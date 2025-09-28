@@ -18,7 +18,7 @@ const Home = () => {
           </div>
         </div>
         <img 
-          src="/images/453353797_868177951841013_4737084022978926838_n (1).jpg" 
+          src="/images/weddings/453353797_868177951841013_4737084022978926838_n.jpg" 
           alt="Wedding Photography"
           className="hero-image"
         />
@@ -44,7 +44,7 @@ const Home = () => {
             </div>
             <div className="about-image">
               <img 
-                src="/images/2 (1).png" 
+                src="/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg" 
                 alt="Wedding Photography Sample"
                 className="sample-image"
               />
@@ -60,7 +60,7 @@ const Home = () => {
           <div className="services-grid">
             <div className="service-card">
               <img 
-                src="/images/1 (1).png" 
+                src="/images/weddings/467744778_943824437609697_1708973942382290310_n.jpg" 
                 alt="Wedding Photography"
                 className="service-image"
               />
@@ -69,7 +69,7 @@ const Home = () => {
             </div>
             <div className="service-card">
               <img 
-                src="/images/3 (1).png" 
+                src="/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg" 
                 alt="Pre-wedding Shoots"
                 className="service-image"
               />
@@ -78,7 +78,7 @@ const Home = () => {
             </div>
             <div className="service-card">
               <img 
-                src="/images/1-1 (1).png" 
+                src="/images/weddings/467581489_943824560943018_1850348283717679066_n.jpg" 
                 alt="Event Photography"
                 className="service-image"
               />
@@ -99,28 +99,28 @@ const Home = () => {
           <div className="gallery-grid">
             <div className="gallery-item">
               <img 
-                src="/images/220-Cam-1-1191.png" 
+                src="/images/weddings/467525658_943824374276370_7508292422335555957_n.jpg" 
                 alt="Wedding Photo 1"
                 className="gallery-image"
               />
             </div>
             <div className="gallery-item">
               <img 
-                src="/images/220-Cam-1-1191-1.png" 
+                src="/images/weddings/467581668_943824124276395_603331384049563710_n.jpg" 
                 alt="Wedding Photo 2"
                 className="gallery-image"
               />
             </div>
             <div className="gallery-item">
               <img 
-                src="/images/1-2.png" 
+                src="/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg" 
                 alt="Wedding Photo 3"
                 className="gallery-image"
               />
             </div>
             <div className="gallery-item">
               <img 
-                src="/images/1-3.png" 
+                src="/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg" 
                 alt="Wedding Photo 4"
                 className="gallery-image"
               />

@@ -15,57 +15,111 @@ const Gallery = () => {
   const galleryImages = [
     {
       id: 1,
-      src: '/images/453353797_868177951841013_4737084022978926838_n (1).jpg',
+      src: '/images/weddings/453353797_868177951841013_4737084022978926838_n.jpg',
       alt: 'Wedding Ceremony',
       category: 'ceremony'
     },
     {
       id: 2,
-      src: '/images/1 (1).png',
+      src: '/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
       alt: 'Bridal Portrait',
       category: 'portraits'
     },
     {
       id: 3,
-      src: '/images/2 (1).png',
+      src: '/images/weddings/467744778_943824437609697_1708973942382290310_n.jpg',
       alt: 'Wedding Reception',
       category: 'reception'
     },
     {
       id: 4,
-      src: '/images/3 (1).png',
+      src: '/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
       alt: 'Pre-Wedding Shoot',
       category: 'prewedding'
     },
     {
       id: 5,
-      src: '/images/220-Cam-1-1191.png',
+      src: '/images/weddings/467525658_943824374276370_7508292422335555957_n.jpg',
       alt: 'Wedding Photography',
       category: 'ceremony'
     },
     {
       id: 6,
-      src: '/images/220-Cam-1-1191-1.png',
+      src: '/images/weddings/467581489_943824560943018_1850348283717679066_n.jpg',
       alt: 'Wedding Moments',
       category: 'reception'
     },
     {
       id: 7,
-      src: '/images/1-1 (1).png',
+      src: '/images/weddings/467581668_943824124276395_603331384049563710_n.jpg',
       alt: 'Event Photography',
       category: 'reception'
     },
     {
       id: 8,
-      src: '/images/1-2.png',
+      src: '/images/weddings/467581955_943824264276381_72587053085497663_n.jpg',
       alt: 'Family Portrait',
       category: 'portraits'
     },
     {
       id: 9,
-      src: '/images/1-3.png',
+      src: '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg',
       alt: 'Wedding Album',
       category: 'portraits'
+    },
+    {
+      id: 10,
+      src: '/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg',
+      alt: 'Ceremony Moments',
+      category: 'ceremony'
+    },
+    {
+      id: 11,
+      src: '/images/weddings/467634259_943823987609742_6459301357175723970_n.jpg',
+      alt: 'Reception Dance',
+      category: 'reception'
+    },
+    {
+      id: 12,
+      src: '/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
+      alt: 'Romantic Portraits',
+      category: 'prewedding'
+    },
+    {
+      id: 13,
+      src: '/images/weddings/467654997_943824067609734_1941169228740568755_n.jpg',
+      alt: 'Bridal Beauty',
+      category: 'portraits'
+    },
+    {
+      id: 14,
+      src: '/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg',
+      alt: 'Wedding Ceremony',
+      category: 'ceremony'
+    },
+    {
+      id: 15,
+      src: '/images/weddings/467677799_943824407609700_1932569026672383994_n.jpg',
+      alt: 'Reception Celebration',
+      category: 'reception'
+    },
+    {
+      id: 16,
+      src: '/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
+      alt: 'Couple Portraits',
+      category: 'prewedding'
+    },
+    {
+      id: 17,
+      src: '/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg',
+      alt: 'Elegant Portraits',
+      category: 'portraits'
+    },
+    {
+      id: 18,
+      src: '/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg',
+      alt: 'Sacred Ceremony',
+      category: 'ceremony'
     }
   ];
 
@@ -104,7 +158,7 @@ const Gallery = () => {
           </div>
         </div>
         <img 
-          src="/images/453353797_868177951841013_4737084022978926838_n (1).jpg" 
+          src="/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg" 
           alt="Wedding Gallery"
           className="hero-image"
         />

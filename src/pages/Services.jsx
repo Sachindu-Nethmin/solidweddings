@@ -12,7 +12,7 @@ const Services = () => {
           </div>
         </div>
         <img 
-          src="/images/1-1 (1).png" 
+          src="/images/weddings/467970224_943824540943020_5717475141864415184_n.jpg" 
           alt="Wedding Photography Services"
           className="hero-image"
         />
@@ -28,7 +28,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/1 (1).png" 
+                  src="/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
                   alt="Wedding Photography"
                 />
               </div>
@@ -53,7 +53,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/3 (1).png" 
+                  src="/images/weddings/467581955_943824264276381_72587053085497663_n.jpg" 
                   alt="Pre-Wedding Photography"
                 />
               </div>
@@ -78,7 +78,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/2 (1).png" 
+                  src="/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg" 
                   alt="Event Photography"
                 />
               </div>
@@ -103,7 +103,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/220-Cam-1-1191.png" 
+                  src="/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg" 
                   alt="Portrait Photography"
                 />
               </div>
@@ -128,7 +128,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/1-2.png" 
+                  src="/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg" 
                   alt="Family Photography"
                 />
               </div>
@@ -153,7 +153,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/1-3.png" 
+                  src="/images/weddings/467968877_943824064276401_491288167559794518_n.jpg" 
                   alt="Wedding Albums"
                 />
               </div>

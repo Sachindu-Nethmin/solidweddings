@@ -47,7 +47,7 @@ const Contact = () => {
           </div>
         </div>
         <img 
-          src="/images/contact-bg.jpg" 
+          src="/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
           alt="Contact Solid Weddings"
           className="hero-image"
         />

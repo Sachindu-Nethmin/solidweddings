@@ -12,7 +12,7 @@ const About = () => {
           </div>
         </div>
         <img 
-          src="/images/2 (1).png" 
+          src="/images/weddings/467677799_943824407609700_1932569026672383994_n.jpg" 
           alt="About Solid Weddings"
           className="hero-image"
         />
@@ -43,7 +43,7 @@ const About = () => {
             </div>
             <div className="image-content">
               <img 
-                src="/images/1 (1).png" 
+                src="/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg" 
                 alt="Wedding Photography Style"
                 className="about-image"
               />
@@ -97,7 +97,7 @@ const About = () => {
           <div className="experience-content">
             <div className="experience-image">
               <img 
-                src="/images/3 (1).png" 
+                src="/images/weddings/467870739_943824287609712_5253220292708146503_n.jpg" 
                 alt="Photography Experience"
                 className="exp-image"
               />
