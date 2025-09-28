@@ -1,0 +1,112 @@
+/*------------------------------------------------------------------
+
+Sticky Header Effects Style
+
+-------------------------------------------------------------------*/
+
+/* MAIN HEADER */
+.header,
+.she-header-yes,
+.she-header-yes.e-con,
+.she-header {
+  transition: all 0.4s ease-in-out, height 0.4s ease-in-out,
+    background-color 0.4s ease-in-out, border-bottom-width 0.4s ease-in-out,
+    border-bottom-color 0.4s ease-in-out, margin 0s !important;
+  width: 100%;
+  max-width: 100%;
+  z-index: 9999;
+}
+
+/* STICKY HEADER */
+.she-header {
+  margin-bottom: 0;
+  margin-top: 0;
+  /* padding-bottom: 0;
+  padding-top: 0; */
+}
+
+.she-header:not(.elementor-sticky) {
+  position: fixed !important;
+  top: 0;
+}
+
+/* BLURRY HEADER */
+.she-header.she-blur-yes {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* HIDE HEADER */
+.headerup {
+  -ms-transform: translateY(-110vh) !important;
+  -o-transition: transform 0.4s ease-in-out !important;
+  -webkit-transform: translateY(-110vh) !important;
+  -webkit-transition: transform 0.4s ease-in-out !important;
+  -webkit-transition: -webkit-transform 0.4s ease-in-out !important;
+  transform: translateY(-110vh) !important;
+  transition: transform 0.4s ease-in-out !important;
+}
+
+/* HEADER LOGO */
+.she-header-yes .elementor-widget-theme-site-logo,
+.she-header-yes .elementor-widget-image,
+.she-header-yes .logo,
+.she-header-yes .elementor-widget-theme-site-logo img,
+.she-header-yes .elementor-widget-image img,
+.she-header-yes .logo img {
+  transition: all 0.4s ease-in-out !important;
+}
+
+/* TRANSPARENT HEADER */
+.she-header-transparent-yes,
+.elementor-editor-active .she-header-transparent-yes {
+  transition: all 0.4s ease-in-out, top 0s;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0) !important;
+  position: absolute !important;
+  z-index: 99;
+}
+
+/* Custom Hamburger Menu */
+.she-header-yes .elementor-menu-toggle:before,
+.she-header-yes .elementor-menu-toggle:after,
+.she-header-yes .elementor-menu-toggle i:after {
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.she-header-yes .elementor-menu-toggle {
+  position: relative;
+  transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+}
+
+.she-header-yes .elementor-menu-toggle.elementor-active:before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.she-header-yes .elementor-menu-toggle:after {
+  transform: translate(-50%, calc(-50% - 0.25em));
+}
+
+.she-header-yes .elementor-menu-toggle.elementor-active:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.she-header-yes .elementor-menu-toggle i:after {
+  transform: translate(-50%, -50%);
+}
+
+/* ADMIN BAR OFFSET */
+@media screen and (min-width: 783px) {
+  .admin-bar .she-header:not(.elementor-sticky) {
+    top: 32px;
+  }
+}
+
+/* .she-header-hide-on-scroll-yes {
+  -webkit-transition: transform 0.4s ease-in-out !important;
+	-o-transition: transform 0.4s ease-in-out !important;
+	-webkit-transition: -webkit-transform 0.4s ease-in-out !important;
+	transition: -webkit-transform 0.4s ease-in-out !important;
+	transition: transform 0.4s ease-in-out !important;
+	transition: transform 0.4s ease-in-out, -webkit-transform 00.4s ease-in-out !important;
+} */
