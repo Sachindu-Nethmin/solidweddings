@@ -160,7 +160,7 @@ const Gallery = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxImage, filteredImages]);
+  }, [lightboxImage]);
 
   return (
     <div className="gallery-page">
