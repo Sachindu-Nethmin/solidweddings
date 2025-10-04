@@ -20,7 +20,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
+    // Handle form submission to here
     console.log('Form submitted:', formData);
     alert('Thank you for your inquiry! We will get back to you soon.');
     
