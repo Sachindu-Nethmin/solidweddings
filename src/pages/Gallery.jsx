@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FiX, FiChevronLeft, FiChevronRight, FiCamera } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [lightboxImage, setLightboxImage] = useState(null);
 
   const categories = [
-    { id: 'all', name: 'All Photos' },
-    { id: 'ceremony', name: 'Ceremony' },
-    { id: 'reception', name: 'Reception' },
-    { id: 'portraits', name: 'Portraits' },
-    { id: 'prewedding', name: 'Pre-Wedding' }
+    { id: 'all', name: '✨ All Photos', icon: '📸' },
+    { id: 'ceremony', name: 'Ceremony', icon: '💒' },
+    { id: 'reception', name: 'Reception', icon: '🎉' },
+    { id: 'portraits', name: 'Portraits', icon: '👰' },
+    { id: 'prewedding', name: 'Pre-Wedding', icon: '💑' }
   ];
 
   const galleryImages = [
@@ -147,102 +149,194 @@ const Gallery = () => {
     setLightboxImage(filteredImages[prevIndex]);
   };
 
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxImage) return;
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'Escape') closeLightbox();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImage, filteredImages]);
+
   return (
     <div className="gallery-page">
       {/* Hero Section */}
-      <section className="page-hero">
+      <motion.section 
+        className="page-hero gallery-hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <div className="hero-overlay">
-          <div className="hero-content">
-            <h1>Our Gallery</h1>
-            <p>Beautiful Moments Captured Forever</p>
-          </div>
+          <motion.div 
+            className="hero-content"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <h1>✨ Our Wedding Gallery</h1>
+            <p>Capturing Love Stories, One Frame at a Time</p>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <FiCamera size={24} />
+                <span>{galleryImages.length}+ Photos</span>
+              </div>
+              <div className="stat-item">
+                <span>❤️</span>
+                <span>Memories Forever</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
         <img 
           src="/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg" 
           alt="Wedding Gallery"
           className="hero-image"
         />
-      </section>
+      </motion.section>
 
       {/* Gallery Filters */}
-      <section className="gallery-filters">
+      <section className="gallery-filters modern-filters">
         <div className="container">
+          <motion.h2 
+            className="filter-title"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            Browse Our Collection
+          </motion.h2>
           <div className="filter-buttons">
-            {categories.map(category => (
-              <button
+            {categories.map((category, index) => (
+              <motion.button
                 key={category.id}
-                className={`filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
+                className={`filter-btn modern-filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(category.id)}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {category.name}
-              </button>
+                <span className="filter-icon">{category.icon}</span>
+                <span>{category.name}</span>
+              </motion.button>
             ))}
           </div>
         </div>
       </section>
 
       {/* Gallery Grid */}
-      <section className="gallery-grid-section">
+      <section className="gallery-grid-section modern-gallery">
         <div className="container">
-          <div className="gallery-grid">
-            {filteredImages.map(image => (
-              <div 
-                key={image.id} 
-                className="gallery-item"
-                onClick={() => openLightbox(image)}
-              >
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="gallery-image"
-                />
-                <div className="gallery-overlay">
-                  <i className="fas fa-search-plus"></i>
-                </div>
-              </div>
-            ))}
-          </div>
+          <motion.div 
+            className="gallery-grid masonry-grid"
+            layout
+          >
+            <AnimatePresence>
+              {filteredImages.map((image, index) => (
+                <motion.div 
+                  key={image.id} 
+                  className="gallery-item modern-gallery-item"
+                  onClick={() => openLightbox(image)}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  whileHover={{ y: -10 }}
+                >
+                  <div className="image-wrapper">
+                    <img 
+                      src={image.src} 
+                      alt={image.alt}
+                      className="gallery-image"
+                      loading="lazy"
+                    />
+                    <div className="gallery-overlay modern-overlay">
+                      <div className="overlay-content">
+                        <FiCamera size={30} />
+                        <p className="image-title">{image.alt}</p>
+                        <span className="view-text">Click to view</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 
       {/* Lightbox */}
-      {lightboxImage && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <button className="lightbox-close" onClick={closeLightbox}>
-              <i className="fas fa-times"></i>
-            </button>
-            <button className="lightbox-prev" onClick={prevImage}>
-              <i className="fas fa-chevron-left"></i>
-            </button>
-            <img 
-              src={lightboxImage.src} 
-              alt={lightboxImage.alt}
-              className="lightbox-image"
-            />
-            <button className="lightbox-next" onClick={nextImage}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div 
+            className="lightbox modern-lightbox"
+            onClick={closeLightbox}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="lightbox-content"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, y: 50 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 50 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button className="lightbox-close modern-lightbox-btn" onClick={closeLightbox}>
+                <FiX size={24} />
+              </button>
+              <button className="lightbox-prev modern-lightbox-btn" onClick={prevImage}>
+                <FiChevronLeft size={28} />
+              </button>
+              <div className="lightbox-image-wrapper">
+                <img 
+                  src={lightboxImage.src} 
+                  alt={lightboxImage.alt}
+                  className="lightbox-image"
+                />
+                <div className="lightbox-caption">
+                  <p>{lightboxImage.alt}</p>
+                </div>
+              </div>
+              <button className="lightbox-next modern-lightbox-btn" onClick={nextImage}>
+                <FiChevronRight size={28} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Call to Action */}
-      <section className="gallery-cta">
+      <motion.section 
+        className="gallery-cta modern-cta"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container">
           <div className="cta-content">
-            <h2>Love What You See?</h2>
+            <h2>💕 Love What You See?</h2>
             <p>
               These are just a few examples of our work. Let's create beautiful 
               memories for your special day too.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Book Your Session</a>
-              <a href="/services" className="btn btn-outline">View Packages</a>
+              <a href="/contact" className="btn btn-primary">📞 Book Your Session</a>
+              <a href="/services" className="btn btn-outline">📦 View Packages</a>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };
