@@ -8,7 +8,7 @@ const About = () => {
         <div className="hero-overlay">
           <div className="hero-content">
             <h1>About Solid Weddings</h1>
-            <p>Passionate Wedding Photographers Dedicated to Your Story.........</p>
+            <p>Passionate Wedding Photographers Dedicated to Your Story...</p>
           </div>
         </div>
         <img 
