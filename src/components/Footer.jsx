@@ -104,7 +104,7 @@ const Footer = () => {
             {/* Social Media */}
             <div className="footer-social">
               <h4>Follow Us</h4>
-              <div className="social-links" style={{ flexDirection: 'row', display: 'flex' }}>
+              <div className="social-links">
                 <motion.a 
                   href="https://www.facebook.com/solidweddingsofficial" 
                   target="_blank" 
