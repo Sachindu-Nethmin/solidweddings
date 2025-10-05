@@ -206,7 +206,7 @@ const Home = () => {
             className="section-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.2, 0.9, 0.2, 1] }}
           >
             Our Services
@@ -216,7 +216,7 @@ const Home = () => {
             className="services-grid"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
             variants={{
               visible: {
                 transition: {
@@ -305,7 +305,7 @@ const Home = () => {
             className="services-cta"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.2, 0.9, 0.2, 1] }}
           >
             <motion.a 
@@ -332,7 +332,7 @@ const Home = () => {
             className="section-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.2, 0.9, 0.2, 1] }}
           >
             Recent Work
@@ -342,7 +342,7 @@ const Home = () => {
             className="gallery-grid"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: false, amount: 0.15 }}
             variants={{
               visible: {
                 transition: {
@@ -480,7 +480,7 @@ const Home = () => {
             className="gallery-cta"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.2, 0.9, 0.2, 1] }}
           >
             <motion.a 
@@ -507,7 +507,7 @@ const Home = () => {
             className="cta-content"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             variants={{
               visible: {
                 transition: {
