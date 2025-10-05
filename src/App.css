@@ -1,3 +1,6 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -16,6 +19,14 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Font Variables - Easy customization */
+:root {
+  /* Hero title font - change this to customize the hero title font */
+  --hero-title-font: 'Playfair Display', serif;
+  /* Body font for rest of the site */
+  --body-font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .main-content {
@@ -57,6 +68,7 @@ p {
   transition: all 0.3s ease;
   font-size: 1rem;
   margin: 5px;
+  will-change: transform, box-shadow;
 }
 
 .btn-primary {
@@ -79,6 +91,12 @@ p {
   background: linear-gradient(135deg, #0984e3, #74b9ff);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+}
+
+/* stronger focus style for keyboard users */
+.btn:focus-visible {
+  outline: 3px solid rgba(255, 107, 107, 0.22);
+  outline-offset: 4px;
 }
 
 .btn-outline {
@@ -202,9 +220,14 @@ p {
   position: relative;
   height: 100vh;
   display: flex;
+  /* vertically center */
   align-items: center;
-  justify-content: center;
+  /* place the content to the left side on desktop */
+  justify-content: flex-start;
   overflow: hidden;
+  /* create a comfortable left gutter, adjust as needed */
+  padding-left: 8%;
+  padding-right: 20px;
 }
 
 .hero-image {
@@ -215,6 +238,7 @@ p {
   height: 100%;
   object-fit: cover;
   z-index: -2;
+  will-change: transform, opacity;
 }
 
 .hero-overlay {
@@ -228,17 +252,22 @@ p {
 }
 
 .hero-content {
-  text-align: center;
+  /* left-aligned column positioned on the left side of the hero */
+  text-align: left;
   color: white;
   z-index: 1;
-  max-width: 800px;
+  max-width: 720px;
   padding: 0 20px;
+  position: relative;
 }
 
 .hero-title {
+  font-family: var(--hero-title-font);
   font-size: 4rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
@@ -250,7 +279,8 @@ p {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  /* align buttons with left-aligned content on desktop */
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -287,6 +317,8 @@ section {
   width: 100%;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform, box-shadow;
 }
 
 .services-grid {
@@ -298,16 +330,20 @@ section {
 
 .service-card {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  text-align: center;
-  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
 }
 
 .service-card:hover {
   transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.05);
 }
 
 .service-image {
@@ -316,6 +352,8 @@ section {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 1rem;
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform;
 }
 
 .service-card h3 {
@@ -325,6 +363,15 @@ section {
 
 .services-cta, .gallery-cta {
   text-align: center;
+  margin-top: 2rem;
+  background: none !important;
+  background-color: transparent !important;
+  padding: 2rem 0;
+}
+
+.services-cta .btn, .gallery-cta .btn {
+  display: inline-block;
+  min-width: 200px;
 }
 
 .gallery-grid {
@@ -340,33 +387,80 @@ section {
   border-radius: 10px;
   aspect-ratio: 1;
   cursor: pointer;
+  will-change: transform;
 }
 
 .gallery-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform;
 }
 
 .gallery-item:hover .gallery-image {
   transform: scale(1.1);
 }
 
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.view-text {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 .contact-cta {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
   color: white;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255, 142, 142, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-content h2 {
   color: white;
   margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .cta-content p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .cta-buttons {
@@ -958,6 +1052,8 @@ section {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+    /* on small screens make sure buttons are centered with hero content */
+    justify-content: center;
   }
   
   .about-content,
@@ -998,6 +1094,24 @@ section {
   
   .lightbox-next {
     right: 20px;
+  }
+}
+
+/* Ensure hero content recenters on small screens */
+@media (max-width: 768px) {
+  .hero, .page-hero {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
   }
 }
 
