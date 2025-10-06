@@ -237,7 +237,7 @@ p {
   .mobile-nav {
     display: block;
     position: fixed;
-    top: 100%;
+    top: 0;
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.95);
