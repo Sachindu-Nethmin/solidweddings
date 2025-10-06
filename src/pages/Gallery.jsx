@@ -177,8 +177,9 @@ const Gallery = () => {
 
   // Add mouse tracking for subtle interactive effects
   useEffect(() => {
+    // Cache the gallery items when the effect runs
+    const cards = document.querySelectorAll('.gallery-item');
     const handleMouseMove = (e) => {
-      const cards = document.querySelectorAll('.gallery-item');
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
