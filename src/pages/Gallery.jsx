@@ -219,7 +219,7 @@ const Gallery = () => {
 
   // helper to mark image loaded (for fade-in / LQIP)
   const markLoaded = (e) => {
-    try { e.currentTarget.setAttribute('data-loaded', 'true'); } catch (err) {}
+    try { e.currentTarget.setAttribute('data-loaded', 'true'); } catch (err) { console.error('Failed to mark image as loaded:', err); }
   };
 
   const closeLightbox = () => {
