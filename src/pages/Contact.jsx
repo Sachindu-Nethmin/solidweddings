@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
+
+  const heroImages = [
+    '/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
+    '/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
+    '/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg'
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +21,56 @@ const Contact = () => {
     package: '',
     message: ''
   });
+
+  // Component mount animation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Hero image rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
+  // Scroll tracking for parallax
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      rootMargin: '120px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const delay = index * 150;
+          setTimeout(() => {
+            entry.target.classList.add('animate-in');
+          }, delay);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const parallaxOffset = scrollY * 0.3;
 
   const handleChange = (e) => {
     setFormData({
@@ -37,20 +98,163 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-page">
+    <div className={`contact-page ${isLoaded ? 'loaded' : ''}`}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+        
+        :root {
+          --bg: #fdfcfb;
+          --text-primary: #2d2d2d;
+          --text-muted: #6b6b6b;
+          --card: #ffffff;
+          --accent-gold: #c0a062;
+          --accent-gold-light: #d9c6a5;
+          --shadow: 0 16px 50px rgba(45, 45, 45, 0.08);
+          --radius: 20px;
+          --header-offset: 72px;
+        }
+
+        .contact-page {
+          font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+          color: var(--text-primary);
+          background: var(--bg);
+          min-height: 100vh;
+          padding-top: var(--header-offset);
+          opacity: 0;
+          transition: opacity 0.8s ease;
+        }
+        .contact-page.loaded { opacity: 1; }
+
+        .contact-page::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background: radial-gradient(circle at 15% 25%, rgba(192, 160, 98, 0.04) 0%, transparent 40%),
+                      radial-gradient(circle at 85% 75%, rgba(192, 160, 98, 0.03) 0%, transparent 40%);
+          animation: bgFloat 25s ease-in-out infinite;
+          z-index: 0;
+          pointer-events: none;
+        }
+        @keyframes bgFloat { 0%, 100% { transform: translate(0,0) scale(1) } 50% { transform: translate(-15px, 10px) scale(1.05) } }
+
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          height: 60vh;
+          min-height: 450px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .hero-bg-image {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+          transform: translateY(${parallaxOffset}px) scale(1.05);
+        }
+        .hero-bg-image.active { opacity: 1; z-index: 2; }
+        .hero-bg-image.inactive { opacity: 0; z-index: 1; }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%);
+          z-index: 3;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          padding: 24px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .hero-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(3.2rem, 7vw, 5.5rem);
+          font-weight: 700;
+          color: #fff;
+          text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+          margin: 0 0 24px;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          animation: titleFadeIn 1.2s ease 0.5s both;
+        }
+        @keyframes titleFadeIn { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: translateY(0) } }
+
+        .hero-subtitle {
+          color: rgba(255, 255, 255, 0.9);
+          text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+          font-size: clamp(1.1rem, 2vw, 1.3rem);
+          font-weight: 400;
+          margin: 0;
+          letter-spacing: 0.02em;
+          line-height: 1.6;
+          animation: subtitleFadeIn 1.2s ease 0.7s both;
+        }
+        @keyframes subtitleFadeIn { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
+
+        /* Common styles */
+        .section {
+          padding: 80px 0;
+          position: relative;
+          z-index: 5;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        .scroll-animate {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: all 0.8s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+        .scroll-animate.animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .section-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 700;
+          text-align: center;
+          margin-bottom: 60px;
+          color: var(--text-primary);
+        }
+
+        /* ...existing contact styles... */
+      `}</style>
+
       {/* Hero Section */}
-      <section className="page-hero">
-        <div className="hero-overlay">
-          <div className="hero-content">
-            <h1>Contact Us</h1>
-            <p>Let's Start Planning Your Perfect Wedding Photography</p>
-          </div>
+      <section ref={heroRef} className="hero-section">
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`hero-bg-image ${index === currentHeroImage ? 'active' : 'inactive'}`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
+
+        <div className="hero-overlay"></div>
+
+        <div className="hero-content">
+          <h1 className="hero-title">Get In Touch</h1>
+          <p className="hero-subtitle">
+            Ready to capture your special moments? Let's discuss your vision and create something beautiful together.
+          </p>
         </div>
-        <img 
-          src="/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
-          alt="Contact Solid Weddings"
-          className="hero-image"
-        />
       </section>
 
       {/* Contact Content */}
