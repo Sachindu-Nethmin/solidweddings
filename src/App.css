@@ -1233,7 +1233,7 @@ section {
     align-items: center;
   }
 
-  /* Footer Responsive */
+  /* Footer Responsive Styles (Media Queries) */
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1253,7 +1253,6 @@ section {
   .social-links-row {
     justify-content: center;
   }
-  
   .lightbox-prev,
   .lightbox-next {
     position: fixed;
