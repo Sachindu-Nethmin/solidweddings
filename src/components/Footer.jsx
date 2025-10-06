@@ -16,48 +16,40 @@ const Footer = () => {
             <a href="mailto:solidweddingsofficial@gmail.com">solidweddingsofficial@gmail.com</a>
           </p>
         </div>
-
-        {/* Social Media */}
-        <div className="footer-social">
+        
+        {/* Social Media Icons */}
+        <div className="social-icons">
           <h3>Follow Us</h3>
-          <div className="social-links">
-            <a 
-              href="https://www.facebook.com/solidweddingsofficial" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a 
-              href="https://www.instagram.com/solidweddingsofficial" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a 
-              href="https://wa.me/94712710881" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <i className="fab fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-
-        {/* Quick Links */}
-        <div className="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about-me">About Me</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
+          <a 
+            href="https://www.facebook.com/solidweddingsofficial" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-link"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a 
+            href="https://www.instagram.com/solidweddingsofficial" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-link"
+          >
+            <i className="fab fa-instagram"></i>
+          </a>
+          <a 
+            href="https://wa.me/94712710881" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="social-link"
+          >
+            <i className="fab fa-whatsapp"></i>
+          </a>
+          <a 
+            href="tel:+94712710881" 
+            className="social-link"
+          >
+            <i className="fas fa-phone"></i>
+          </a>
         </div>
       </div>
 
