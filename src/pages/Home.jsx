@@ -89,7 +89,7 @@ const Home = () => {
             className="about-content"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ staggerChildren: 0.2 }}
           >
             {/* Left side - Text content */}
