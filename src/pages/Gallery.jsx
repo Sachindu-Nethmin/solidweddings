@@ -383,7 +383,7 @@ const Gallery = () => {
                 tabIndex={0}
                 role="button"
                 aria-label={`Open ${image.alt}`}
-                onKeyDown={(e) => { if (e.key === 'Enter') openLightbox(image); }}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(image); }}
               >
                 <div className="media">
                   <img src={image.src} alt={image.alt} className="gallery-image" loading="lazy" onLoad={markLoaded} data-loaded="false" />
