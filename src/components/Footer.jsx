@@ -3,12 +3,12 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-container">
+      <div className="footer-container" >
         {/* Contact Info */}
         <div className="footer-contact">
           <h3>Get in Touch</h3>
           <p>
-            <i className="fas fa-phone"></i>
+            <i className="fas fa-phone" ></i>
             <a href="tel:+94712710881">+94 71 271 0881</a>
           </p>
           <p>
@@ -16,11 +16,11 @@ const Footer = () => {
             <a href="mailto:solidweddingsofficial@gmail.com">solidweddingsofficial@gmail.com</a>
           </p>
         </div>
-
-        {/* Social Media */}
-        <div className="footer-social">
+        
+        {/* Social Media Icons */}
+        <div className="social-icons-footer">
           <h3>Follow Us</h3>
-          <div className="social-links">
+          <div className="social-links-row">
             <a 
               href="https://www.facebook.com/solidweddingsofficial" 
               target="_blank" 
@@ -45,19 +45,13 @@ const Footer = () => {
             >
               <i className="fab fa-whatsapp"></i>
             </a>
+            <a 
+              href="tel:+94712710881" 
+              className="social-link"
+            >
+              <i className="fas fa-phone"></i>
+            </a>
           </div>
-        </div>
-
-        {/* Quick Links */}
-        <div className="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about-me">About Me</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
         </div>
       </div>
 
