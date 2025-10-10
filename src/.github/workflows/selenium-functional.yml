@@ -1,0 +1,33 @@
+name: Selenium Functional Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Start dev server in background
+      - name: Start dev server
+        run: npm run dev &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:5173
+
+      - name: Run Selenium functional tests
+        run: npx mocha test/contactForm.test.js
