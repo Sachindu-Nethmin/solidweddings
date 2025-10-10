@@ -349,7 +349,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 
