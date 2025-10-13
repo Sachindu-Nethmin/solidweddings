@@ -79,22 +79,82 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission to here
     console.log('Form submitted:', formData);
     alert('Thank you for your inquiry! We will get back to you soon.');
     
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      weddingDate: '',
-      venue: '',
-      package: '',
-      message: ''
+    // Set loading state
+    setFormStatus({
+      isSubmitting: true,
+      message: 'Sending your inquiry...',
+      type: 'info'
     });
+
+    try {
+      // EmailJS configuration
+      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_solid_weddings';
+      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact_form';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key';
+
+      // Prepare email template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        wedding_date: formData.weddingDate,
+        venue: formData.venue,
+        package: formData.package,
+        message: formData.message,
+        to_email: 'solidweddingsofficial@gmail.com', // Your business email
+        reply_to: formData.email
+      };
+
+      // Send email using EmailJS
+      const response = await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      
+      console.log('Email sent successfully:', response);
+      console.log('Form submitted:', formData);
+
+      // Success state
+      setFormStatus({
+        isSubmitting: false,
+        message: 'Thank you for your inquiry! We will get back to you within 24 hours.',
+        type: 'success'
+      });
+
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        weddingDate: '',
+        venue: '',
+        package: '',
+        message: ''
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setFormStatus({ isSubmitting: false, message: '', type: '' });
+      }, 5000);
+
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      
+      // Error state
+      setFormStatus({
+        isSubmitting: false,
+        message: 'Sorry, there was an error sending your message. Please try calling us directly.',
+        type: 'error'
+      });
+
+      // Clear error message after 7 seconds
+      setTimeout(() => {
+        setFormStatus({ isSubmitting: false, message: '', type: '' });
+      }, 7000);
+    }
   };
 
   return (
@@ -358,8 +418,30 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                  Send Inquiry
+                {/* Form Status Message */}
+                {formStatus.message && (
+                  <div className={`form-status ${formStatus.type}`}>
+                    <i className={`fas ${formStatus.type === 'success' ? 'fa-check-circle' : formStatus.type === 'error' ? 'fa-exclamation-circle' : 'fa-spinner fa-spin'}`}></i>
+                    {formStatus.message}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  className="btn btn-primary"
+                  disabled={formStatus.isSubmitting}
+                >
+                  {formStatus.isSubmitting ? (
+                    <>
+                      <i className="fas fa-spinner fa-spin"></i>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-paper-plane"></i>
+                      Send Inquiry
+                    </>
+                  )}
                 </button>
               </form>
             </div>
