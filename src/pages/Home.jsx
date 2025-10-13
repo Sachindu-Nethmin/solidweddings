@@ -143,6 +143,8 @@ const Home = () => {
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up under header */
+          padding-top: var(--header-offset); /* Maintain content spacing */
         }
 
         .hero-bg-image {

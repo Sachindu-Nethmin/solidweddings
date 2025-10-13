@@ -13,7 +13,16 @@ const Header = () => {
   };
 
   return (
-    <header className="header" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', backdropFilter: 'blur(10px)' }}>
+    <header className="header" style={{ 
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(10px)',
+      zIndex: 1000,
+      transition: 'background-color 0.3s ease'
+    }}>
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
