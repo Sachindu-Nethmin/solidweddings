@@ -443,15 +443,13 @@ section {
   margin-bottom: 1rem;
 }
 
-.services-cta, .gallery-cta {
+.gallery-cta {
   text-align: center;
   margin-top: 2rem;
-  background: none !important;
-  background-color: transparent !important;
   padding: 2rem 0;
 }
 
-.services-cta .btn, .gallery-cta .btn {
+.gallery-cta .btn {
   display: inline-block;
   min-width: 200px;
 }

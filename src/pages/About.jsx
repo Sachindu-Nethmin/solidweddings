@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const About = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -26,13 +25,45 @@ const About = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -59,8 +90,6 @@ const About = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className={`about-page ${isLoaded ? 'loaded' : ''}`}>
@@ -120,8 +149,11 @@ const About = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
@@ -200,6 +232,239 @@ const About = () => {
           text-align: center;
           margin-bottom: 60px;
           color: var(--text-primary);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+          padding: 80px 0;
+          background: linear-gradient(135deg, #f8f6f4 0%, #fdfcfb 100%);
+          position: relative;
+          z-index: 5;
+        }
+
+        .philosophy-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          margin-top: 60px;
+        }
+
+        .philosophy-item {
+          background: var(--card);
+          border-radius: var(--radius);
+          padding: 40px 30px;
+          text-align: center;
+          box-shadow: var(--shadow);
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+
+        .philosophy-item:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 70px rgba(45, 45, 45, 0.12);
+        }
+
+        .philosophy-item .icon {
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+          border-radius: 50%;
+          margin: 0 auto 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          color: #fff;
+        }
+
+        .philosophy-item h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 16px;
+          color: var(--text-primary);
+        }
+
+        .philosophy-item p {
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+
+        /* Experience Section */
+        .experience {
+          padding: 80px 0;
+          position: relative;
+          z-index: 5;
+        }
+
+        .experience-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .experience-image {
+          border-radius: var(--radius);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+
+        .exp-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+
+        .experience-image:hover .exp-image {
+          transform: scale(1.05);
+        }
+
+        .experience-text h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 30px;
+          color: var(--text-primary);
+        }
+
+        .benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 40px;
+        }
+
+        .benefits-list li {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 12px 0;
+          color: var(--text-primary);
+          font-size: 1.05rem;
+        }
+
+        .benefits-list i {
+          color: var(--accent-gold);
+          font-size: 1.2rem;
+          flex-shrink: 0;
+        }
+
+        /* About CTA Section */
+        .about-cta {
+          background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
+          color: #fff;
+          text-align: center;
+          padding: 80px 0;
+          position: relative;
+          overflow: hidden;
+          z-index: 10;
+        }
+        .about-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        .cta-content h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 24px;
+          color: #fff;
+        }
+
+        .cta-content p {
+          font-size: 1.2rem;
+          margin-bottom: 40px;
+          opacity: 0.9;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          padding: 16px 32px;
+          border-radius: 50px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.1rem;
+        }
+
+        .btn-primary {
+          background: var(--accent-gold);
+          color: #fff;
+          border: 2px solid var(--accent-gold);
+          box-shadow: 0 12px 40px rgba(192, 160, 98, 0.3);
+        }
+
+        .btn-primary:hover {
+          background: #a88a4f;
+          border-color: #a88a4f;
+          transform: translateY(-2px);
+          box-shadow: 0 16px 50px rgba(192, 160, 98, 0.4);
+        }
+
+        .btn-outline {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px);
+        }
+
+        /* Our Story Section */
+        .section p {
+          color: var(--text-muted);
+          line-height: 1.8;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .philosophy-grid {
+            grid-template-columns: 1fr;
+          }
+          .experience-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+          .btn {
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
+          }
         }
       `}</style>
 
@@ -343,7 +608,7 @@ const About = () => {
               and learn about your special day.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Get in Touch</a>
+              <a href="/contact" className="btn btn-outline">Get in Touch</a>
               <a href="/gallery" className="btn btn-outline">View Our Work</a>
             </div>
           </div>
