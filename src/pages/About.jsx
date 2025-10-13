@@ -201,6 +201,270 @@ const About = () => {
           margin-bottom: 60px;
           color: var(--text-primary);
         }
+
+        /* Philosophy Section Styles */
+        .philosophy {
+          position: relative;
+          padding: 120px 0;
+          background: linear-gradient(135deg, var(--bg) 0%, #f8f6f3 50%, var(--bg) 100%);
+          overflow: hidden;
+        }
+
+        .philosophy-bg {
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(circle at 20% 30%, rgba(192, 160, 98, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(192, 160, 98, 0.03) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(192, 160, 98, 0.02) 0%, transparent 60%);
+          animation: philosophyBgFloat 30s ease-in-out infinite;
+        }
+        @keyframes philosophyBgFloat {
+          0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+          33% { transform: translate(20px, -15px) rotate(1deg) scale(1.02); }
+          66% { transform: translate(-15px, 10px) rotate(-0.5deg) scale(0.98); }
+        }
+
+        .philosophy-header {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto 80px;
+        }
+
+        .philosophy-title {
+          position: relative;
+          margin-bottom: 24px;
+        }
+        .philosophy-title::after {
+          content: '';
+          position: absolute;
+          bottom: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+          border-radius: 2px;
+          animation: titleUnderline 1.5s ease 1s both;
+        }
+        @keyframes titleUnderline {
+          from { width: 0; opacity: 0; }
+          to { width: 80px; opacity: 1; }
+        }
+
+        .philosophy-subtitle {
+          font-size: clamp(1.1rem, 2vw, 1.3rem);
+          color: var(--text-muted);
+          line-height: 1.8;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+        }
+
+        .philosophy-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 40px;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .philosophy-item {
+          opacity: 0;
+          transform: translateY(60px) scale(0.95);
+          transition: all 0.8s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+        .philosophy-item.animate-in {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        .philosophy-item[data-delay="150"].animate-in { transition-delay: 0.15s; }
+        .philosophy-item[data-delay="300"].animate-in { transition-delay: 0.3s; }
+        .philosophy-item[data-delay="450"].animate-in { transition-delay: 0.45s; }
+        .philosophy-item[data-delay="600"].animate-in { transition-delay: 0.6s; }
+        .philosophy-item[data-delay="750"].animate-in { transition-delay: 0.75s; }
+
+        .philosophy-card {
+          position: relative;
+          background: var(--card);
+          border-radius: var(--radius);
+          padding: 40px 32px;
+          text-align: center;
+          box-shadow: var(--shadow);
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+          border: 1px solid rgba(192, 160, 98, 0.1);
+          overflow: hidden;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        .philosophy-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+          transform: scaleX(0);
+          transition: transform 0.4s ease;
+        }
+        .philosophy-card:hover::before {
+          transform: scaleX(1);
+        }
+        .philosophy-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 60px rgba(45, 45, 45, 0.12);
+          border-color: rgba(192, 160, 98, 0.2);
+        }
+
+        .philosophy-icon-wrapper {
+          position: relative;
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .philosophy-icon {
+          position: relative;
+          z-index: 2;
+          color: var(--accent-gold);
+          transition: all 0.4s ease;
+          animation: iconFloat 4s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-5px) rotate(2deg); }
+        }
+        .philosophy-card:hover .philosophy-icon {
+          color: var(--text-primary);
+          transform: scale(1.1);
+          animation-play-state: paused;
+        }
+
+        .philosophy-glow {
+          position: absolute;
+          inset: -20px;
+          background: radial-gradient(circle, rgba(192, 160, 98, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          animation: glowPulse 3s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+          0%, 100% { transform: scale(1); opacity: 0.1; }
+          50% { transform: scale(1.2); opacity: 0.2; }
+        }
+        .philosophy-card:hover .philosophy-glow {
+          opacity: 1;
+          animation-play-state: paused;
+        }
+
+        .philosophy-item-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 16px;
+          letter-spacing: -0.01em;
+        }
+
+        .philosophy-item-text {
+          color: var(--text-muted);
+          line-height: 1.7;
+          font-size: 1rem;
+          font-weight: 400;
+          flex-grow: 1;
+          margin-bottom: 20px;
+        }
+
+        .philosophy-decoration {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 40px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, var(--accent-gold-light), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        .philosophy-card:hover .philosophy-decoration {
+          opacity: 1;
+        }
+
+        .philosophy-quote {
+          text-align: center;
+          max-width: 700px;
+          margin: 80px auto 0;
+          padding: 40px;
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: var(--radius);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(192, 160, 98, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+        .philosophy-quote::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, rgba(192, 160, 98, 0.05) 0%, transparent 50%);
+          animation: quoteShimmer 4s ease-in-out infinite;
+        }
+        @keyframes quoteShimmer {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+
+        .philosophy-quote blockquote {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+          font-style: italic;
+          color: var(--text-primary);
+          margin: 0 0 16px;
+          line-height: 1.6;
+          position: relative;
+          z-index: 2;
+        }
+        .philosophy-quote blockquote::before {
+          content: '"';
+          font-size: 3rem;
+          color: var(--accent-gold);
+          position: absolute;
+          top: -10px;
+          left: -20px;
+          font-family: serif;
+        }
+
+        .philosophy-quote cite {
+          color: var(--text-muted);
+          font-size: 1rem;
+          font-weight: 500;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .philosophy {
+            padding: 80px 0;
+          }
+          .philosophy-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+          }
+          .philosophy-card {
+            padding: 32px 24px;
+          }
+          .philosophy-quote {
+            margin: 60px auto 0;
+            padding: 32px 24px;
+          }
+        }
       `}</style>
 
       {/* Hero Section */}
@@ -251,39 +515,144 @@ const About = () => {
 
       {/* Philosophy Section */}
       <section className="philosophy">
+        <div className="philosophy-bg"></div>
         <div className="container">
-          <h2 className="section-title">Our Philosophy</h2>
+          <div className="philosophy-header scroll-animate">
+            <h2 className="section-title philosophy-title">Our Philosophy</h2>
+            <p className="philosophy-subtitle">
+              Every moment is precious. Our approach is rooted in capturing the authentic beauty 
+              and genuine emotions that make your story uniquely yours.
+            </p>
+          </div>
+          
           <div className="philosophy-grid">
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-heart"></i>
+            <div className="philosophy-item scroll-animate" data-delay="0">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Authentic Moments</h3>
+                <p className="philosophy-item-text">
+                  We believe in capturing raw, unfiltered emotions. Every laugh, 
+                  tear, and tender glance tells your story in its most genuine form.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Authentic Moments</h3>
-              <p>
-                We capture genuine emotions and candid moments that truly 
-                represent your special day.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-camera"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="150">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Artistic Excellence</h3>
+                <p className="philosophy-item-text">
+                  Through masterful composition, lighting, and timing, we transform 
+                  fleeting moments into timeless works of art that speak to the soul.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Artistic Excellence</h3>
-              <p>
-                Our artistic approach ensures every photo is a work of art 
-                that tells your unique story.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-users"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="300">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Personal Connection</h3>
+                <p className="philosophy-item-text">
+                  We take time to understand your unique story, building trust 
+                  and connection that allows us to capture your most intimate moments.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Personal Service</h3>
-              <p>
-                We work closely with each couple to understand their vision 
-                and exceed their expectations.
-              </p>
             </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="450">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Passionate Craft</h3>
+                <p className="philosophy-item-text">
+                  Photography isn't just our profession—it's our passion. We pour 
+                  our hearts into every shot, ensuring each image resonates with life.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="600">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Lasting Legacy</h3>
+                <p className="philosophy-item-text">
+                  We create heirloom-quality images that will be treasured for 
+                  generations, preserving your love story for years to come.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="750">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Seamless Experience</h3>
+                <p className="philosophy-item-text">
+                  From initial consultation to final delivery, we ensure a smooth, 
+                  stress-free experience that lets you focus on what matters most.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="philosophy-quote scroll-animate">
+            <blockquote>
+              "Photography is not about the camera, it's about the heart behind it. 
+              We don't just document your day—we preserve the soul of your love story."
+            </blockquote>
+            <cite>— The Solid Weddings Team</cite>
           </div>
         </div>
       </section>
