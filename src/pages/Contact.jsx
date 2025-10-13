@@ -22,6 +22,12 @@ const Contact = () => {
     message: ''
   });
 
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    message: '',
+    type: ''
+  });
+
   // Component mount animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
