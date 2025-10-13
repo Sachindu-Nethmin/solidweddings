@@ -85,7 +85,7 @@ const Contact = () => {
     console.log('Form submitted:', formData);
     alert('Thank you for your inquiry! We will get back to you soon.');
     
-    // Set loading state
+    // Set loading states
     setFormStatus({
       isSubmitting: true,
       message: 'Sending your inquiry...',
