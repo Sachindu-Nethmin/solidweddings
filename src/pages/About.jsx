@@ -12,7 +12,7 @@ const About = () => {
     '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
   ];
 
-  // Component mount animation
+  // Component mount animations
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
