@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
@@ -21,12 +20,6 @@ const Contact = () => {
     venue: '',
     package: '',
     message: ''
-  });
-
-  const [formStatus, setFormStatus] = useState({
-    isSubmitting: false,
-    message: '',
-    type: '' // 'success' or 'error'
   });
 
   // Component mount animation
@@ -88,6 +81,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Handle form submission to here
+    console.log('Form submitted:', formData);
+    alert('Thank you for your inquiry! We will get back to you soon.');
     
     // Set loading state
     setFormStatus({
@@ -296,148 +292,6 @@ const Contact = () => {
           text-align: center;
           margin-bottom: 60px;
           color: var(--text-primary);
-        }
-
-        /* Form Status Styles */
-        .form-status {
-          padding: 16px 20px;
-          border-radius: 12px;
-          margin: 24px 0;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          font-weight: 500;
-          animation: slideIn 0.3s ease;
-        }
-        .form-status.success {
-          background: linear-gradient(135deg, #d4edda, #c3e6cb);
-          color: #155724;
-          border: 1px solid #c3e6cb;
-        }
-        .form-status.error {
-          background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-          color: #721c24;
-          border: 1px solid #f5c6cb;
-        }
-        .form-status.info {
-          background: linear-gradient(135deg, #d1ecf1, #bee5eb);
-          color: #0c5460;
-          border: 1px solid #bee5eb;
-        }
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Submit Button Styles */
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 14px 28px;
-          border: none;
-          border-radius: 12px;
-          font-weight: 600;
-          font-size: 16px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          text-decoration: none;
-          justify-content: center;
-        }
-        .btn:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none !important;
-        }
-        .btn-primary {
-          background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-          color: white;
-          box-shadow: 0 4px 20px rgba(192, 160, 98, 0.3);
-        }
-        .btn-primary:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(192, 160, 98, 0.4);
-        }
-        .btn-secondary {
-          background: var(--card);
-          color: var(--text-primary);
-          border: 1px solid rgba(192, 160, 98, 0.3);
-        }
-        .btn-success {
-          background: linear-gradient(135deg, #25d366, #128c7e);
-          color: white;
-        }
-
-        /* Contact Form Styles */
-        .contact-content {
-          padding: 80px 0;
-          background: var(--bg);
-        }
-        .contact-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
-          align-items: start;
-        }
-        @media (max-width: 768px) {
-          .contact-grid {
-            grid-template-columns: 1fr;
-            gap: 60px;
-          }
-        }
-
-        .contact-form-section h2 {
-          font-family: 'Playfair Display', serif;
-          font-size: 2.5rem;
-          margin-bottom: 16px;
-          color: var(--text-primary);
-        }
-        .contact-form-section p {
-          color: var(--text-muted);
-          margin-bottom: 40px;
-          font-size: 1.1rem;
-        }
-
-        .contact-form {
-          background: var(--card);
-          padding: 40px;
-          border-radius: var(--radius);
-          box-shadow: var(--shadow);
-        }
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 24px;
-          margin-bottom: 24px;
-        }
-        @media (max-width: 600px) {
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-        }
-        .form-group {
-          display: flex;
-          flex-direction: column;
-        }
-        .form-group label {
-          font-weight: 600;
-          margin-bottom: 8px;
-          color: var(--text-primary);
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-          padding: 14px 16px;
-          border: 2px solid rgba(192, 160, 98, 0.2);
-          border-radius: 8px;
-          font-size: 16px;
-          transition: border-color 0.3s ease;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-          outline: none;
-          border-color: var(--accent-gold);
         }
 
         /* ...existing contact styles... */

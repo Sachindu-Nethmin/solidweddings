@@ -13,7 +13,6 @@
     "test:all": "npm run test && npm run test:functional"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "framer-motion": "^12.23.22",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

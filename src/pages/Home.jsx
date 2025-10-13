@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -27,51 +28,13 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Smooth parallax using requestAnimationFrame (avoids CSS-transform transitions)
+  // Scroll tracking for parallax
   useEffect(() => {
-    if (!heroRef.current) return;
-
-    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
-    let ticking = false;
-
-    const update = () => {
-      const rect = heroRef.current.getBoundingClientRect();
-      // rect.top is position relative to viewport; we want a subtle inverse offset
-      const base = -rect.top; // positive when scrolled down
-      // scale it down and clamp to avoid large shifts
-      const offset = Math.max(-120, Math.min(120, base * 0.12));
-
-      images().forEach(img => {
-        img.style.transform = `translateY(${offset}px) scale(1.05)`;
-      });
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
     };
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        update();
-        ticking = false;
-      });
-    };
-
-    // Initialize transforms and styles for performance
-    images().forEach(img => {
-      img.style.transform = 'translateY(0) scale(1.05)';
-      img.style.willChange = 'transform, opacity';
-      img.style.pointerEvents = 'none';
-    });
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-
-    // run one frame to set initial position
-    onScroll();
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Intersection Observer for scroll animations
@@ -100,7 +63,7 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  // parallax handled by rAF effect above
+  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className={`home-page ${isLoaded ? 'loaded' : ''}`}>
@@ -160,13 +123,8 @@ const Home = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          /* only transition opacity between slides; transform is driven by JS (rAF)
-             and should NOT be transitioned via CSS to avoid slow "glide" */
-          transition: opacity 1.2s ease-in-out;
-          transform: translateY(0) scale(1.05);
-          background-color: #000; /* fallback so you don't see gray gaps while images change */
-          will-change: transform, opacity;
-          pointer-events: none;
+          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+          transform: translateY(${parallaxOffset}px) scale(1.05);
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
