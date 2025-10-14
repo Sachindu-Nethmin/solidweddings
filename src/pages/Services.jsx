@@ -134,7 +134,7 @@ const Services = () => {
         /* Hero Section */
         .hero-section {
           position: relative;
-          height: 70vh;
+          height: 80vh;
           min-height: 500px;
           display: flex;
           align-items: center;

@@ -235,7 +235,7 @@ const Contact = () => {
         /* Hero Section */
         .hero-section {
           position: relative;
-          height: 60vh;
+          height: 80vh;
           min-height: 450px;
           display: flex;
           align-items: center;

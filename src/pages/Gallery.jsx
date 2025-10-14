@@ -300,7 +300,7 @@ const Gallery = () => {
         /* HERO with Increased Transparency */
         .hero-section {
           position: relative;
-          height: 65vh;
+          height: 80vh;
           min-height: 500px;
           display: flex;
           align-items: center;
