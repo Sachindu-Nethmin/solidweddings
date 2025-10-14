@@ -11,7 +11,7 @@ const About = () => {
     '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
   ];
 
-  // Component mount animation
+  // Component mount animations
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -516,39 +516,144 @@ const About = () => {
 
       {/* Philosophy Section */}
       <section className="philosophy">
+        <div className="philosophy-bg"></div>
         <div className="container">
-          <h2 className="section-title">Our Philosophy</h2>
+          <div className="philosophy-header scroll-animate">
+            <h2 className="section-title philosophy-title">Our Philosophy</h2>
+            <p className="philosophy-subtitle">
+              Every moment is precious. Our approach is rooted in capturing the authentic beauty 
+              and genuine emotions that make your story uniquely yours.
+            </p>
+          </div>
+          
           <div className="philosophy-grid">
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-heart"></i>
+            <div className="philosophy-item scroll-animate" data-delay="0">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Authentic Moments</h3>
+                <p className="philosophy-item-text">
+                  We believe in capturing raw, unfiltered emotions. Every laugh, 
+                  tear, and tender glance tells your story in its most genuine form.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Authentic Moments</h3>
-              <p>
-                We capture genuine emotions and candid moments that truly 
-                represent your special day.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-camera"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="150">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Artistic Excellence</h3>
+                <p className="philosophy-item-text">
+                  Through masterful composition, lighting, and timing, we transform 
+                  fleeting moments into timeless works of art that speak to the soul.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Artistic Excellence</h3>
-              <p>
-                Our artistic approach ensures every photo is a work of art 
-                that tells your unique story.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-users"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="300">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Personal Connection</h3>
+                <p className="philosophy-item-text">
+                  We take time to understand your unique story, building trust 
+                  and connection that allows us to capture your most intimate moments.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Personal Service</h3>
-              <p>
-                We work closely with each couple to understand their vision 
-                and exceed their expectations.
-              </p>
             </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="450">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Passionate Craft</h3>
+                <p className="philosophy-item-text">
+                  Photography isn't just our profession—it's our passion. We pour 
+                  our hearts into every shot, ensuring each image resonates with life.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="600">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Lasting Legacy</h3>
+                <p className="philosophy-item-text">
+                  We create heirloom-quality images that will be treasured for 
+                  generations, preserving your love story for years to come.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="750">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Seamless Experience</h3>
+                <p className="philosophy-item-text">
+                  From initial consultation to final delivery, we ensure a smooth, 
+                  stress-free experience that lets you focus on what matters most.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="philosophy-quote scroll-animate">
+            <blockquote>
+              "Photography is not about the camera, it's about the heart behind it. 
+              We don't just document your day—we preserve the soul of your love story."
+            </blockquote>
+            <cite>— The Solid Weddings Team</cite>
           </div>
         </div>
       </section>
@@ -614,7 +719,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 
