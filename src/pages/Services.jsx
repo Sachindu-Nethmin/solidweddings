@@ -140,6 +140,8 @@ const Services = () => {
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up by 72px */
+          padding-top: var(--header-offset);           /* Add 72px padding inside */
         }
 
         .hero-bg-image {
