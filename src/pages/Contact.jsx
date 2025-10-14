@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const Contact = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -42,13 +41,45 @@ const Contact = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -75,8 +106,6 @@ const Contact = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const parallaxOffset = scrollY * 0.3;
 
   const handleChange = (e) => {
     setFormData({
@@ -221,8 +250,11 @@ const Contact = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const About = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -26,13 +25,45 @@ const About = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -59,8 +90,6 @@ const About = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className={`about-page ${isLoaded ? 'loaded' : ''}`}>
@@ -120,8 +149,11 @@ const About = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
@@ -202,267 +234,236 @@ const About = () => {
           color: var(--text-primary);
         }
 
-        /* Philosophy Section Styles */
+        /* Philosophy Section */
         .philosophy {
+          padding: 80px 0;
+          background: linear-gradient(135deg, #f8f6f4 0%, #fdfcfb 100%);
           position: relative;
-          padding: 120px 0;
-          background: linear-gradient(135deg, var(--bg) 0%, #f8f6f3 50%, var(--bg) 100%);
-          overflow: hidden;
-        }
-
-        .philosophy-bg {
-          position: absolute;
-          inset: 0;
-          background: 
-            radial-gradient(circle at 20% 30%, rgba(192, 160, 98, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(192, 160, 98, 0.03) 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(192, 160, 98, 0.02) 0%, transparent 60%);
-          animation: philosophyBgFloat 30s ease-in-out infinite;
-        }
-        @keyframes philosophyBgFloat {
-          0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-          33% { transform: translate(20px, -15px) rotate(1deg) scale(1.02); }
-          66% { transform: translate(-15px, 10px) rotate(-0.5deg) scale(0.98); }
-        }
-
-        .philosophy-header {
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto 80px;
-        }
-
-        .philosophy-title {
-          position: relative;
-          margin-bottom: 24px;
-        }
-        .philosophy-title::after {
-          content: '';
-          position: absolute;
-          bottom: -12px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
-          border-radius: 2px;
-          animation: titleUnderline 1.5s ease 1s both;
-        }
-        @keyframes titleUnderline {
-          from { width: 0; opacity: 0; }
-          to { width: 80px; opacity: 1; }
-        }
-
-        .philosophy-subtitle {
-          font-size: clamp(1.1rem, 2vw, 1.3rem);
-          color: var(--text-muted);
-          line-height: 1.8;
-          font-weight: 400;
-          letter-spacing: 0.01em;
+          z-index: 5;
         }
 
         .philosophy-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 40px;
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 20px;
+          margin-top: 60px;
         }
 
         .philosophy-item {
-          opacity: 0;
-          transform: translateY(60px) scale(0.95);
-          transition: all 0.8s cubic-bezier(0.2, 0.9, 0.2, 1);
-        }
-        .philosophy-item.animate-in {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-        .philosophy-item[data-delay="150"].animate-in { transition-delay: 0.15s; }
-        .philosophy-item[data-delay="300"].animate-in { transition-delay: 0.3s; }
-        .philosophy-item[data-delay="450"].animate-in { transition-delay: 0.45s; }
-        .philosophy-item[data-delay="600"].animate-in { transition-delay: 0.6s; }
-        .philosophy-item[data-delay="750"].animate-in { transition-delay: 0.75s; }
-
-        .philosophy-card {
-          position: relative;
           background: var(--card);
           border-radius: var(--radius);
-          padding: 40px 32px;
+          padding: 40px 30px;
           text-align: center;
           box-shadow: var(--shadow);
           transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
-          border: 1px solid rgba(192, 160, 98, 0.1);
-          overflow: hidden;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-        .philosophy-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
-          transform: scaleX(0);
-          transition: transform 0.4s ease;
-        }
-        .philosophy-card:hover::before {
-          transform: scaleX(1);
-        }
-        .philosophy-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 25px 60px rgba(45, 45, 45, 0.12);
-          border-color: rgba(192, 160, 98, 0.2);
         }
 
-        .philosophy-icon-wrapper {
-          position: relative;
+        .philosophy-item:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 70px rgba(45, 45, 45, 0.12);
+        }
+
+        .philosophy-item .icon {
           width: 80px;
           height: 80px;
+          background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+          border-radius: 50%;
           margin: 0 auto 24px;
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 2rem;
+          color: #fff;
         }
 
-        .philosophy-icon {
-          position: relative;
-          z-index: 2;
-          color: var(--accent-gold);
-          transition: all 0.4s ease;
-          animation: iconFloat 4s ease-in-out infinite;
-        }
-        @keyframes iconFloat {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-5px) rotate(2deg); }
-        }
-        .philosophy-card:hover .philosophy-icon {
-          color: var(--text-primary);
-          transform: scale(1.1);
-          animation-play-state: paused;
-        }
-
-        .philosophy-glow {
-          position: absolute;
-          inset: -20px;
-          background: radial-gradient(circle, rgba(192, 160, 98, 0.15) 0%, transparent 70%);
-          border-radius: 50%;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-          animation: glowPulse 3s ease-in-out infinite;
-        }
-        @keyframes glowPulse {
-          0%, 100% { transform: scale(1); opacity: 0.1; }
-          50% { transform: scale(1.2); opacity: 0.2; }
-        }
-        .philosophy-card:hover .philosophy-glow {
-          opacity: 1;
-          animation-play-state: paused;
-        }
-
-        .philosophy-item-title {
+        .philosophy-item h3 {
           font-family: 'Playfair Display', serif;
           font-size: 1.5rem;
           font-weight: 600;
-          color: var(--text-primary);
           margin-bottom: 16px;
-          letter-spacing: -0.01em;
+          color: var(--text-primary);
         }
 
-        .philosophy-item-text {
+        .philosophy-item p {
           color: var(--text-muted);
-          line-height: 1.7;
-          font-size: 1rem;
-          font-weight: 400;
-          flex-grow: 1;
-          margin-bottom: 20px;
+          line-height: 1.6;
         }
 
-        .philosophy-decoration {
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 40px;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, var(--accent-gold-light), transparent);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-        .philosophy-card:hover .philosophy-decoration {
-          opacity: 1;
+        /* Experience Section */
+        .experience {
+          padding: 80px 0;
+          position: relative;
+          z-index: 5;
         }
 
-        .philosophy-quote {
-          text-align: center;
-          max-width: 700px;
-          margin: 80px auto 0;
-          padding: 40px;
-          background: rgba(255, 255, 255, 0.7);
+        .experience-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .experience-image {
           border-radius: var(--radius);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(192, 160, 98, 0.1);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+
+        .exp-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+
+        .experience-image:hover .exp-image {
+          transform: scale(1.05);
+        }
+
+        .experience-text h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 30px;
+          color: var(--text-primary);
+        }
+
+        .benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 40px;
+        }
+
+        .benefits-list li {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 12px 0;
+          color: var(--text-primary);
+          font-size: 1.05rem;
+        }
+
+        .benefits-list i {
+          color: var(--accent-gold);
+          font-size: 1.2rem;
+          flex-shrink: 0;
+        }
+
+        /* About CTA Section */
+        .about-cta {
+          background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
+          color: #fff;
+          text-align: center;
+          padding: 80px 0;
           position: relative;
           overflow: hidden;
+          z-index: 10;
         }
-        .philosophy-quote::before {
+        .about-cta::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(45deg, rgba(192, 160, 98, 0.05) 0%, transparent 50%);
-          animation: quoteShimmer 4s ease-in-out infinite;
-        }
-        @keyframes quoteShimmer {
-          0%, 100% { opacity: 0; }
-          50% { opacity: 1; }
+          background: url('/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
         }
 
-        .philosophy-quote blockquote {
+        .cta-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        .cta-content h2 {
           font-family: 'Playfair Display', serif;
-          font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-          font-style: italic;
-          color: var(--text-primary);
-          margin: 0 0 16px;
-          line-height: 1.6;
-          position: relative;
-          z-index: 2;
-        }
-        .philosophy-quote blockquote::before {
-          content: '"';
-          font-size: 3rem;
-          color: var(--accent-gold);
-          position: absolute;
-          top: -10px;
-          left: -20px;
-          font-family: serif;
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 24px;
+          color: #fff;
         }
 
-        .philosophy-quote cite {
+        .cta-content p {
+          font-size: 1.2rem;
+          margin-bottom: 40px;
+          opacity: 0.9;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          padding: 16px 32px;
+          border-radius: 50px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.1rem;
+        }
+
+        .btn-primary {
+          background: var(--accent-gold);
+          color: #fff;
+          border: 2px solid var(--accent-gold);
+          box-shadow: 0 12px 40px rgba(192, 160, 98, 0.3);
+        }
+
+        .btn-primary:hover {
+          background: #a88a4f;
+          border-color: #a88a4f;
+          transform: translateY(-2px);
+          box-shadow: 0 16px 50px rgba(192, 160, 98, 0.4);
+        }
+
+        .btn-outline {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px);
+        }
+
+        /* Our Story Section */
+        .section p {
           color: var(--text-muted);
-          font-size: 1rem;
-          font-weight: 500;
-          position: relative;
-          z-index: 2;
+          line-height: 1.8;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-          .philosophy {
-            padding: 80px 0;
-          }
           .philosophy-grid {
             grid-template-columns: 1fr;
-            gap: 30px;
           }
-          .philosophy-card {
-            padding: 32px 24px;
+          .experience-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
           }
-          .philosophy-quote {
-            margin: 60px auto 0;
-            padding: 32px 24px;
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+          .btn {
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
           }
         }
       `}</style>
@@ -712,7 +713,7 @@ const About = () => {
               and learn about your special day.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Get in Touch</a>
+              <a href="/contact" className="btn btn-outline">Get in Touch</a>
               <a href="/gallery" className="btn btn-outline">View Our Work</a>
             </div>
           </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -28,13 +27,45 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -63,8 +94,6 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  const parallaxOffset = scrollY * 0.3;
-
   return (
     <div className={`home-page ${isLoaded ? 'loaded' : ''}`}>
       <style>{`
@@ -79,7 +108,7 @@ const Home = () => {
           --accent-gold-light: #d9c6a5;
           --shadow: 0 16px 50px rgba(45, 45, 45, 0.08);
           --radius: 20px;
-          --header-offset: 72px;
+          --header-offset: 90px;
         }
 
         .home-page {
@@ -114,6 +143,8 @@ const Home = () => {
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up under header */
+          padding-top: var(--header-offset); /* Maintain content spacing */
         }
 
         .hero-bg-image {
@@ -123,8 +154,11 @@ const Home = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
@@ -359,6 +393,22 @@ const Home = () => {
           background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
           color: #fff;
           text-align: center;
+          position: relative;
+          overflow: hidden;
+          z-index: 10;
+        }
+        .cta-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 2;
         }
 
         .cta-title {
@@ -484,7 +534,7 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section cta-section">
         <div className="container">
-          <div className="scroll-animate">
+          <div className="scroll-animate cta-content">
             <h2 className="cta-title">Ready to Begin?</h2>
             <p className="cta-text">Let's create beautiful memories together. Contact us today to discuss your vision and start planning your perfect photography experience.</p>
             <div className="hero-cta">
