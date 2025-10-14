@@ -108,7 +108,7 @@ const Home = () => {
           --accent-gold-light: #d9c6a5;
           --shadow: 0 16px 50px rgba(45, 45, 45, 0.08);
           --radius: 20px;
-          --header-offset: 72px;
+          --header-offset: 90px;
         }
 
         .home-page {
