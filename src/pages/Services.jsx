@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const Services = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -26,13 +25,45 @@ const Services = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -59,8 +90,6 @@ const Services = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className={`services-page ${isLoaded ? 'loaded' : ''}`}>
@@ -105,12 +134,14 @@ const Services = () => {
         /* Hero Section */
         .hero-section {
           position: relative;
-          height: 70vh;
+          height: 80vh;
           min-height: 500px;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up by 72px */
+          padding-top: var(--header-offset);           /* Add 72px padding inside */
         }
 
         .hero-bg-image {
@@ -120,8 +151,11 @@ const Services = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
@@ -202,7 +236,321 @@ const Services = () => {
           color: var(--text-primary);
         }
 
-        /* ...existing styles for services content... */
+        /* Services Grid Section - "What We Offer" */
+        .services-grid-section {
+          padding: 100px 0;
+          background: linear-gradient(135deg, #f8f6f4 0%, #fdfcfb 100%);
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 40px;
+          margin-top: 60px;
+        }
+
+        .service-card {
+          background: var(--card);
+          border-radius: var(--radius);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+          display: flex;
+          flex-direction: column;
+        }
+        .service-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 24px 60px rgba(45, 45, 45, 0.12);
+        }
+
+        .service-image {
+          width: 100%;
+          height: 300px;
+          overflow: hidden;
+          position: relative;
+        }
+        .service-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+        }
+        .service-card:hover .service-image img {
+          transform: scale(1.1);
+        }
+
+        .service-content {
+          padding: 32px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          flex: 1;
+        }
+
+        .service-content h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin: 0 0 12px 0;
+        }
+
+        .service-content p {
+          color: var(--text-muted);
+          font-size: 1rem;
+          line-height: 1.7;
+          margin: 0 0 20px 0;
+        }
+
+        .service-features {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .service-features li {
+          color: var(--text-muted);
+          font-size: 0.95rem;
+          padding-left: 28px;
+          position: relative;
+          line-height: 1.5;
+        }
+        .service-features li::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: var(--accent-gold);
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+
+        /* Packages Section - Keep existing styles */
+        .packages {
+          padding: 100px 0;
+          background: var(--bg);
+        }
+
+        .packages-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 40px;
+          margin-top: 60px;
+        }
+
+        .package-card {
+          background: var(--card);
+          border-radius: var(--radius);
+          padding: 48px 36px;
+          box-shadow: var(--shadow);
+          transition: all 0.4s ease;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .package-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 24px 60px rgba(45, 45, 45, 0.15);
+        }
+        .package-card.featured {
+          background: var(--card);
+          color: var(--text-primary);
+          transform: scale(1.05);
+          border: 3px solid #ff6b6b;
+          box-shadow: 0 20px 60px rgba(255, 107, 107, 0.2);
+        }
+        .package-card.featured:hover {
+          transform: scale(1.05) translateY(-8px);
+          box-shadow: 0 24px 70px rgba(255, 107, 107, 0.25);
+        }
+
+        .popular-badge {
+          position: absolute;
+          top: -12px;
+          right: 20px;
+          background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+          color: white;
+          padding: 6px 16px;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .package-card h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: 2rem;
+          font-weight: 700;
+          margin: 0 0 16px 0;
+        }
+        .package-card.featured h3 {
+          color: var(--text-primary);
+        }
+
+        .package-price {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--accent-gold);
+          margin-bottom: 32px;
+        }
+        .package-card.featured .package-price {
+          color: #ff6b6b;
+          font-size: 1.75rem;
+        }
+
+        .package-features {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 40px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          width: 100%;
+        }
+
+        .package-features li {
+          color: var(--text-muted);
+          font-size: 0.95rem;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(45, 45, 45, 0.08);
+          text-align: center;
+        }
+        .package-card.featured .package-features li {
+          color: var(--text-muted);
+          border-bottom-color: rgba(45, 45, 45, 0.08);
+        }
+        .package-features li:last-child {
+          border-bottom: none;
+        }
+
+        /* CTA Section */
+        .services-cta {
+          padding: 100px 0;
+          background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
+          position: relative;
+          overflow: hidden;
+          z-index: 10;
+        }
+        .services-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .cta-content h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
+          color: white;
+          margin: 0 0 24px 0;
+          line-height: 1.2;
+        }
+
+        .cta-content p {
+          color: rgba(255, 255, 255, 0.95);
+          font-size: 1.25rem;
+          line-height: 1.7;
+          margin: 0 0 48px 0;
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 16px 32px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          text-decoration: none;
+          border-radius: 50px;
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+          cursor: pointer;
+        }
+
+        /* CTA Section Buttons - Glass Morphism Style */
+        .services-cta .btn {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+        }
+        .services-cta .btn:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px);
+        }
+
+        /* Package Card Buttons */
+        .btn-outline {
+          background: rgba(255, 255, 255, 0.1);
+          color: var(--text-primary);
+          backdrop-filter: blur(10px);
+          border: 2px solid var(--accent-gold);
+        }
+        .btn-outline:hover {
+          background: var(--accent-gold);
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(192, 160, 98, 0.3);
+        }
+        .btn-primary {
+          background: white;
+          color: var(--accent-gold);
+          border: 2px solid white;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+        }
+        .package-card.featured .btn-primary {
+          background: white;
+          color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .services-grid,
+          .packages-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .package-card.featured {
+            transform: scale(1);
+          }
+          .package-card.featured:hover {
+            transform: translateY(-8px);
+          }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .service-content {
+            padding: 24px;
+          }
+        }
       `}</style>
 
       {/* Hero Section */}
@@ -445,10 +793,8 @@ const Services = () => {
               captures your special day within your budget.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Get Custom Quote</a>
-              <a href="tel:+94712710881" className="btn btn-secondary">
-                <i className="fas fa-phone"></i> Call Us Now
-              </a>
+              <a href="/contact" className="btn">Get In Touch</a>
+              <a href="/services" className="btn">View Packages</a>
             </div>
           </div>
         </div>

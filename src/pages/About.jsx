@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const About = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -12,7 +11,7 @@ const About = () => {
     '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
   ];
 
-  // Component mount animation
+  // Component mount animations
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -26,13 +25,45 @@ const About = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Scroll tracking for parallax
+  // Smooth parallax using requestAnimationFrame (no state updates, no slow glide)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
+    let ticking = false;
+
+    const update = () => {
+      const sc = window.scrollY || window.pageYOffset;
+      // subtle clamped offset
+      const offset = Math.max(-100, Math.min(100, sc * 0.25));
+      images().forEach(img => {
+        const scale = img.classList.contains('active') ? 1.05 : 1;
+        img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    // Initialize styles
+    images().forEach(img => {
+      img.style.transform = 'translateY(0) scale(1.05)';
+      img.style.willChange = 'transform, opacity';
+      img.style.pointerEvents = 'none';
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll(); // run once initially
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Intersection Observer for scroll animations
@@ -59,8 +90,6 @@ const About = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className={`about-page ${isLoaded ? 'loaded' : ''}`}>
@@ -105,12 +134,14 @@ const About = () => {
         /* Hero Section */
         .hero-section {
           position: relative;
-          height: 70vh;
+          height: 80vh;
           min-height: 500px;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up by 72px */
+          padding-top: var(--header-offset);           /* Add 72px padding inside */
         }
 
         .hero-bg-image {
@@ -120,8 +151,11 @@ const About = () => {
           height: 100%;
           background-size: cover;
           background-position: center;
-          transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-          transform: translateY(${parallaxOffset}px) scale(1.05);
+          transition: opacity 1.2s ease-in-out;
+          transform: translateY(0) scale(1.05);
+          background-color: #000;
+          will-change: transform, opacity;
+          pointer-events: none;
         }
         .hero-bg-image.active { opacity: 1; z-index: 2; }
         .hero-bg-image.inactive { opacity: 0; z-index: 1; }
@@ -201,6 +235,239 @@ const About = () => {
           margin-bottom: 60px;
           color: var(--text-primary);
         }
+
+        /* Philosophy Section */
+        .philosophy {
+          padding: 80px 0;
+          background: linear-gradient(135deg, #f8f6f4 0%, #fdfcfb 100%);
+          position: relative;
+          z-index: 5;
+        }
+
+        .philosophy-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          margin-top: 60px;
+        }
+
+        .philosophy-item {
+          background: var(--card);
+          border-radius: var(--radius);
+          padding: 40px 30px;
+          text-align: center;
+          box-shadow: var(--shadow);
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+
+        .philosophy-item:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 70px rgba(45, 45, 45, 0.12);
+        }
+
+        .philosophy-item .icon {
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+          border-radius: 50%;
+          margin: 0 auto 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          color: #fff;
+        }
+
+        .philosophy-item h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 16px;
+          color: var(--text-primary);
+        }
+
+        .philosophy-item p {
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+
+        /* Experience Section */
+        .experience {
+          padding: 80px 0;
+          position: relative;
+          z-index: 5;
+        }
+
+        .experience-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .experience-image {
+          border-radius: var(--radius);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+
+        .exp-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+        }
+
+        .experience-image:hover .exp-image {
+          transform: scale(1.05);
+        }
+
+        .experience-text h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          margin-bottom: 30px;
+          color: var(--text-primary);
+        }
+
+        .benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 40px;
+        }
+
+        .benefits-list li {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 12px 0;
+          color: var(--text-primary);
+          font-size: 1.05rem;
+        }
+
+        .benefits-list i {
+          color: var(--accent-gold);
+          font-size: 1.2rem;
+          flex-shrink: 0;
+        }
+
+        /* About CTA Section */
+        .about-cta {
+          background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
+          color: #fff;
+          text-align: center;
+          padding: 80px 0;
+          position: relative;
+          overflow: hidden;
+          z-index: 10;
+        }
+        .about-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+
+        .cta-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        .cta-content h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-weight: 700;
+          margin-bottom: 24px;
+          color: #fff;
+        }
+
+        .cta-content p {
+          font-size: 1.2rem;
+          margin-bottom: 40px;
+          opacity: 0.9;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          padding: 16px 32px;
+          border-radius: 50px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.1rem;
+        }
+
+        .btn-primary {
+          background: var(--accent-gold);
+          color: #fff;
+          border: 2px solid var(--accent-gold);
+          box-shadow: 0 12px 40px rgba(192, 160, 98, 0.3);
+        }
+
+        .btn-primary:hover {
+          background: #a88a4f;
+          border-color: #a88a4f;
+          transform: translateY(-2px);
+          box-shadow: 0 16px 50px rgba(192, 160, 98, 0.4);
+        }
+
+        .btn-outline {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px);
+        }
+
+        /* Our Story Section */
+        .section p {
+          color: var(--text-muted);
+          line-height: 1.8;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .philosophy-grid {
+            grid-template-columns: 1fr;
+          }
+          .experience-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+          .btn {
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
+          }
+        }
       `}</style>
 
       {/* Hero Section */}
@@ -251,39 +518,144 @@ const About = () => {
 
       {/* Philosophy Section */}
       <section className="philosophy">
+        <div className="philosophy-bg"></div>
         <div className="container">
-          <h2 className="section-title">Our Philosophy</h2>
+          <div className="philosophy-header scroll-animate">
+            <h2 className="section-title philosophy-title">Our Philosophy</h2>
+            <p className="philosophy-subtitle">
+              Every moment is precious. Our approach is rooted in capturing the authentic beauty 
+              and genuine emotions that make your story uniquely yours.
+            </p>
+          </div>
+          
           <div className="philosophy-grid">
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-heart"></i>
+            <div className="philosophy-item scroll-animate" data-delay="0">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Authentic Moments</h3>
+                <p className="philosophy-item-text">
+                  We believe in capturing raw, unfiltered emotions. Every laugh, 
+                  tear, and tender glance tells your story in its most genuine form.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Authentic Moments</h3>
-              <p>
-                We capture genuine emotions and candid moments that truly 
-                represent your special day.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-camera"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="150">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Artistic Excellence</h3>
+                <p className="philosophy-item-text">
+                  Through masterful composition, lighting, and timing, we transform 
+                  fleeting moments into timeless works of art that speak to the soul.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Artistic Excellence</h3>
-              <p>
-                Our artistic approach ensures every photo is a work of art 
-                that tells your unique story.
-              </p>
             </div>
-            <div className="philosophy-item">
-              <div className="icon">
-                <i className="fas fa-users"></i>
+
+            <div className="philosophy-item scroll-animate" data-delay="300">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Personal Connection</h3>
+                <p className="philosophy-item-text">
+                  We take time to understand your unique story, building trust 
+                  and connection that allows us to capture your most intimate moments.
+                </p>
+                <div className="philosophy-decoration"></div>
               </div>
-              <h3>Personal Service</h3>
-              <p>
-                We work closely with each couple to understand their vision 
-                and exceed their expectations.
-              </p>
             </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="450">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Passionate Craft</h3>
+                <p className="philosophy-item-text">
+                  Photography isn't just our profession—it's our passion. We pour 
+                  our hearts into every shot, ensuring each image resonates with life.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="600">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Lasting Legacy</h3>
+                <p className="philosophy-item-text">
+                  We create heirloom-quality images that will be treasured for 
+                  generations, preserving your love story for years to come.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+
+            <div className="philosophy-item scroll-animate" data-delay="750">
+              <div className="philosophy-card">
+                <div className="philosophy-icon-wrapper">
+                  <div className="philosophy-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="philosophy-glow"></div>
+                </div>
+                <h3 className="philosophy-item-title">Seamless Experience</h3>
+                <p className="philosophy-item-text">
+                  From initial consultation to final delivery, we ensure a smooth, 
+                  stress-free experience that lets you focus on what matters most.
+                </p>
+                <div className="philosophy-decoration"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="philosophy-quote scroll-animate">
+            <blockquote>
+              "Photography is not about the camera, it's about the heart behind it. 
+              We don't just document your day—we preserve the soul of your love story."
+            </blockquote>
+            <cite>— The Solid Weddings Team</cite>
           </div>
         </div>
       </section>
@@ -343,7 +715,7 @@ const About = () => {
               and learn about your special day.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Get in Touch</a>
+              <a href="/contact" className="btn btn-outline">Get in Touch</a>
               <a href="/gallery" className="btn btn-outline">View Our Work</a>
             </div>
           </div>

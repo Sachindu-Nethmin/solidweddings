@@ -300,12 +300,14 @@ const Gallery = () => {
         /* HERO with Increased Transparency */
         .hero-section {
           position: relative;
-          height: 65vh;
+          height: 80vh;
           min-height: 500px;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          margin-top: calc(var(--header-offset) * -1); /* Pull hero up by 72px */
+          padding-top: var(--header-offset);           /* Add 72px padding inside */
         }
         .hero-bg-image {
           position: absolute;
@@ -501,25 +503,58 @@ const Gallery = () => {
         .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: #fff; }
 
         /* CTA with new colors */
-        .gallery-cta { padding: 3.5rem 0 6rem; text-align: center; background: transparent; }
-        .cta-content h2 { color: var(--text-primary); }
-        .cta-content p { color: var(--text-muted); }
-        .btn-primary {
-          background: var(--accent-gold);
+        .gallery-cta {
+          padding: 3.5rem 0 6rem;
+          text-align: center;
+          background: linear-gradient(135deg, var(--accent-gold) 0%, #a88a4f 100%);
+          position: relative;
+          overflow: hidden;
+          z-index: 10;
+        }
+        .gallery-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg') center/cover;
+          opacity: 0.1;
+          pointer-events: none;
+        }
+        .cta-content {
+          position: relative;
+          z-index: 2;
+        }
+        .cta-content h2 { color: #fff; }
+        .cta-content p { color: rgba(255, 255, 255, 0.9); }
+        
+        /* CTA Buttons - Glass Morphism Style */
+        .gallery-cta .btn-primary,
+        .gallery-cta .btn-outline {
+          background: rgba(255, 255, 255, 0.1);
           color: #fff;
-          box-shadow: 0 12px 40px rgba(192, 160, 98, 0.2);
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(10px);
+          padding: 16px 32px;
+          border-radius: 50px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.1rem;
         }
-        .btn-primary:hover {
-          background: #a88a4f; /* Darker gold on hover */
-          box-shadow: 0 16px 50px rgba(192, 160, 98, 0.3);
+        .gallery-cta .btn-primary:hover,
+        .gallery-cta .btn-outline:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px);
         }
-        .btn-outline {
-          border: 2px solid rgba(45, 45, 45, 0.15);
-          color: var(--text-primary);
-        }
-        .btn-outline:hover {
-          border-color: var(--accent-gold);
-          background: rgba(192, 160, 98, 0.05);
+        
+        .cta-buttons {
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
         }
 
         /* Filtering state */
@@ -647,10 +682,10 @@ const Gallery = () => {
       <section className="gallery-cta">
         <div className="container">
           <div className="cta-content">
-            <h2>Ready to Capture Your Story?</h2>
-            <p>Every moment deserves to be beautifully preserved. Let's create timeless memories that you'll cherish forever.</p>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 5vw, 3.5rem)", fontWeight: 700, marginBottom: "24px" }}>Ready to Capture Your Story?</h2>
+            <p style={{ fontSize: "1.2rem", marginBottom: "40px", opacity: 0.9, maxWidth: "600px", marginLeft: "auto", marginRight: "auto" }}>Every moment deserves to be beautifully preserved. Let's create timeless memories that you'll cherish forever.</p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Book Your Session</a>
+              <a href="/contact" className="btn btn-outline">Book Your Session</a>
               <a href="/services" className="btn btn-outline">View Our Packages</a>
             </div>
           </div>
