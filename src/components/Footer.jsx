@@ -9,7 +9,7 @@ const Footer = () => {
           <h3>Get in Touch</h3>
           <p>
             <i className="fas fa-phone" ></i>
-            <a href="tel:+94712710881">+94 71 271 0881</a>
+            <a href="tel:+94702288999">+94 70 228 8999</a>
           </p>
           <p>
             <i className="fas fa-envelope"></i>
@@ -22,7 +22,7 @@ const Footer = () => {
           <h3>Follow Us</h3>
           <div className="social-links-row">
             <a 
-              href="https://www.facebook.com/solidweddingsofficial" 
+              href="https://web.facebook.com/solidweddings" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -30,7 +30,7 @@ const Footer = () => {
               <i className="fab fa-facebook-f"></i>
             </a>
             <a 
-              href="https://www.instagram.com/solidweddingsofficial" 
+              href="https://www.instagram.com/solid_weddings/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -38,7 +38,7 @@ const Footer = () => {
               <i className="fab fa-instagram"></i>
             </a>
             <a 
-              href="https://wa.me/94712710881" 
+              href="https://wa.me/+94702288999" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -46,7 +46,7 @@ const Footer = () => {
               <i className="fab fa-whatsapp"></i>
             </a>
             <a 
-              href="tel:+94712710881" 
+              href="tel:+94702288999" 
               className="social-link"
             >
               <i className="fas fa-phone"></i>
