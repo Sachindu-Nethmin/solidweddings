@@ -105,7 +105,7 @@ const Header = () => {
         {/* Mobile Social Media Icons */}
         <div className="mobile-social-icons">
           <a 
-            href="https://www.facebook.com/solidweddingsofficial" 
+            href="https://web.facebook.com/solidweddings" 
             target="_blank" 
             rel="noopener noreferrer"
             className="mobile-social-link"
@@ -114,7 +114,7 @@ const Header = () => {
             <i className="fab fa-facebook-f"></i>
           </a>
           <a 
-            href="https://www.instagram.com/solidweddingsofficial" 
+            href="https://www.instagram.com/solid_weddings/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="mobile-social-link"
@@ -123,7 +123,7 @@ const Header = () => {
             <i className="fab fa-instagram"></i>
           </a>
           <a 
-            href="https://wa.me/94712710881" 
+            href="https://wa.me/+94702288999" 
             target="_blank" 
             rel="noopener noreferrer"
             className="mobile-social-link"
@@ -132,7 +132,7 @@ const Header = () => {
             <i className="fab fa-whatsapp"></i>
           </a>
           <a 
-            href="tel:+94712710881" 
+            href="tel:+94702288999" 
             className="mobile-social-link"
             onClick={closeMobileMenu}
           >

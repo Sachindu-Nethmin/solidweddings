@@ -13,7 +13,7 @@ const Footer = () => {
           </p>
           <p>
             <i className="fas fa-envelope"></i>
-            <a href="mailto:solidweddingsofficial@gmail.com">solidweddingsofficial@gmail.com</a>
+            <a href="mailto:snapssolid@gmail.com">snapssolid@gmail.com</a>
           </p>
         </div>
         
