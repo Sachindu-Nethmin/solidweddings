@@ -42,6 +42,7 @@ const Header = () => {
             <li><Link to="/about-me" className="nav-link">About Me</Link></li>
             <li><Link to="/services" className="nav-link">Services</Link></li>
             <li><Link to="/gallery" className="nav-link">Gallery</Link></li>
+            <li><Link to="/book-now" className="nav-link book-now-link">Book Now</Link></li>
             <li><Link to="/contact" className="nav-link">Contact</Link></li>
           </ul>
         </nav>
@@ -99,6 +100,7 @@ const Header = () => {
           <li><Link to="/about-me" className="mobile-nav-link" onClick={closeMobileMenu}>About Me</Link></li>
           <li><Link to="/services" className="mobile-nav-link" onClick={closeMobileMenu}>Services</Link></li>
           <li><Link to="/gallery" className="mobile-nav-link" onClick={closeMobileMenu}>Gallery</Link></li>
+          <li><Link to="/book-now" className="mobile-nav-link book-now-link" onClick={closeMobileMenu}>Book Now</Link></li>
           <li><Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link></li>
         </ul>
         

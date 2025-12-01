@@ -182,6 +182,27 @@ p {
   width: 100%;
 }
 
+/* Book Now Button Special Styling */
+.nav-link.book-now-link {
+  background: linear-gradient(135deg, #c0a062, #d9c6a5);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.nav-link.book-now-link:hover {
+  background: linear-gradient(135deg, #d9c6a5, #c0a062);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 160, 98, 0.3);
+  color: white;
+}
+
+.nav-link.book-now-link::after {
+  display: none; /* Remove underline effect for button */
+}
+
 .social-icons {
   display: flex;
   gap: 1rem;
@@ -275,6 +296,23 @@ p {
 
 .mobile-nav-link:hover {
   color: #ff6b6b;
+}
+
+/* Mobile Book Now Button Special Styling */
+.mobile-nav-link.book-now-link {
+  background: linear-gradient(135deg, #c0a062, #d9c6a5);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.mobile-nav-link.book-now-link:hover {
+  background: linear-gradient(135deg, #d9c6a5, #c0a062);
+  color: white;
+  transform: scale(1.05);
 }
 
 .mobile-social-icons {
