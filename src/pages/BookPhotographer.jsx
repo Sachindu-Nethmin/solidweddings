@@ -74,8 +74,13 @@ const BookPhotographer = () => {
 
   const handleSelectPhotographer = (photographer) => {
     setSelectedPhotographer(photographer);
-    // Navigate to contact page with photographer info
-    navigate('/contact', { state: { selectedPhotographer: photographer } });
+    // Navigate to specific contact page for each photographer
+    const contactPages = {
+      1: '/contact1',
+      2: '/contact2',
+      3: '/contact3'
+    };
+    navigate(contactPages[photographer.id] || '/contact');
   };
 
   return (
