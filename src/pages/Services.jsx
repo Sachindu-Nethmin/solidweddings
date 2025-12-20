@@ -6,9 +6,9 @@ const Services = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
-    '/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
-    '/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg'
+    `${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467672116_943824590943015_1177962738152061151_n.jpg`
   ];
 
   // Component mount animation
@@ -439,7 +439,7 @@ const Services = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
+          background: url('${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
           opacity: 0.1;
           pointer-events: none;
         }
@@ -577,21 +577,21 @@ const Services = () => {
       <section className="services-grid-section">
         <div className="container">
           <h2 className="section-title scroll-animate">What We Offer</h2>
-          
+
           <div className="services-grid">
             {/* Wedding Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467833684_943824270943047_5484742608995516360_n.jpg`}
                   alt="Wedding Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Wedding Day Photography</h3>
                 <p>
-                  Complete coverage of your wedding day from preparation to reception. 
-                  We capture every precious moment, emotion, and detail to tell your 
+                  Complete coverage of your wedding day from preparation to reception.
+                  We capture every precious moment, emotion, and detail to tell your
                   complete love story.
                 </p>
                 <ul className="service-features">
@@ -607,16 +607,16 @@ const Services = () => {
             {/* Pre-Wedding Shoots */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467581955_943824264276381_72587053085497663_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467581955_943824264276381_72587053085497663_n.jpg`}
                   alt="Pre-Wedding Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Pre-Wedding Photography</h3>
                 <p>
-                  Romantic couple sessions in beautiful locations. Perfect for 
-                  engagement announcements, save-the-dates, or simply celebrating 
+                  Romantic couple sessions in beautiful locations. Perfect for
+                  engagement announcements, save-the-dates, or simply celebrating
                   your love before the big day.
                 </p>
                 <ul className="service-features">
@@ -632,16 +632,16 @@ const Services = () => {
             {/* Event Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467615027_943824340943040_3427541276125358098_n.jpg`}
                   alt="Event Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Event Photography</h3>
                 <p>
-                  Professional coverage for engagement parties, bridal showers, 
-                  rehearsal dinners, and other wedding-related events. Capture 
+                  Professional coverage for engagement parties, bridal showers,
+                  rehearsal dinners, and other wedding-related events. Capture
                   all the celebrations leading up to your big day.
                 </p>
                 <ul className="service-features">
@@ -657,16 +657,16 @@ const Services = () => {
             {/* Portrait Sessions */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467711436_943824007609740_2453538354038684178_n.jpg`}
                   alt="Portrait Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Bridal Portraits</h3>
                 <p>
-                  Elegant bridal portrait sessions to capture the bride's beauty 
-                  and grace. Perfect for creating stunning images for display 
+                  Elegant bridal portrait sessions to capture the bride's beauty
+                  and grace. Perfect for creating stunning images for display
                   at the wedding or as keepsakes.
                 </p>
                 <ul className="service-features">
@@ -682,16 +682,16 @@ const Services = () => {
             {/* Family Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467717505_943824147609726_5116480860040812036_n.jpg`}
                   alt="Family Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Family Photography</h3>
                 <p>
-                  Capture beautiful family moments during wedding celebrations. 
-                  Perfect for creating lasting memories with extended family 
+                  Capture beautiful family moments during wedding celebrations.
+                  Perfect for creating lasting memories with extended family
                   and loved ones who gathered for your special day.
                 </p>
                 <ul className="service-features">
@@ -707,16 +707,16 @@ const Services = () => {
             {/* Album Creation */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/images/weddings/467968877_943824064276401_491288167559794518_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467968877_943824064276401_491288167559794518_n.jpg`}
                   alt="Wedding Albums"
                 />
               </div>
               <div className="service-content">
                 <h3>Wedding Albums</h3>
                 <p>
-                  Beautifully designed wedding albums to preserve your memories 
-                  in a tangible, heirloom-quality format. Custom layouts that 
+                  Beautifully designed wedding albums to preserve your memories
+                  in a tangible, heirloom-quality format. Custom layouts that
                   tell your wedding story perfectly.
                 </p>
                 <ul className="service-features">
@@ -789,7 +789,7 @@ const Services = () => {
           <div className="cta-content">
             <h2>Ready to Book Your Wedding Photography?</h2>
             <p>
-              Let's discuss your needs and create a custom package that perfectly 
+              Let's discuss your needs and create a custom package that perfectly
               captures your special day within your budget.
             </p>
             <div className="cta-buttons">
