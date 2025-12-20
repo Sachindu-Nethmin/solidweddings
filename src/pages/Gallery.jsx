@@ -441,7 +441,7 @@ const Gallery = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg') center/cover;
+          background: url('${import.meta.env.BASE_URL}images/weddings/467502583_943824090943065_7221224242965653699_n.jpg') center/cover;
           opacity: 0.1;
           pointer-events: none;
         }
