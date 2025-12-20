@@ -16,6 +16,10 @@ env
 .env.local
 .env.*
 
+# Test files with secrets
+test_drive.mjs
+*.test.mjs
+
 
 # Editor directories and files
 .vscode/*
