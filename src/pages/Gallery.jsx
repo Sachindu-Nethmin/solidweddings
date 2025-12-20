@@ -1,138 +1,64 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { fetchFolders, fetchImages } from '../services/googleDrive';
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [lightboxImage, setLightboxImage] = useState(null);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
-  const categories = [
-    { id: 'all', name: 'All Photos' },
-    { id: 'ceremony', name: 'Ceremony' },
-    { id: 'reception', name: 'Reception' },
-    { id: 'portraits', name: 'Portraits' },
-    { id: 'prewedding', name: 'Pre-Wedding' }
-  ];
+  const [categories, setCategories] = useState([{ id: 'all', name: 'All Photos' }]);
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [heroImages, setHeroImages] = useState([]);
 
-  const heroImages = [
-    '/images/weddings/467502583_943824090943065_7221224242965653699_n.jpg',
-    '/images/weddings/453353797_868177951841013_4737084022978926838_n.jpg',
-    '/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
-    '/images/weddings/467744778_943824437609697_1708973942382290310_n.jpg',
-    '/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg'
-  ];
+  const rootFolderId = import.meta.env.VITE_GOOGLE_DRIVE_ROOT_FOLDER_ID;
 
-  const galleryImages = [
-    {
-      id: 1,
-      src: '/images/weddings/453353797_868177951841013_4737084022978926838_n.jpg',
-      alt: 'Wedding Ceremony',
-      category: 'ceremony'
-    },
-    {
-      id: 2,
-      src: '/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
-      alt: 'Bridal Portrait',
-      category: 'portraits'
-    },
-    {
-      id: 3,
-      src: '/images/weddings/467744778_943824437609697_1708973942382290310_n.jpg',
-      alt: 'Wedding Reception',
-      category: 'reception'
-    },
-    {
-      id: 4,
-      src: '/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
-      alt: 'Pre-Wedding Shoot',
-      category: 'prewedding'
-    },
-    {
-      id: 5,
-      src: '/images/weddings/467525658_943824374276370_7508292422335555957_n.jpg',
-      alt: 'Wedding Photography',
-      category: 'ceremony'
-    },
-    {
-      id: 6,
-      src: '/images/weddings/467581489_943824560943018_1850348283717679066_n.jpg',
-      alt: 'Wedding Moments',
-      category: 'reception'
-    },
-    {
-      id: 7,
-      src: '/images/weddings/467581668_943824124276395_603331384049563710_n.jpg',
-      alt: 'Event Photography',
-      category: 'reception'
-    },
-    {
-      id: 8,
-      src: '/images/weddings/467581955_943824264276381_72587053085497663_n.jpg',
-      alt: 'Family Portrait',
-      category: 'portraits'
-    },
-    {
-      id: 9,
-      src: '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg',
-      alt: 'Wedding Album',
-      category: 'portraits'
-    },
-    {
-      id: 10,
-      src: '/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg',
-      alt: 'Ceremony Moments',
-      category: 'ceremony'
-    },
-    {
-      id: 11,
-      src: '/images/weddings/467634259_943823987609742_6459301357175723970_n.jpg',
-      alt: 'Reception Dance',
-      category: 'reception'
-    },
-    {
-      id: 12,
-      src: '/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
-      alt: 'Romantic Portraits',
-      category: 'prewedding'
-    },
-    {
-      id: 13,
-      src: '/images/weddings/467654997_943824067609734_1941169228740568755_n.jpg',
-      alt: 'Bridal Beauty',
-      category: 'portraits'
-    },
-    {
-      id: 14,
-      src: '/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg',
-      alt: 'Wedding Ceremony',
-      category: 'ceremony'
-    },
-    {
-      id: 15,
-      src: '/images/weddings/467677799_943824407609700_1932569026672383994_n.jpg',
-      alt: 'Reception Celebration',
-      category: 'reception'
-    },
-    {
-      id: 16,
-      src: '/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
-      alt: 'Couple Portraits',
-      category: 'prewedding'
-    },
-    {
-      id: 17,
-      src: '/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg',
-      alt: 'Elegant Portraits',
-      category: 'portraits'
-    },
-    {
-      id: 18,
-      src: '/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg',
-      alt: 'Sacred Ceremony',
-      category: 'ceremony'
+  useEffect(() => {
+    const loadGalleryData = async () => {
+      if (import.meta.env.VITE_GOOGLE_DRIVE_API_KEY === 'YOUR_GOOGLE_DRIVE_API_KEY_HERE' || !import.meta.env.VITE_GOOGLE_DRIVE_API_KEY) {
+        console.error("Google Drive API Key is missing. Please add it to .env");
+        setLoading(false);
+        alert("Google Drive API Key is missing! Please check your .env file.");
+        return;
+      }
+      setLoading(true);
+      try {
+        // 1. Fetch Folders (Categories)
+        const folders = await fetchFolders(rootFolderId);
+        const newCategories = [
+          { id: 'all', name: 'All Photos' },
+          ...folders.map(f => ({ id: f.id, name: f.name }))
+        ];
+        setCategories(newCategories);
+
+        // 2. Fetch Images from all folders
+        const imagePromises = folders.map(folder => fetchImages(folder.id));
+        const imagesPerFolder = await Promise.all(imagePromises);
+
+        // Flatten array
+        const allImages = imagesPerFolder.flat();
+        setGalleryImages(allImages);
+
+        // 3. Set Hero Images (take top 5 from all images)
+        if (allImages.length > 0) {
+          setHeroImages(allImages.slice(0, 5).map(img => img.src));
+        }
+
+      } catch (error) {
+        console.error("Failed to load gallery data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (rootFolderId) {
+      loadGalleryData();
     }
-  ];
+  }, [rootFolderId]);
 
-  const filteredImages = selectedCategory === 'all' ? galleryImages : galleryImages.filter(image => image.category === selectedCategory);
+  const filteredImages = selectedCategory === 'all'
+    ? galleryImages
+    : galleryImages.filter(image => image.category === selectedCategory);
 
   const gridRef = useRef(null);
   const [isFiltering, setIsFiltering] = useState(false);
@@ -202,13 +128,13 @@ const Gallery = () => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
           const rotateX = (y - centerY) / 20;
           const rotateY = (centerX - x) / 20;
-          
+
           card.style.setProperty('--mouse-x', `${x}px`);
           card.style.setProperty('--mouse-y', `${y}px`);
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(0)`;
@@ -566,7 +492,7 @@ const Gallery = () => {
         @keyframes fadeInScale{ from{ opacity:0; transform:scale(0.8) } to{ opacity:1; transform:scale(1) } }
         @keyframes rotateIn{ from{ opacity:0; transform:rotate(-10deg) scale(0.9) } to{ opacity:1; transform:rotate(0deg) scale(1) } }
       `}</style>
-      
+
       {/* HERO SECTION - FIXED */}
       <section className="hero-section">
         {/* Background Images */}
@@ -583,35 +509,35 @@ const Gallery = () => {
 
         {/* Content */}
         <div className="hero-content-wrapper">
-            <h1 className="hero-title">Our Gallery</h1>
-            <p className="hero-subtitle">Capturing love stories through timeless, romantic imagery</p>
-            
-            <div className="hero-divider-wrap">
-              <div className="hero-divider-shine"></div>
-            </div>
+          <h1 className="hero-title">Our Gallery</h1>
+          <p className="hero-subtitle">Capturing love stories through timeless, romantic imagery</p>
 
-            {/* Navigation Dots */}
-            <div className="hero-nav-dots">
-              {heroImages.map((_, index) => (
-                <button
-                  key={index}
-                  className={`hero-dot ${index === currentHeroImage ? 'active' : 'inactive'}`}
-                  onClick={() => setCurrentHeroImage(index)}
-                  aria-label={`View image ${index + 1}`}
-                >
-                  <div className="hero-dot-inner"></div>
-                  {index === currentHeroImage && <div className="dot-ping"></div>}
-                </button>
-              ))}
-            </div>
+          <div className="hero-divider-wrap">
+            <div className="hero-divider-shine"></div>
+          </div>
 
-            {/* Progress Bar */}
-            <div className="hero-progress-bar">
-              <div 
-                className="hero-progress-fill"
-                style={{ width: `${((currentHeroImage + 1) / heroImages.length) * 100}%` }}
-              ></div>
-            </div>
+          {/* Navigation Dots */}
+          <div className="hero-nav-dots">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                className={`hero-dot ${index === currentHeroImage ? 'active' : 'inactive'}`}
+                onClick={() => setCurrentHeroImage(index)}
+                aria-label={`View image ${index + 1}`}
+              >
+                <div className="hero-dot-inner"></div>
+                {index === currentHeroImage && <div className="dot-ping"></div>}
+              </button>
+            ))}
+          </div>
+
+          {/* Progress Bar */}
+          <div className="hero-progress-bar">
+            <div
+              className="hero-progress-fill"
+              style={{ width: `${((currentHeroImage + 1) / heroImages.length) * 100}%` }}
+            ></div>
+          </div>
         </div>
 
         {/* Bottom Fade */}
@@ -639,27 +565,37 @@ const Gallery = () => {
       {/* GALLERY GRID */}
       <section className="gallery-grid-section">
         <div className="container">
-          <div ref={gridRef} className="gallery-grid">
-            {filteredImages.map(image => (
-              <article
-                key={image.id}
-                className="gallery-item"
-                onClick={() => openLightbox(image)}
-                tabIndex={0}
-                role="button"
-                aria-label={`Open ${image.alt}`}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(image); }}
-              >
-                <div className="media">
-                  <img src={image.src} alt={image.alt} className="gallery-image" loading="lazy" onLoad={markLoaded} data-loaded="false" />
-                </div>
-                <div className="meta">
-                  <h3>{image.alt}</h3>
-                  <span className="tag">{image.category}</span>
-                </div>
-              </article>
-            ))}
-          </div>
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '60px 20px', fontSize: '1.2rem', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'inline-block', marginBottom: '16px', fontSize: '2rem', animation: 'spin 2s linear infinite' }}>⏳</div>
+              <div>Loading gallery images...</div>
+              <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+            </div>
+          ) : (
+            <div ref={gridRef} className="gallery-grid">
+              {filteredImages.map(image => (
+                <article
+                  key={image.id}
+                  className="gallery-item"
+                  onClick={() => openLightbox(image)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Open ${image.alt}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(image); }}
+                >
+                  <div className="media">
+                    <img src={image.src} alt={image.alt} className="gallery-image" loading="lazy" onLoad={markLoaded} data-loaded="false" />
+                  </div>
+                  <div className="meta">
+                    <h3>{image.alt}</h3>
+                    <span className="tag">
+                      {categories.find(c => c.id === image.category)?.name || image.category}
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
