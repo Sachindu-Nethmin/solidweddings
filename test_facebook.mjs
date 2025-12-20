@@ -1,9 +1,14 @@
 // import fetch from 'node-fetch'; // Relying on global fetch in Node 18+
 
-const ACCESS_TOKEN = 'EAAORgPSQ10sBQKbtN432xZAgUNZCgYYrC7CeTfC44t4DjRENeUUoA0VLD2JwQ8cvUZBCEClM9SvdNfC2ylC1H93DHi6FHaQUKdAifjg3HUYjZBe41l7cZApfncLilaYhlS8RgZB7FpngHWTIdZCD95VCacmoFnTO6Sgd4kA2YzoTNfZAZA6Cb5TZCi4GOM5vE6LnK5jp0uZBXPcpOTWSUpX4EhV6ZBXsz1ZB3ZCBOGYxdNrGXZC9fAPaPfFvUETkbl4xqe3UUFfTQ5K8GeWGlZAqJxl2yCi1nDLZCF6ufSCrvQwZDZD';
+// SANITIZED: Access Token should be loaded from environment variables
+const ACCESS_TOKEN = process.env.VITE_FACEBOOK_ACCESS_TOKEN || 'YOUR_TOKEN_HERE';
 const BASE_URL = 'https://graph.facebook.com/v18.0';
 
 async function testFacebookAPI() {
+    if (!process.env.VITE_FACEBOOK_ACCESS_TOKEN) {
+        console.warn("Warning: VITE_FACEBOOK_ACCESS_TOKEN is not set. Using placeholder.");
+    }
+
     // 1. Debug Token Identity
     const debugUrl = `${BASE_URL}/me?fields=id,name&access_token=${ACCESS_TOKEN}`;
     console.log(`Debugging token: ${debugUrl}`);
