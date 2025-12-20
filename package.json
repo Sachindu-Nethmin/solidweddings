@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test": "jest",
     "test:functional": "mocha src/__tests__/contactForm.test.jsx",
-    "test:all": "npm run test && npm run test:functional"
+    "test:all": "npm run test && npm run test:functional",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "framer-motion": "^12.23.22",
@@ -28,6 +30,7 @@
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "gh-pages": "^6.3.0",
     "globals": "^16.4.0",
     "mocha": "^11.7.4",
     "selenium-webdriver": "^4.36.0",
