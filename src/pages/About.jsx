@@ -6,9 +6,9 @@ const About = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg',
-    '/images/weddings/467654997_943824067609734_1941169228740568755_n.jpg',
-    '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
+    `${import.meta.env.BASE_URL}images/weddings/467711436_943824007609740_2453538354038684178_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467654997_943824067609734_1941169228740568755_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467614283_943824474276360_1770150232184232428_n.jpg`
   ];
 
   // Component mount animations
@@ -365,7 +365,7 @@ const About = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
+          background: url('${import.meta.env.BASE_URL}images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
           opacity: 0.1;
           pointer-events: none;
         }
@@ -497,19 +497,19 @@ const About = () => {
           <div className="scroll-animate">
             <h2 className="section-title">Our Story</h2>
             <p>
-              Welcome to Solid Weddings, where passion meets artistry in wedding photography. 
-              We believe that every wedding is a unique story waiting to be told through 
+              Welcome to Solid Weddings, where passion meets artistry in wedding photography.
+              We believe that every wedding is a unique story waiting to be told through
               beautiful, timeless images.
             </p>
             <p>
-              Our journey began with a simple love for capturing authentic moments and 
-              genuine emotions. Over the years, we've had the privilege of documenting 
+              Our journey began with a simple love for capturing authentic moments and
+              genuine emotions. Over the years, we've had the privilege of documenting
               hundreds of love stories, each one special and meaningful in its own way.
             </p>
             <p>
-              What sets us apart is our commitment to understanding your vision and 
-              translating it into stunning photographs that reflect your personality 
-              and style. We don't just take pictures; we create memories that will 
+              What sets us apart is our commitment to understanding your vision and
+              translating it into stunning photographs that reflect your personality
+              and style. We don't just take pictures; we create memories that will
               be treasured for generations.
             </p>
           </div>
@@ -523,25 +523,25 @@ const About = () => {
           <div className="philosophy-header scroll-animate">
             <h2 className="section-title philosophy-title">Our Philosophy</h2>
             <p className="philosophy-subtitle">
-              Every moment is precious. Our approach is rooted in capturing the authentic beauty 
+              Every moment is precious. Our approach is rooted in capturing the authentic beauty
               and genuine emotions that make your story uniquely yours.
             </p>
           </div>
-          
+
           <div className="philosophy-grid">
             <div className="philosophy-item scroll-animate" data-delay="0">
               <div className="philosophy-card">
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Authentic Moments</h3>
                 <p className="philosophy-item-text">
-                  We believe in capturing raw, unfiltered emotions. Every laugh, 
+                  We believe in capturing raw, unfiltered emotions. Every laugh,
                   tear, and tender glance tells your story in its most genuine form.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -553,15 +553,15 @@ const About = () => {
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Artistic Excellence</h3>
                 <p className="philosophy-item-text">
-                  Through masterful composition, lighting, and timing, we transform 
+                  Through masterful composition, lighting, and timing, we transform
                   fleeting moments into timeless works of art that speak to the soul.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -573,17 +573,17 @@ const About = () => {
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Personal Connection</h3>
                 <p className="philosophy-item-text">
-                  We take time to understand your unique story, building trust 
+                  We take time to understand your unique story, building trust
                   and connection that allows us to capture your most intimate moments.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -595,14 +595,14 @@ const About = () => {
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Passionate Craft</h3>
                 <p className="philosophy-item-text">
-                  Photography isn't just our profession—it's our passion. We pour 
+                  Photography isn't just our profession—it's our passion. We pour
                   our hearts into every shot, ensuring each image resonates with life.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -614,14 +614,14 @@ const About = () => {
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Lasting Legacy</h3>
                 <p className="philosophy-item-text">
-                  We create heirloom-quality images that will be treasured for 
+                  We create heirloom-quality images that will be treasured for
                   generations, preserving your love story for years to come.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -633,16 +633,16 @@ const About = () => {
                 <div className="philosophy-icon-wrapper">
                   <div className="philosophy-icon">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                   <div className="philosophy-glow"></div>
                 </div>
                 <h3 className="philosophy-item-title">Seamless Experience</h3>
                 <p className="philosophy-item-text">
-                  From initial consultation to final delivery, we ensure a smooth, 
+                  From initial consultation to final delivery, we ensure a smooth,
                   stress-free experience that lets you focus on what matters most.
                 </p>
                 <div className="philosophy-decoration"></div>
@@ -652,7 +652,7 @@ const About = () => {
 
           <div className="philosophy-quote scroll-animate">
             <blockquote>
-              "Photography is not about the camera, it's about the heart behind it. 
+              "Photography is not about the camera, it's about the heart behind it.
               We don't just document your day—we preserve the soul of your love story."
             </blockquote>
             <cite>— The Solid Weddings Team</cite>
@@ -665,8 +665,8 @@ const About = () => {
         <div className="container">
           <div className="experience-content">
             <div className="experience-image">
-              <img 
-                src="/images/weddings/467870739_943824287609712_5253220292708146503_n.jpg" 
+              <img
+                src={`${import.meta.env.BASE_URL}images/weddings/467870739_943824287609712_5253220292708146503_n.jpg`}
                 alt="Photography Experience"
                 className="exp-image"
               />
@@ -711,7 +711,7 @@ const About = () => {
           <div className="cta-content">
             <h2>Let's Create Magic Together</h2>
             <p>
-              Ready to discuss your wedding photography needs? We'd love to hear from you 
+              Ready to discuss your wedding photography needs? We'd love to hear from you
               and learn about your special day.
             </p>
             <div className="cta-buttons">
