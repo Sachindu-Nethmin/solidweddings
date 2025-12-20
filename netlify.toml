@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # These are client-side public variables that are expected to be in the build output
+  SECRETS_SCAN_OMIT_KEYS = "VITE_EMAILJS_PUBLIC_KEY,VITE_EMAILJS_SERVICE_ID,VITE_EMAILJS_TEMPLATE_ID,VITE_GOOGLE_DRIVE_API_KEY,VITE_GOOGLE_DRIVE_ROOT_FOLDER_ID"
+
+# Alternative: Omit specific paths from scanning
+# SECRETS_SCAN_OMIT_PATHS = "dist/assets/*.js,test_drive.mjs"
+
+# Or completely disable secrets scanning (not recommended for production)
+# SECRETS_SCAN_ENABLED = "false"
