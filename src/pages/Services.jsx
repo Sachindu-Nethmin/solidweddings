@@ -739,7 +739,6 @@ const Services = () => {
           <div className="packages-grid">
             <div className="package-card">
               <h3>Essential Package</h3>
-              <div className="package-price">Starting from LKR 75,000</div>
               <ul className="package-features">
                 <li>6 hours wedding day coverage</li>
                 <li>200+ edited high-resolution photos</li>
@@ -753,7 +752,6 @@ const Services = () => {
             <div className="package-card featured">
               <div className="popular-badge">Most Popular</div>
               <h3>Premium Package</h3>
-              <div className="package-price">Starting from LKR 125,000</div>
               <ul className="package-features">
                 <li>10 hours wedding day coverage</li>
                 <li>400+ edited high-resolution photos</li>
@@ -767,7 +765,6 @@ const Services = () => {
 
             <div className="package-card">
               <h3>Luxury Package</h3>
-              <div className="package-price">Starting from LKR 200,000</div>
               <ul className="package-features">
                 <li>Full day wedding coverage</li>
                 <li>600+ edited high-resolution photos</li>

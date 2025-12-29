@@ -692,7 +692,7 @@ const About = () => {
                 </li>
                 <li>
                   <i className="fas fa-check"></i>
-                  Comprehensive packages to suit every budget
+                  Flexible and comprehensive packages
                 </li>
                 <li>
                   <i className="fas fa-check"></i>
