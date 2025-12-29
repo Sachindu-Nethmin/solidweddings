@@ -507,7 +507,6 @@ const Home = () => {
                 <div className="service-content">
                   <h3 className="service-title">Wedding Photography</h3>
                   <p className="service-description">Complete wedding day coverage from preparation to celebration</p>
-                  <div className="service-price">Starting from $1,500</div>
                 </div>
               </div>
               <div className="service-card scroll-animate">
@@ -515,7 +514,6 @@ const Home = () => {
                 <div className="service-content">
                   <h3 className="service-title">Pre-Wedding Shoots</h3>
                   <p className="service-description">Romantic sessions to capture your love story before the big day</p>
-                  <div className="service-price">Starting from $800</div>
                 </div>
               </div>
               <div className="service-card scroll-animate">
@@ -523,7 +521,6 @@ const Home = () => {
                 <div className="service-content">
                   <h3 className="service-title">Portrait Sessions</h3>
                   <p className="service-description">Professional portraits for couples, families, and individuals</p>
-                  <div className="service-price">Starting from $400</div>
                 </div>
               </div>
             </div>
