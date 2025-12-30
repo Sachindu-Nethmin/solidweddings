@@ -11,6 +11,15 @@ node_modules
 dist
 dist-ssr
 *.local
+env
+.env
+.env.local
+.env.*
+
+# Test files with secrets
+test_drive.mjs
+*.test.mjs
+
 
 # Editor directories and files
 .vscode/*

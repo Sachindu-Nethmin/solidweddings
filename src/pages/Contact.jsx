@@ -142,7 +142,7 @@ const Contact = () => {
         venue: formData.venue,
         package: formData.package,
         message: formData.message,
-        to_email: 'solidweddingsofficial@gmail.com', // Your business email
+        to_email: 'snapssolid@gmail.com', // Your business email
         reply_to: formData.email
       };
 
@@ -498,7 +498,7 @@ const Contact = () => {
                   <div className="contact-details">
                     <h3>Phone</h3>
                     <p>
-                      <a href="tel:+94712710881">+94 71 271 0881</a>
+                      <a href="tel:+94702288999">+94702288999</a>
                     </p>
                   </div>
                 </div>
@@ -510,8 +510,8 @@ const Contact = () => {
                   <div className="contact-details">
                     <h3>Email</h3>
                     <p>
-                      <a href="mailto:solidweddingsofficial@gmail.com">
-                        solidweddingsofficial@gmail.com
+                      <a href="mailto:snapssolid@gmail.com">
+                        snapssolid@gmail.com
                       </a>
                     </p>
                   </div>
@@ -543,7 +543,7 @@ const Contact = () => {
                 <h3>Follow Us</h3>
                 <div className="social-links">
                   <a 
-                    href="https://www.facebook.com/solidweddingsofficial" 
+                    href="https://web.facebook.com/solidweddings" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="social-link"
@@ -561,7 +561,7 @@ const Contact = () => {
                     <span>Instagram</span>
                   </a>
                   <a 
-                    href="https://wa.me/94712710881" 
+                    href="https://wa.me/+94702288999" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="social-link"
@@ -581,13 +581,13 @@ const Contact = () => {
                 </p>
                 <div className="quick-buttons">
                   <a 
-                    href="tel:+94712710881" 
+                    href="tel:+94702288999" 
                     className="btn btn-secondary"
                   >
                     <i className="fas fa-phone"></i> Call Now
                   </a>
                   <a 
-                    href="https://wa.me/94712710881" 
+                    href="https://wa.me/+94702288999" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn btn-success"
