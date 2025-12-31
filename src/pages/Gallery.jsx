@@ -30,7 +30,9 @@ const Gallery = () => {
           const photosIndex = parts.indexOf('photos');
 
           if (photosIndex !== -1 && parts.length > photosIndex + 2) {
-            const category = parts[photosIndex + 1];
+            // Use the immediate parent folder name as the Category/Album name
+            // This allows nesting like: photos/Homecoming/AlbumName/img.jpg -> AlbumName
+            const category = decodeURIComponent(parts[parts.length - 2]);
             const filename = parts[parts.length - 1];
             const src = path.replace('/public', '');
 
