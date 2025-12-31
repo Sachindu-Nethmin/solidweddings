@@ -6,9 +6,9 @@ const About = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg',
-    '/images/weddings/467654997_943824067609734_1941169228740568755_n.jpg',
-    '/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
+    '/solidweddings/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg',
+    '/solidweddings/images/weddings/467654997_943824067609734_1941169228740568755_n.jpg',
+    '/solidweddings/images/weddings/467614283_943824474276360_1770150232184232428_n.jpg'
   ];
 
   // Component mount animations
@@ -365,7 +365,7 @@ const About = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
+          background: url('/solidweddings/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg') center/cover;
           opacity: 0.1;
           pointer-events: none;
         }
@@ -666,7 +666,7 @@ const About = () => {
           <div className="experience-content">
             <div className="experience-image">
               <img 
-                src="/images/weddings/467870739_943824287609712_5253220292708146503_n.jpg" 
+                src="/solidweddings/images/weddings/467870739_943824287609712_5253220292708146503_n.jpg" 
                 alt="Photography Experience"
                 className="exp-image"
               />

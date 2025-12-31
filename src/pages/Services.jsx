@@ -6,9 +6,9 @@ const Services = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
-    '/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
-    '/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg'
+    '/solidweddings/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
+    '/solidweddings/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
+    '/solidweddings/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg'
   ];
 
   // Component mount animation
@@ -439,7 +439,7 @@ const Services = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
+          background: url('/solidweddings/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
           opacity: 0.1;
           pointer-events: none;
         }
@@ -583,7 +583,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
+                  src="/solidweddings/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
                   alt="Wedding Photography"
                 />
               </div>
@@ -608,7 +608,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467581955_943824264276381_72587053085497663_n.jpg" 
+                  src="/solidweddings/images/weddings/467581955_943824264276381_72587053085497663_n.jpg" 
                   alt="Pre-Wedding Photography"
                 />
               </div>
@@ -633,7 +633,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg" 
+                  src="/solidweddings/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg" 
                   alt="Event Photography"
                 />
               </div>
@@ -658,7 +658,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg" 
+                  src="/solidweddings/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg" 
                   alt="Portrait Photography"
                 />
               </div>
@@ -683,7 +683,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg" 
+                  src="/solidweddings/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg" 
                   alt="Family Photography"
                 />
               </div>
@@ -708,7 +708,7 @@ const Services = () => {
             <div className="service-card">
               <div className="service-image">
                 <img 
-                  src="/images/weddings/467968877_943824064276401_491288167559794518_n.jpg" 
+                  src="/solidweddings/images/weddings/467968877_943824064276401_491288167559794518_n.jpg" 
                   alt="Wedding Albums"
                 />
               </div>

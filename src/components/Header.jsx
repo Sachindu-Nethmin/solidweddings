@@ -28,7 +28,7 @@ const Header = () => {
         <div className="logo">
           <Link to="/" onClick={closeMobileMenu}>
             <img 
-              src="/images/logos/logo.png" 
+              src="/solidweddings/images/logos/logo.png" 
               alt="Solid Weddings Logo" 
               className="logo-image"
             />
