@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaArrowLeft } from 'react-icons/fa';
-import '../styles/Gallery.css'; // Keep existing gallery grid styles
+import '../styles/Gallery.css';
 
 const Gallery = () => {
   // --- STATE ---
@@ -20,9 +21,10 @@ const Gallery = () => {
     const loadImages = async () => {
       setLoading(true);
       try {
+        const baseUrl = import.meta.env.BASE_URL; // e.g. "/solidweddings/"
+
         // 1. Fetch Gallery Images (from photos folder)
-        // Use relative path to avoid 'public' prefix issues if possible, or keep as is if working
-        const modules = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,webp,avif}');
+        const modules = import.meta.glob('../../public/images/photos/**/*.{jpg,jpeg,png,webp,avif}');
         const grouped = {};
 
         for (const path in modules) {
@@ -33,7 +35,13 @@ const Gallery = () => {
             // Use immediate parent as category
             const category = decodeURIComponent(parts[parts.length - 2]);
             const filename = parts[parts.length - 1];
-            const src = path.replace('/public', '');
+
+            // path is like "../../public/images/photos/..."
+            // We want "/solidweddings/images/photos/..."
+            // replace '../../public' with empty string -> "/images/photos/..."
+            // then join with baseUrl (stripping trailing slash from baseUrl if needed to avoid //)
+            const relativePath = path.replace('../../public', '');
+            const src = `${baseUrl.replace(/\/$/, '')}${relativePath}`;
 
             if (!grouped[category]) grouped[category] = [];
 
@@ -51,15 +59,13 @@ const Gallery = () => {
         setCategories(Object.keys(grouped));
 
         // 2. Fetch Hero Images (specifically from weddings folder)
-        // Note: Using relative path from src/pages to public/images/weddings
         const heroModules = import.meta.glob('../../public/images/weddings/**/*.{jpg,jpeg,png,webp,avif}');
         const heroList = [];
 
         for (const path in heroModules) {
-          // path is like '../../public/images/weddings/file.jpg'
-          // We need '/images/weddings/file.jpg'
-          const cleanPath = path.replace('../../public', '');
-          heroList.push(cleanPath);
+          const relativePath = path.replace('../../public', '');
+          const src = `${baseUrl.replace(/\/$/, '')}${relativePath}`;
+          heroList.push(src);
         }
 
         // Shuffle and pick 5 random images for Hero
@@ -115,37 +121,31 @@ const Gallery = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-
-  // --- HANDLERS ---
-  const openLightbox = (image) => {
-    setLightboxImage(image);
+  // --- LIGHTBOX CONTROLS ---
+  const openLightbox = (img) => {
+    setLightboxImage(img);
     document.body.style.overflow = 'hidden';
   };
-
   const closeLightbox = () => {
     setLightboxImage(null);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
   };
-
   const nextImage = (e) => {
     e.stopPropagation();
-    if (!selectedCategory || !lightboxImage) return;
-    const currentList = imagesByCategory[selectedCategory];
-    const currentIndex = currentList.findIndex(img => img.id === lightboxImage.id);
-    const nextIndex = (currentIndex + 1) % currentList.length;
-    setLightboxImage(currentList[nextIndex]);
+    if (!lightboxImage || !selectedCategory) return;
+    const imgs = imagesByCategory[selectedCategory];
+    const idx = imgs.findIndex(i => i.id === lightboxImage.id);
+    const nextIdx = (idx + 1) % imgs.length;
+    setLightboxImage(imgs[nextIdx]);
   };
-
   const prevImage = (e) => {
     e.stopPropagation();
-    if (!selectedCategory || !lightboxImage) return;
-    const currentList = imagesByCategory[selectedCategory];
-    const currentIndex = currentList.findIndex(img => img.id === lightboxImage.id);
-    const prevIndex = (currentIndex - 1 + currentList.length) % currentList.length;
-    setLightboxImage(currentList[prevIndex]);
+    if (!lightboxImage || !selectedCategory) return;
+    const imgs = imagesByCategory[selectedCategory];
+    const idx = imgs.findIndex(i => i.id === lightboxImage.id);
+    const prevIdx = (idx - 1 + imgs.length) % imgs.length;
+    setLightboxImage(imgs[prevIdx]);
   };
-
-  if (loading) return <div className="loader">Loading...</div>;
 
   return (
     <div className="gallery-page">
