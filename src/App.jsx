@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/solidweddings">
       <div className="App">
         <Header />
         <main className="main-content">

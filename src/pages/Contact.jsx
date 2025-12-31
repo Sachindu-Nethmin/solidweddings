@@ -6,9 +6,9 @@ const Contact = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
-    '/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
-    '/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg'
+    '/solidweddings/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
+    '/solidweddings/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
+    '/solidweddings/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg'
   ];
 
   const [formData, setFormData] = useState({
