@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
@@ -6,9 +7,9 @@ const Services = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/solidweddings/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg',
-    '/solidweddings/images/weddings/467525385_943824337609707_4503835412837400410_n.jpg',
-    '/solidweddings/images/weddings/467672116_943824590943015_1177962738152061151_n.jpg'
+    `${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467672116_943824590943015_1177962738152061151_n.jpg`
   ];
 
   // Component mount animation
@@ -439,116 +440,116 @@ const Services = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/solidweddings/images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
-          opacity: 0.1;
-          pointer-events: none;
+          background: url('${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg') center/cover;
+        opacity: 0.1;
+        pointer-events: none;
         }
 
         .cta-content {
           position: relative;
-          z-index: 2;
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
         }
 
         .cta-content h2 {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 700;
-          color: white;
-          margin: 0 0 24px 0;
-          line-height: 1.2;
+          font - family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: white;
+        margin: 0 0 24px 0;
+        line-height: 1.2;
         }
 
         .cta-content p {
           color: rgba(255, 255, 255, 0.95);
-          font-size: 1.25rem;
-          line-height: 1.7;
-          margin: 0 0 48px 0;
+        font-size: 1.25rem;
+        line-height: 1.7;
+        margin: 0 0 48px 0;
         }
 
         .cta-buttons {
           display: flex;
-          gap: 20px;
-          justify-content: center;
-          flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
         }
 
         /* Buttons */
         .btn {
           display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 16px 32px;
-          font-size: 1.1rem;
-          font-weight: 600;
-          text-decoration: none;
-          border-radius: 50px;
-          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
-          cursor: pointer;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 32px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+        cursor: pointer;
         }
 
         /* CTA Section Buttons - Glass Morphism Style */
         .services-cta .btn {
           background: rgba(255, 255, 255, 0.1);
-          color: #fff;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          backdrop-filter: blur(10px);
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
         }
         .services-cta .btn:hover {
           background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
-          transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
         }
 
         /* Package Card Buttons */
         .btn-outline {
           background: rgba(255, 255, 255, 0.1);
-          color: var(--text-primary);
-          backdrop-filter: blur(10px);
-          border: 2px solid var(--accent-gold);
+        color: var(--text-primary);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--accent-gold);
         }
         .btn-outline:hover {
           background: var(--accent-gold);
-          color: white;
-          transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(192, 160, 98, 0.3);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(192, 160, 98, 0.3);
         }
         .btn-primary {
           background: white;
-          color: var(--accent-gold);
-          border: 2px solid white;
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        color: var(--accent-gold);
+        border: 2px solid white;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
         .btn-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
         }
         .package-card.featured .btn-primary {
           background: white;
-          color: var(--accent-gold);
+        color: var(--accent-gold);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-          .services-grid,
-          .packages-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
+          .services - grid,
+          .packages - grid {
+          grid - template - columns: 1fr;
+        gap: 32px;
           }
-          .package-card.featured {
-            transform: scale(1);
+        .package-card.featured {
+          transform: scale(1);
           }
-          .package-card.featured:hover {
-            transform: translateY(-8px);
+        .package-card.featured:hover {
+          transform: translateY(-8px);
           }
-          .cta-buttons {
-            flex-direction: column;
-            align-items: stretch;
+        .cta-buttons {
+          flex - direction: column;
+        align-items: stretch;
           }
-          .service-content {
-            padding: 24px;
+        .service-content {
+          padding: 24px;
           }
         }
       `}</style>
@@ -577,21 +578,21 @@ const Services = () => {
       <section className="services-grid-section">
         <div className="container">
           <h2 className="section-title scroll-animate">What We Offer</h2>
-          
+
           <div className="services-grid">
             {/* Wedding Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467833684_943824270943047_5484742608995516360_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467833684_943824270943047_5484742608995516360_n.jpg`}
                   alt="Wedding Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Wedding Day Photography</h3>
                 <p>
-                  Complete coverage of your wedding day from preparation to reception. 
-                  We capture every precious moment, emotion, and detail to tell your 
+                  Complete coverage of your wedding day from preparation to reception.
+                  We capture every precious moment, emotion, and detail to tell your
                   complete love story.
                 </p>
                 <ul className="service-features">
@@ -607,16 +608,16 @@ const Services = () => {
             {/* Pre-Wedding Shoots */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467581955_943824264276381_72587053085497663_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467581955_943824264276381_72587053085497663_n.jpg`}
                   alt="Pre-Wedding Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Pre-Wedding Photography</h3>
                 <p>
-                  Romantic couple sessions in beautiful locations. Perfect for 
-                  engagement announcements, save-the-dates, or simply celebrating 
+                  Romantic couple sessions in beautiful locations. Perfect for
+                  engagement announcements, save-the-dates, or simply celebrating
                   your love before the big day.
                 </p>
                 <ul className="service-features">
@@ -632,16 +633,16 @@ const Services = () => {
             {/* Event Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467615027_943824340943040_3427541276125358098_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467615027_943824340943040_3427541276125358098_n.jpg`}
                   alt="Event Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Event Photography</h3>
                 <p>
-                  Professional coverage for engagement parties, bridal showers, 
-                  rehearsal dinners, and other wedding-related events. Capture 
+                  Professional coverage for engagement parties, bridal showers,
+                  rehearsal dinners, and other wedding-related events. Capture
                   all the celebrations leading up to your big day.
                 </p>
                 <ul className="service-features">
@@ -657,16 +658,16 @@ const Services = () => {
             {/* Portrait Sessions */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467711436_943824007609740_2453538354038684178_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467711436_943824007609740_2453538354038684178_n.jpg`}
                   alt="Portrait Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Bridal Portraits</h3>
                 <p>
-                  Elegant bridal portrait sessions to capture the bride's beauty 
-                  and grace. Perfect for creating stunning images for display 
+                  Elegant bridal portrait sessions to capture the bride's beauty
+                  and grace. Perfect for creating stunning images for display
                   at the wedding or as keepsakes.
                 </p>
                 <ul className="service-features">
@@ -682,16 +683,16 @@ const Services = () => {
             {/* Family Photography */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467717505_943824147609726_5116480860040812036_n.jpg`}
                   alt="Family Photography"
                 />
               </div>
               <div className="service-content">
                 <h3>Family Photography</h3>
                 <p>
-                  Capture beautiful family moments during wedding celebrations. 
-                  Perfect for creating lasting memories with extended family 
+                  Capture beautiful family moments during wedding celebrations.
+                  Perfect for creating lasting memories with extended family
                   and loved ones who gathered for your special day.
                 </p>
                 <ul className="service-features">
@@ -707,16 +708,16 @@ const Services = () => {
             {/* Album Creation */}
             <div className="service-card">
               <div className="service-image">
-                <img 
-                  src="/solidweddings/images/weddings/467968877_943824064276401_491288167559794518_n.jpg" 
+                <img
+                  src={`${import.meta.env.BASE_URL}images/weddings/467968877_943824064276401_491288167559794518_n.jpg`}
                   alt="Wedding Albums"
                 />
               </div>
               <div className="service-content">
                 <h3>Wedding Albums</h3>
                 <p>
-                  Beautifully designed wedding albums to preserve your memories 
-                  in a tangible, heirloom-quality format. Custom layouts that 
+                  Beautifully designed wedding albums to preserve your memories
+                  in a tangible, heirloom-quality format. Custom layouts that
                   tell your wedding story perfectly.
                 </p>
                 <ul className="service-features">
@@ -746,7 +747,7 @@ const Services = () => {
                 <li>Print release</li>
                 <li>USB delivery</li>
               </ul>
-              <a href="/contact" className="btn btn-outline">Get Quote</a>
+              <Link to="/contact" className="btn btn-outline">Get Quote</Link>
             </div>
 
             <div className="package-card featured">
@@ -760,7 +761,7 @@ const Services = () => {
                 <li>50 printed photos</li>
                 <li>USB + Cloud delivery</li>
               </ul>
-              <a href="/contact" className="btn btn-primary">Get Quote</a>
+              <Link to="/contact" className="btn btn-primary">Get Quote</Link>
             </div>
 
             <div className="package-card">
@@ -774,7 +775,7 @@ const Services = () => {
                 <li>All digital files</li>
                 <li>Second photographer</li>
               </ul>
-              <a href="/contact" className="btn btn-outline">Get Quote</a>
+              <Link to="/contact" className="btn btn-outline">Get Quote</Link>
             </div>
           </div>
         </div>
@@ -786,12 +787,12 @@ const Services = () => {
           <div className="cta-content">
             <h2>Ready to Book Your Wedding Photography?</h2>
             <p>
-              Let's discuss your needs and create a custom package that perfectly 
+              Let's discuss your needs and create a custom package that perfectly
               captures your special day within your budget.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn">Get In Touch</a>
-              <a href="/services" className="btn">View Packages</a>
+              <Link to="/contact" className="btn">Get In Touch</Link>
+              <Link to="/services" className="btn">View Packages</Link>
             </div>
           </div>
         </div>

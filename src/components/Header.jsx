@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header" style={{ 
+    <header className="header" style={{
       position: 'fixed',
       top: 0,
       left: 0,
@@ -27,9 +27,9 @@ const Header = () => {
         {/* Logo */}
         <div className="logo">
           <Link to="/" onClick={closeMobileMenu}>
-            <img 
-              src="/solidweddings/images/logos/logo.png" 
-              alt="Solid Weddings Logo" 
+            <img
+              src={`${import.meta.env.BASE_URL}images/logos/logo.png`}
+              alt="Solid Weddings Logo"
               className="logo-image"
             />
           </Link>
@@ -48,32 +48,32 @@ const Header = () => {
 
         {/* Desktop Social Media Icons */}
         <div className="social-icons desktop-social">
-          <a 
-            href="https://web.facebook.com/solidweddings" 
-            target="_blank" 
+          <a
+            href="https://web.facebook.com/solidweddings"
+            target="_blank"
             rel="noopener noreferrer"
             className="social-link"
           >
             <i className="fab fa-facebook-f"></i>
           </a>
-          <a 
-            href="https://www.instagram.com/solid_weddings/" 
-            target="_blank" 
+          <a
+            href="https://www.instagram.com/solid_weddings/"
+            target="_blank"
             rel="noopener noreferrer"
             className="social-link"
           >
             <i className="fab fa-instagram"></i>
           </a>
-          <a 
-            href="https://wa.me/+94702288999" 
-            target="_blank" 
+          <a
+            href="https://wa.me/+94702288999"
+            target="_blank"
             rel="noopener noreferrer"
             className="social-link"
           >
             <i className="fab fa-whatsapp"></i>
           </a>
-          <a 
-            href="tel:+94702288999" 
+          <a
+            href="tel:+94702288999"
             className="social-link"
           >
             <i className="fas fa-phone"></i>
@@ -81,7 +81,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
@@ -101,38 +101,38 @@ const Header = () => {
           <li><Link to="/gallery" className="mobile-nav-link" onClick={closeMobileMenu}>Gallery</Link></li>
           <li><Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link></li>
         </ul>
-        
+
         {/* Mobile Social Media Icons */}
         <div className="mobile-social-icons">
-          <a 
-            href="https://web.facebook.com/solidweddings" 
-            target="_blank" 
+          <a
+            href="https://web.facebook.com/solidweddings"
+            target="_blank"
             rel="noopener noreferrer"
             className="mobile-social-link"
             onClick={closeMobileMenu}
           >
             <i className="fab fa-facebook-f"></i>
           </a>
-          <a 
-            href="https://www.instagram.com/solid_weddings/" 
-            target="_blank" 
+          <a
+            href="https://www.instagram.com/solid_weddings/"
+            target="_blank"
             rel="noopener noreferrer"
             className="mobile-social-link"
             onClick={closeMobileMenu}
           >
             <i className="fab fa-instagram"></i>
           </a>
-          <a 
-            href="https://wa.me/+94702288999" 
-            target="_blank" 
+          <a
+            href="https://wa.me/+94702288999"
+            target="_blank"
             rel="noopener noreferrer"
             className="mobile-social-link"
             onClick={closeMobileMenu}
           >
             <i className="fab fa-whatsapp"></i>
           </a>
-          <a 
-            href="tel:+94702288999" 
+          <a
+            href="tel:+94702288999"
             className="mobile-social-link"
             onClick={closeMobileMenu}
           >

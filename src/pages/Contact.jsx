@@ -6,9 +6,9 @@ const Contact = () => {
   const heroRef = useRef(null);
 
   const heroImages = [
-    '/solidweddings/images/weddings/467696682_943824070943067_9155044915667421983_n.jpg',
-    '/solidweddings/images/weddings/467643997_943824010943073_1011805423029436531_n.jpg',
-    '/solidweddings/images/weddings/467717505_943824147609726_5116480860040812036_n.jpg'
+    `${import.meta.env.BASE_URL}images/weddings/467696682_943824070943067_9155044915667421983_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467643997_943824010943073_1011805423029436531_n.jpg`,
+    `${import.meta.env.BASE_URL}images/weddings/467717505_943824147609726_5116480860040812036_n.jpg`
   ];
 
   const [formData, setFormData] = useState({
@@ -119,7 +119,7 @@ const Contact = () => {
     // Handle form submission to here
     console.log('Form submitted:', formData);
     alert('Thank you for your inquiry! We will get back to you soon.');
-    
+
     // Set loading states
     setFormStatus({
       isSubmitting: true,
@@ -148,7 +148,7 @@ const Contact = () => {
 
       // Send email using EmailJS
       const response = await emailjs.send(serviceID, templateID, templateParams, publicKey);
-      
+
       console.log('Email sent successfully:', response);
       console.log('Form submitted:', formData);
 
@@ -177,7 +177,7 @@ const Contact = () => {
 
     } catch (error) {
       console.error('Email sending failed:', error);
-      
+
       // Error state
       setFormStatus({
         isSubmitting: false,
@@ -365,7 +365,7 @@ const Contact = () => {
             <div className="contact-form-section">
               <h2>Get Your Free Quote</h2>
               <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-              
+
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
@@ -466,8 +466,8 @@ const Contact = () => {
                   </div>
                 )}
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn btn-primary"
                   disabled={formStatus.isSubmitting}
                 >
@@ -489,7 +489,7 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="contact-info-section">
               <h2>Get in Touch</h2>
-              
+
               <div className="contact-info">
                 <div className="contact-item">
                   <div className="contact-icon">
@@ -542,27 +542,27 @@ const Contact = () => {
               <div className="contact-social">
                 <h3>Follow Us</h3>
                 <div className="social-links">
-                  <a 
-                    href="https://web.facebook.com/solidweddings" 
-                    target="_blank" 
+                  <a
+                    href="https://web.facebook.com/solidweddings"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
                   >
                     <i className="fab fa-facebook-f"></i>
                     <span>Facebook</span>
                   </a>
-                  <a 
-                    href="https://www.instagram.com/solidweddingsofficial" 
-                    target="_blank" 
+                  <a
+                    href="https://www.instagram.com/solidweddingsofficial"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
                   >
                     <i className="fab fa-instagram"></i>
                     <span>Instagram</span>
                   </a>
-                  <a 
-                    href="https://wa.me/+94702288999" 
-                    target="_blank" 
+                  <a
+                    href="https://wa.me/+94702288999"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
                   >
@@ -576,19 +576,19 @@ const Contact = () => {
               <div className="quick-response">
                 <h3>Quick Response</h3>
                 <p>
-                  Need immediate assistance? Call us directly or send a WhatsApp 
+                  Need immediate assistance? Call us directly or send a WhatsApp
                   message for fastest response.
                 </p>
                 <div className="quick-buttons">
-                  <a 
-                    href="tel:+94702288999" 
+                  <a
+                    href="tel:+94702288999"
                     className="btn btn-secondary"
                   >
                     <i className="fas fa-phone"></i> Call Now
                   </a>
-                  <a 
-                    href="https://wa.me/+94702288999" 
-                    target="_blank" 
+                  <a
+                    href="https://wa.me/+94702288999"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-success"
                   >
@@ -609,29 +609,29 @@ const Contact = () => {
             <div className="faq-item">
               <h3>How far in advance should I book?</h3>
               <p>
-                We recommend booking 6-12 months in advance, especially for 
-                peak wedding season (December-April). However, we do accept 
+                We recommend booking 6-12 months in advance, especially for
+                peak wedding season (December-April). However, we do accept
                 last-minute bookings based on availability.
               </p>
             </div>
             <div className="faq-item">
               <h3>Do you travel outside Colombo?</h3>
               <p>
-                Yes! We provide services all over Sri Lanka. Travel costs may 
+                Yes! We provide services all over Sri Lanka. Travel costs may
                 apply for destinations outside Colombo metro area.
               </p>
             </div>
             <div className="faq-item">
               <h3>How long to receive photos?</h3>
               <p>
-                You'll receive a sneak peek within 48 hours and the complete 
+                You'll receive a sneak peek within 48 hours and the complete
                 edited gallery within 4-6 weeks after your wedding.
               </p>
             </div>
             <div className="faq-item">
               <h3>Can we customize packages?</h3>
               <p>
-                Absolutely! We understand every wedding is unique and we're 
+                Absolutely! We understand every wedding is unique and we're
                 happy to create custom packages to fit your specific needs.
               </p>
             </div>
