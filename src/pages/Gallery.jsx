@@ -6,9 +6,10 @@ import '../styles/Gallery.css';
 
 const Gallery = () => {
   // --- STATE ---
-  const [imagesByCategory, setImagesByCategory] = useState({});
+  const [galleryData, setGalleryData] = useState({}); // { Category: { albums: { "AlbumName": [images] }, allImages: [images] } }
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null); // "Wedding"
+  const [selectedAlbum, setSelectedAlbum] = useState(null);       // "CoupleName"
   const [lightboxImage, setLightboxImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,40 +27,85 @@ const Gallery = () => {
 
         // 1. Fetch Gallery Images (from photos folder)
         const modules = import.meta.glob('../../public/images/photos/**/*.{jpg,jpeg,png,webp,avif}');
-        const grouped = {};
+        const data = {};
 
         for (const path in modules) {
           const parts = path.split('/');
           const photosIndex = parts.indexOf('photos');
 
           if (photosIndex !== -1 && parts.length > photosIndex + 2) {
-            // Use immediate parent as category
-            const category = decodeURIComponent(parts[parts.length - 2]);
+            // Level 1: Category (e.g. "Engagement")
+            const category = decodeURIComponent(parts[photosIndex + 1]);
+
+            // Level 2: Album (e.g. "CoupleName") OR Image if directly in category
+            // If path is .../photos/Category/Album/img.jpg -> parts.length = photosIndex + 4
+            // If path is .../photos/Category/img.jpg       -> parts.length = photosIndex + 3
+
+            let albumName = "General";
+            if (parts.length > photosIndex + 3) {
+              albumName = decodeURIComponent(parts[photosIndex + 2]);
+            }
+
             const filename = parts[parts.length - 1];
 
-            // path is like "../../public/images/photos/..."
-            // We want "/solidweddings/images/photos/..."
-            // replace '../../public' with empty string -> "/images/photos/..."
-            // then join with baseUrl (stripping trailing slash from baseUrl if needed to avoid //)
+            // Construct src
             const relativePath = path.replace('../../public', '');
             const src = `${baseUrl.replace(/\/$/, '')}${relativePath}`;
 
-            if (!grouped[category]) grouped[category] = [];
+            // Initialize Category Object
+            if (!data[category]) {
+              data[category] = {
+                id: category,
+                albums: {},
+                allImages: [] // Flat list for "All Albums" cover logic if needed, or fallback
+              };
+            }
+
+            // Initialize Album Array
+            if (!data[category].albums[albumName]) {
+              data[category].albums[albumName] = [];
+            }
 
             const imgObj = {
               id: src,
               src: src,
               alt: filename.split('.')[0],
-              category: category
+              category: category,
+              album: albumName
             };
-            grouped[category].push(imgObj);
+
+            // Add to Album
+            data[category].albums[albumName].push(imgObj);
+
+            // Add to Category's flat list (optional, might be useful)
+            data[category].allImages.push(imgObj);
           }
         }
 
-        setImagesByCategory(grouped);
-        setCategories(Object.keys(grouped));
+        setGalleryData(data);
 
-        // 2. Fetch Hero Images (specifically from weddings folder)
+        const preferredOrder = [
+          "Wedding",
+          "Homecoming",
+          "Destination",
+          "Private Session",
+          "Bridal",
+          "Engagement"
+        ];
+
+        // Sort categories
+        const sortedCategories = Object.keys(data).sort((a, b) => {
+          const indexA = preferredOrder.indexOf(a);
+          const indexB = preferredOrder.indexOf(b);
+          if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+          if (indexA !== -1) return -1;
+          if (indexB !== -1) return 1;
+          return a.localeCompare(b);
+        });
+
+        setCategories(sortedCategories);
+
+        // 2. Fetch Hero Images
         const heroModules = import.meta.glob('../../public/images/weddings/**/*.{jpg,jpeg,png,webp,avif}');
         const heroList = [];
 
@@ -69,7 +115,6 @@ const Gallery = () => {
           heroList.push(src);
         }
 
-        // Shuffle and pick 5 random images for Hero
         if (heroList.length > 0) {
           const shuffled = heroList.sort(() => 0.5 - Math.random());
           setHeroImages(shuffled.slice(0, 5));
@@ -84,22 +129,18 @@ const Gallery = () => {
     loadImages();
   }, []);
 
-  // --- HERO LOGIC (From Home.jsx) ---
-
-  // Image Rotation
+  // --- HERO LOGIC ---
   useEffect(() => {
     if (heroImages.length === 0) return;
     const interval = setInterval(() => {
       setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
-    }, 7000); // Slower interval (7 seconds)
+    }, 7000);
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  // Smooth Parallax (From Home.jsx)
   useEffect(() => {
     const images = () => Array.from(document.querySelectorAll('.hero-bg-image'));
     let ticking = false;
-
     const update = () => {
       const sc = window.scrollY || window.pageYOffset;
       const offset = Math.max(-100, Math.min(100, sc * 0.25));
@@ -108,7 +149,6 @@ const Gallery = () => {
         img.style.transform = `translateY(${offset}px) scale(${scale})`;
       });
     };
-
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
@@ -117,7 +157,6 @@ const Gallery = () => {
         ticking = false;
       });
     };
-
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -131,18 +170,40 @@ const Gallery = () => {
     setLightboxImage(null);
     document.body.style.overflow = '';
   };
+
+  // Navigation should depend on CURRENT VIEW context
+  const getContextImages = () => {
+    if (!selectedCategory || !galleryData[selectedCategory]) return [];
+
+    // If we are in an album view, cycle through that album only
+    if (selectedAlbum) {
+      return galleryData[selectedCategory].albums[selectedAlbum] || [];
+    }
+
+    // Otherwise cycle through all images in category? 
+    // Usually if we are just viewing a category, we might see all images (if no albums)
+    // But currently UI shows albums... 
+    // If the user clicks an image, they must be in a context where images are visible.
+    // If we support mixed view (albums + loose images), it's complex.
+    // For now, let's assume we cycle through whatever list the image came from.
+    // But since we pass the image object, let's just use the currently viewed list.
+    // If selectedAlbum is null, maybe we are finding from 'allImages'
+    return galleryData[selectedCategory].allImages;
+  };
+
   const nextImage = (e) => {
     e.stopPropagation();
-    if (!lightboxImage || !selectedCategory) return;
-    const imgs = imagesByCategory[selectedCategory];
+    const imgs = getContextImages();
+    if (!lightboxImage || imgs.length === 0) return;
     const idx = imgs.findIndex(i => i.id === lightboxImage.id);
     const nextIdx = (idx + 1) % imgs.length;
     setLightboxImage(imgs[nextIdx]);
   };
+
   const prevImage = (e) => {
     e.stopPropagation();
-    if (!lightboxImage || !selectedCategory) return;
-    const imgs = imagesByCategory[selectedCategory];
+    const imgs = getContextImages();
+    if (!lightboxImage || imgs.length === 0) return;
     const idx = imgs.findIndex(i => i.id === lightboxImage.id);
     const prevIdx = (idx - 1 + imgs.length) % imgs.length;
     setLightboxImage(imgs[prevIdx]);
@@ -336,26 +397,47 @@ const Gallery = () => {
       {/* 2. GALLERY CONTENT */}
       <div className="gallery-container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '3rem 2rem', minHeight: '50vh' }}>
 
-        {/* VIEW A: ALBUMS */}
+        {/* Category Filter Bar */}
+        <div className="category-filters">
+          <button
+            className={`filter-btn ${selectedCategory === null ? 'active' : ''}`}
+            onClick={() => { setSelectedCategory(null); setSelectedAlbum(null); }}
+          >
+            All Albums
+          </button>
+
+          {categories.map(cat => (
+            <button
+              key={cat}
+              className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+              onClick={() => { setSelectedCategory(cat); setSelectedAlbum(null); }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* VIEW A: ROOT (ALL CATEGORIES) */}
         {!selectedCategory && (
           <div className="albums-grid" style={{ animation: 'fadeIn 0.8s ease' }}>
             {categories.length === 0 ? (
-              <div>No images found. Please check public/images/photos folder.</div>
+              <div style={{ width: '100%', textAlign: 'center' }}>No images found. Please check data.</div>
             ) : (
               categories.map(cat => {
-                const cover = imagesByCategory[cat][0]?.src;
+                const catData = galleryData[cat];
+                const cover = catData.allImages[0]?.src;
                 return (
                   <div
                     key={cat}
                     className="album-card"
-                    onClick={() => setSelectedCategory(cat)}
+                    onClick={() => { setSelectedCategory(cat); setSelectedAlbum(null); }}
                   >
                     <div className="album-cover">
                       <img src={cover} alt={cat} />
                     </div>
                     <div className="album-info">
                       <h3>{cat}</h3>
-                      <span>{imagesByCategory[cat].length} Photos</span>
+                      <span>{catData.allImages.length} Photos</span>
                     </div>
                   </div>
                 );
@@ -364,17 +446,53 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* VIEW B: PHOTOS */}
-        {selectedCategory && (
+        {/* VIEW B: CATEGORY (LIST OF ALBUMS) */}
+        {selectedCategory && !selectedAlbum && (
           <div style={{ animation: 'fadeIn 0.5s ease' }}>
             <div className="category-header">
               <button className="back-btn" onClick={() => setSelectedCategory(null)}>
-                <FaArrowLeft /> Back to Albums
+                <FaArrowLeft /> Back to Categories
               </button>
               <h2>{selectedCategory}</h2>
             </div>
+
+            <div className="albums-grid">
+              {Object.keys(galleryData[selectedCategory].albums).map(albumName => {
+                const albumImages = galleryData[selectedCategory].albums[albumName];
+                if (albumImages.length === 0) return null;
+                const cover = albumImages[0].src;
+
+                // If "General" is the ONLY album, we might want to skip this view, 
+                // but for consistency let's show it or auto-select it?
+                // Let's just show it as an album.
+
+                return (
+                  <div key={albumName} className="album-card" onClick={() => setSelectedAlbum(albumName)}>
+                    <div className="album-cover">
+                      <img src={cover} alt={albumName} />
+                    </div>
+                    <div className="album-info">
+                      <h3 style={{ fontSize: '1.1rem' }}>{albumName}</h3>
+                      <span>{albumImages.length} Photos</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* VIEW C: ALBUM (PHOTOS) */}
+        {selectedCategory && selectedAlbum && (
+          <div style={{ animation: 'fadeIn 0.5s ease' }}>
+            <div className="category-header">
+              <button className="back-btn" onClick={() => setSelectedAlbum(null)}>
+                <FaArrowLeft /> Back to {selectedCategory}
+              </button>
+              <h2>{selectedAlbum === "General" ? selectedCategory : selectedAlbum}</h2>
+            </div>
             <div className="gallery-grid">
-              {imagesByCategory[selectedCategory].map(img => (
+              {galleryData[selectedCategory].albums[selectedAlbum].map(img => (
                 <div key={img.id} className="gallery-item" onClick={() => openLightbox(img)}>
                   <div className="media"><img src={img.src} alt={img.alt} loading="lazy" /></div>
                 </div>
