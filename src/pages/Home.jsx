@@ -465,8 +465,8 @@ const Home = () => {
             Professional wedding photography that preserves your most precious moments with artistic elegance and timeless beauty
           </p>
           <div className="hero-cta">
-            <a href="/gallery" className="btn btn-primary">View Our Work</a>
-            <a href="/contact" className="btn btn-outline">Book Consultation</a>
+            <Link to="/gallery" className="btn btn-primary">View Our Work</Link>
+            <Link to="/contact" className="btn btn-outline">Book Consultation</Link>
           </div>
         </div>
       </section>
