@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaArrowLeft } from 'react-icons/fa';
 import '../styles/Gallery.css';
 
@@ -399,7 +400,7 @@ const Gallery = () => {
           <h2 className="cta-title">Ready to Capture Your Story?</h2>
           <p className="cta-text">Let's create timeless memories that you'll cherish forever.</p>
           <div className="hero-cta">
-            <a href="/contact" className="btn btn-outline">Book Your Session</a>
+            <Link to="/contact" className="btn btn-outline">Book Your Session</Link>
           </div>
         </div>
       </section>
