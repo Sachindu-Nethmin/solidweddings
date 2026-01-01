@@ -1,0 +1,26 @@
+name: Check Build Status
+
+on:
+  push:
+    branches: ["**"]     # Run on all branches
+  pull_request:
+    branches: ["master"] # Run on Pull Requests to master
+
+jobs:
+  verify-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Build
+        run: npm run build
