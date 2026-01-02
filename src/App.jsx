@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <div className="App">
         <Header />
         <main className="main-content">
@@ -25,7 +25,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
