@@ -381,8 +381,9 @@ const Gallery = () => {
                 );
               })
             )}
-          </div>
-        )}
+                  </div>
+                )
+              }
 
         {/* VIEW B: CATEGORY (LIST OF ALBUMS) */}
         {selectedCategory && !selectedAlbum && galleryData[selectedCategory] && (
@@ -463,28 +464,28 @@ const Gallery = () => {
       </div>
 
       {/* 3. LIGHTBOX */}
-      {lightboxImage && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-close" onClick={closeLightbox}><FaTimes /></button>
-          <button className="nav-btn prev" onClick={prevImage}><FaChevronLeft /></button>
-          <img src={lightboxImage.src} className="lightbox-image" onClick={e => e.stopPropagation()} alt="" />
-          <button className="nav-btn next" onClick={nextImage}><FaChevronRight /></button>
-        </div>
-      )}
-
-      {/* 4. CTA SECTION (Updated to Home Style) */}
-      <section className="cta-section">
-        <div className="cta-content">
-          <h2 className="cta-title">Ready to Capture Your Story?</h2>
-          <p className="cta-text">Let's create timeless memories that you'll cherish forever.</p>
-          <div className="hero-cta">
-            <Link to="/contact" className="btn btn-outline">Book Your Session</Link>
+        {lightboxImage && (
+          <div className="lightbox" onClick={closeLightbox}>
+            <button className="lightbox-close" onClick={closeLightbox}><FaTimes /></button>
+            <button className="nav-btn prev" onClick={prevImage}><FaChevronLeft /></button>
+            <img src={lightboxImage.src} className="lightbox-image" onClick={e => e.stopPropagation()} alt="" />
+            <button className="nav-btn next" onClick={nextImage}><FaChevronRight /></button>
           </div>
-        </div>
-      </section>
+        )}
 
-    </div>
-  );
+        {/* 4. CTA SECTION (Updated to Home Style) */}
+        <section className="cta-section">
+          <div className="cta-content">
+            <h2 className="cta-title">Ready to Capture Your Story?</h2>
+            <p className="cta-text">Let's create timeless memories that you'll cherish forever.</p>
+            <div className="hero-cta">
+              <Link to="/contact" className="btn btn-outline">Book Your Session</Link>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      );
 };
 
-export default Gallery;
+      export default Gallery;
