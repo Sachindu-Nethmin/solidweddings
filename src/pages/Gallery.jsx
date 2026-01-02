@@ -462,9 +462,7 @@ const Gallery = () => {
                 if (albumImages.length === 0) return null;
                 const cover = albumImages[0].src;
 
-                // If "General" is the ONLY album, we might want to skip this view, 
-                // but for consistency let's show it or auto-select it?
-                // Let's just show it as an album.
+                // "General" (if present) is treated like any other album and always shown here for consistency.
 
                 return (
                   <div key={albumName} className="album-card" onClick={() => setSelectedAlbum(albumName)}>
