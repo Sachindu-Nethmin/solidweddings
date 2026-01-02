@@ -3,12 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaArrowLeft } from 'react-icons/fa';
 import '../styles/Gallery.css';
+import { fetchGalleryData } from '../services/galleryService';
 
 const Gallery = () => {
   // --- STATE ---
-  const [galleryData, setGalleryData] = useState({}); // { Category: { albums: { "AlbumName": [images] }, allImages: [images] } }
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null); // "Wedding"
+  const [galleryData, setGalleryData] = useState({}); // Raw data map
+  const [categories, setCategories] = useState([]);   // Array of {id, displayName, data} objects
+  const [selectedCategory, setSelectedCategory] = useState(null); // stores the ID, e.g. "Wedding"
   const [selectedAlbum, setSelectedAlbum] = useState(null);       // "CoupleName"
   const [lightboxImage, setLightboxImage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,89 +24,17 @@ const Gallery = () => {
     const loadImages = async () => {
       setLoading(true);
       try {
-        const baseUrl = import.meta.env.BASE_URL; // e.g. "/solidweddings/"
+        // Use shared service
+        // fetchGalleryData returns { raw, display: [{id, displayName, data}] }
+        const { raw, display } = await fetchGalleryData();
 
-        // 1. Fetch Gallery Images (from photos folder)
-        const modules = import.meta.glob('../../public/images/photos/**/*.{jpg,jpeg,png,webp,avif}');
-        const data = {};
+        setGalleryData(raw);
+        setCategories(display);
 
-        for (const path in modules) {
-          const parts = path.split('/');
-          const photosIndex = parts.indexOf('photos');
-
-          if (photosIndex !== -1 && parts.length > photosIndex + 2) {
-            // Level 1: Category (e.g. "Engagement")
-            const category = decodeURIComponent(parts[photosIndex + 1]);
-
-            // Level 2: Album (e.g. "CoupleName") OR Image if directly in category
-            // If path is .../photos/Category/Album/img.jpg -> parts.length = photosIndex + 4
-            // If path is .../photos/Category/img.jpg       -> parts.length = photosIndex + 3
-
-            let albumName = "General";
-            if (parts.length > photosIndex + 3) {
-              albumName = decodeURIComponent(parts[photosIndex + 2]);
-            }
-
-            const filename = parts[parts.length - 1];
-
-            // Construct src
-            const relativePath = path.replace('../../public', '');
-            const src = `${baseUrl.replace(/\/$/, '')}${relativePath}`;
-
-            // Initialize Category Object
-            if (!data[category]) {
-              data[category] = {
-                id: category,
-                albums: {},
-                allImages: [] // Flat list for "All Albums" cover logic if needed, or fallback
-              };
-            }
-
-            // Initialize Album Array
-            if (!data[category].albums[albumName]) {
-              data[category].albums[albumName] = [];
-            }
-
-            const imgObj = {
-              id: src,
-              src: src,
-              alt: filename.split('.')[0],
-              category: category,
-              album: albumName
-            };
-
-            // Add to Album
-            data[category].albums[albumName].push(imgObj);
-
-            // Add to Category's flat list (optional, might be useful)
-            data[category].allImages.push(imgObj);
-          }
-        }
-
-        setGalleryData(data);
-
-        const preferredOrder = [
-          "Wedding",
-          "Homecoming",
-          "Destination",
-          "Private Session",
-          "Bridal",
-          "Engagement"
-        ];
-
-        // Sort categories
-        const sortedCategories = Object.keys(data).sort((a, b) => {
-          const indexA = preferredOrder.indexOf(a);
-          const indexB = preferredOrder.indexOf(b);
-          if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-          if (indexA !== -1) return -1;
-          if (indexB !== -1) return 1;
-          return a.localeCompare(b);
-        });
-
-        setCategories(sortedCategories);
-
-        // 2. Fetch Hero Images
+        // 2. Fetch Hero Images (keep this local as it's just random display logic)
+        // ... well, actually fetchGalleryData scans 'photos', not 'weddings' root where hero images might be.
+        // Let's keep the hero logic here for now as it seems specific to this page style.
+        const baseUrl = import.meta.env.BASE_URL;
         const heroModules = import.meta.glob('../../public/images/weddings/**/*.{jpg,jpeg,png,webp,avif}');
         const heroList = [];
 
@@ -171,23 +100,12 @@ const Gallery = () => {
     document.body.style.overflow = '';
   };
 
-  // Navigation should depend on CURRENT VIEW context
   const getContextImages = () => {
     if (!selectedCategory || !galleryData[selectedCategory]) return [];
 
-    // If we are in an album view, cycle through that album only
     if (selectedAlbum) {
       return galleryData[selectedCategory].albums[selectedAlbum] || [];
     }
-
-    // Otherwise cycle through all images in category? 
-    // Usually if we are just viewing a category, we might see all images (if no albums)
-    // But currently UI shows albums... 
-    // If the user clicks an image, they must be in a context where images are visible.
-    // If we support mixed view (albums + loose images), it's complex.
-    // For now, let's assume we cycle through whatever list the image came from.
-    // But since we pass the image object, let's just use the currently viewed list.
-    // If selectedAlbum is null, maybe we are finding from 'allImages'
     return galleryData[selectedCategory].allImages;
   };
 
@@ -408,11 +326,11 @@ const Gallery = () => {
 
           {categories.map(cat => (
             <button
-              key={cat}
-              className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
-              onClick={() => { setSelectedCategory(cat); setSelectedAlbum(null); }}
+              key={cat.id}
+              className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+              onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }}
             >
-              {cat}
+              {cat.displayName}
             </button>
           ))}
         </div>
@@ -421,22 +339,42 @@ const Gallery = () => {
         {!selectedCategory && (
           <div className="albums-grid" style={{ animation: 'fadeIn 0.8s ease' }}>
             {categories.length === 0 ? (
-              <div style={{ width: '100%', textAlign: 'center' }}>No images found. Please check data.</div>
+              <div style={{ width: '100%', textAlign: 'center' }}>No images found.</div>
             ) : (
               categories.map(cat => {
-                const catData = galleryData[cat];
+                const catData = galleryData[cat.id]; // Access by ID
+                if (!catData) return null; // Safety check
+
                 const cover = catData.allImages[0]?.src;
+
+                // If it's a virtual category with no images, maybe show placeholder?
+                if (catData.type === 'virtual' && !cover) {
+                  return (
+                    <div key={cat.id} className="album-card" onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }}>
+                      <div className="album-cover" style={{ background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
+                        Category Empty
+                      </div>
+                      <div className="album-info">
+                        <h3>{cat.displayName}</h3>
+                        <span>(New)</span>
+                      </div>
+                    </div>
+                  );
+                }
+
+                if (!cover) return null; // Don't show empty real categories if we can't
+
                 return (
                   <div
-                    key={cat}
+                    key={cat.id}
                     className="album-card"
-                    onClick={() => { setSelectedCategory(cat); setSelectedAlbum(null); }}
+                    onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }} // Use ID
                   >
                     <div className="album-cover">
-                      <img src={cover} alt={cat} />
+                      <img src={cover} alt={cat.displayName} />
                     </div>
                     <div className="album-info">
-                      <h3>{cat}</h3>
+                      <h3>{cat.displayName}</h3>
                       <span>{catData.allImages.length} Photos</span>
                     </div>
                   </div>
@@ -447,22 +385,30 @@ const Gallery = () => {
         )}
 
         {/* VIEW B: CATEGORY (LIST OF ALBUMS) */}
-        {selectedCategory && !selectedAlbum && (
+        {selectedCategory && !selectedAlbum && galleryData[selectedCategory] && (
           <div style={{ animation: 'fadeIn 0.5s ease' }}>
             <div className="category-header">
               <button className="back-btn" onClick={() => setSelectedCategory(null)}>
                 <FaArrowLeft /> Back to Categories
               </button>
-              <h2>{selectedCategory}</h2>
+              {
+                // Find the display name for the header title
+                (() => {
+                  const c = categories.find(c => c.id === selectedCategory);
+                  return <h2>{c ? c.displayName : selectedCategory}</h2>;
+                })()
+              }
             </div>
 
             <div className="albums-grid">
+              {/* 
+                 For virtual categories, we might not have albums yet.
+                 Basically iterate keys of albums 
+               */}
               {Object.keys(galleryData[selectedCategory].albums).map(albumName => {
                 const albumImages = galleryData[selectedCategory].albums[albumName];
                 if (albumImages.length === 0) return null;
                 const cover = albumImages[0].src;
-
-                // "General" (if present) is treated like any other album and always shown here for consistency.
 
                 return (
                   <div key={albumName} className="album-card" onClick={() => setSelectedAlbum(albumName)}>
@@ -476,18 +422,34 @@ const Gallery = () => {
                   </div>
                 );
               })}
+              {Object.keys(galleryData[selectedCategory].albums).length === 0 && (
+                <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '3rem', color: '#666' }}>
+                  No albums or photos in this category yet.
+                </div>
+              )}
             </div>
           </div>
         )}
 
         {/* VIEW C: ALBUM (PHOTOS) */}
-        {selectedCategory && selectedAlbum && (
+        {selectedCategory && selectedAlbum && galleryData[selectedCategory] && (
           <div style={{ animation: 'fadeIn 0.5s ease' }}>
             <div className="category-header">
               <button className="back-btn" onClick={() => setSelectedAlbum(null)}>
-                <FaArrowLeft /> Back to {selectedCategory}
+                {/* Back to [Category Display Name] */}
+                <FaArrowLeft /> Back to {
+                  (() => {
+                    const c = categories.find(c => c.id === selectedCategory);
+                    return c ? c.displayName : selectedCategory;
+                  })()
+                }
               </button>
-              <h2>{selectedAlbum === "General" ? selectedCategory : selectedAlbum}</h2>
+              <h2>{selectedAlbum === "General" ?
+                (() => {
+                  const c = categories.find(c => c.id === selectedCategory);
+                  return c ? c.displayName : selectedCategory;
+                })() : selectedAlbum}
+              </h2>
             </div>
             <div className="gallery-grid">
               {galleryData[selectedCategory].albums[selectedAlbum].map(img => (
