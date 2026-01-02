@@ -35,18 +35,21 @@ const Gallery = () => {
 
           if (photosIndex !== -1 && parts.length > photosIndex + 2) {
             // Level 1: Category (e.g. "Engagement")
-            const category = decodeURIComponent(parts[photosIndex + 1]);
+            let category = decodeURIComponent(parts[photosIndex + 1]);
+            // Capitalize Category
+            category = category.charAt(0).toUpperCase() + category.slice(1);
 
             // Level 2: Album (e.g. "CoupleName") OR Image if directly in category
             // If path is .../photos/Category/Album/img.jpg -> parts.length = photosIndex + 4
             // If path is .../photos/Category/img.jpg       -> parts.length = photosIndex + 3
 
-            let albumName = "General";
+            const filename = parts[parts.length - 1];
+            // Default Card Name to Filename (Level 2) if no subfolder
+            let albumName = filename.split('.')[0];
+
             if (parts.length > photosIndex + 3) {
               albumName = decodeURIComponent(parts[photosIndex + 2]);
             }
-
-            const filename = parts[parts.length - 1];
 
             // Construct src
             const relativePath = path.replace('../../public', '');
@@ -423,25 +426,28 @@ const Gallery = () => {
             {categories.length === 0 ? (
               <div style={{ width: '100%', textAlign: 'center' }}>No images found. Please check data.</div>
             ) : (
-              categories.map(cat => {
-                const catData = galleryData[cat];
-                const cover = catData.allImages[0]?.src;
-                return (
-                  <div
-                    key={cat}
-                    className="album-card"
-                    onClick={() => { setSelectedCategory(cat); setSelectedAlbum(null); }}
-                  >
-                    <div className="album-cover">
-                      <img src={cover} alt={cat} />
-                    </div>
-                    <div className="album-info">
-                      <h3>{cat}</h3>
-                      <span>{catData.allImages.length} Photos</span>
-                    </div>
+              // Aggregate ALL albums from ALL categories
+              categories.flatMap(cat =>
+                Object.keys(galleryData[cat].albums).map(albumName => ({
+                  category: cat,
+                  name: albumName,
+                  data: galleryData[cat].albums[albumName]
+                }))
+              ).map((album) => (
+                <div
+                  key={`${album.category}-${album.name}`}
+                  className="album-card"
+                  onClick={() => { setSelectedCategory(album.category); setSelectedAlbum(album.name); }}
+                >
+                  <div className="album-cover">
+                    <img src={album.data[0].src} alt={album.name} />
                   </div>
-                );
-              })
+                  <div className="album-info">
+                    <h3 style={{ fontSize: '1.1rem' }}>{album.name}</h3>
+                    <span>{album.category}</span>
+                  </div>
+                </div>
+              ))
             )}
           </div>
         )}
