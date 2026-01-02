@@ -183,6 +183,44 @@
   right: 20px;
 }
 
+/* Category Filters */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  animation: fadeIn 0.8s ease;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #6b6b6b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: rgba(192, 160, 98, 0.05); /* Gold tint */
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--accent-gold);
+  color: #fff;
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 12px rgba(192, 160, 98, 0.3);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-title {
@@ -191,6 +229,16 @@
 
   .albums-grid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .category-filters {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 
   .lightbox-image {
