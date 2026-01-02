@@ -262,7 +262,7 @@ export const fetchGalleryData = async () => {
 
                 const extraImages = addedPhotosMap[fsId]
                     .filter(src => !existingSrcs.has(src)) // Deduplicate
-                    .map(src => ({
+                    .map((src, idx) => ({
                         id: src, // USE SRC AS ID to match Editor and FS conventions
                         src: src,
                         alt: newName,
