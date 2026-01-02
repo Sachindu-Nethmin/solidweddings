@@ -537,7 +537,7 @@ const Home = () => {
             <p className="cta-text">Let's create beautiful memories together. Contact us today to discuss your vision and start planning your perfect photography experience.</p>
             <div className="hero-cta">
               <Link to="/contact" className="btn btn-outline">Get Quote</Link>
-              <a href="/services" className="btn btn-outline">View Packages</a>
+              <Link to="/services" className="btn btn-outline">View Packages</Link>
             </div>
           </div>
         </div>
