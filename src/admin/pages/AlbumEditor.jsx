@@ -373,7 +373,8 @@ const AlbumEditor = () => {
                             isNew: false,
                             src: result.filePath,
                             file: undefined,
-                            id: result.filePath
+                            id: result.filePath,
+                            isFsInfo: false // Explicitly mark as NOT filesystem so it saves
                         };
                     } else {
                         throw new Error("All upload methods failed");
@@ -383,6 +384,7 @@ const AlbumEditor = () => {
 
             // 2. Save Config
             if (editingSource === 'virtual') {
+                // ... (Keep existing virtual logic) ...
                 const rawPhotos = processedPhotos.map(p => p.src);
                 const albumData = {
                     id: isEditing ? id : Date.now().toString(),
@@ -407,7 +409,7 @@ const AlbumEditor = () => {
                     categoryOverrides: { ...settings.categoryOverrides },
                     hiddenPhotos: [...(settings.hiddenPhotos || [])],
                     addedPhotos: { ...settings.addedPhotos },
-                    photoOrder: { ...settings.photoOrder } // New Order Map
+                    photoOrder: { ...settings.photoOrder }
                 };
 
                 if (!settingsCopy.renames) settingsCopy.renames = {};
@@ -435,17 +437,20 @@ const AlbumEditor = () => {
                     .filter(p => !p.isFsInfo)
                     .map(p => p.src);
 
+                console.log("[AlbumEditor] Saving Filesystem Settings for:", id);
+                console.log("[AlbumEditor] Virtuals (Added) to save:", virtualsToSave);
+                console.log("[AlbumEditor] processedPhotos:", processedPhotos);
+
                 settingsCopy.addedPhotos[id] = virtualsToSave;
 
                 // SAVE ORDER: Map current processedPhotos IDs
-                // CRITICAL: We must ensure we grab the CURRENT IDs from processedPhotos, which now contains the server paths for new uploads.
-                // We double check to filter out any remaining temp- IDs just in case, though they should be gone.
                 const currentOrder = processedPhotos
                     .map(p => p.id)
                     .filter(pid => pid && !String(pid).startsWith('temp-') && !String(pid).startsWith('pending-'));
 
                 settingsCopy.photoOrder[id] = currentOrder;
 
+                console.log("[AlbumEditor] Final Settings:", settingsCopy);
                 saveAlbumSettings(settingsCopy);
             }
 
