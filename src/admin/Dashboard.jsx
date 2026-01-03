@@ -36,6 +36,53 @@ const Dashboard = () => {
         setLoading(false);
     };
 
+    // --- CLOUDINARY WIDGET ---
+    const [loadedWidget, setLoadedWidget] = useState(false);
+
+    useEffect(() => {
+        if (!loadedWidget) {
+            const script = document.createElement('script');
+            script.src = "https://upload-widget.cloudinary.com/global/all.js";
+            script.async = true;
+            script.onload = () => setLoadedWidget(true);
+            document.body.appendChild(script);
+        }
+    }, [loadedWidget]);
+
+    const openCloudinaryWidget = () => {
+        if (!window.cloudinary) {
+            alert("Cloudinary widget not loaded yet.");
+            return;
+        }
+
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        if (!cloudName || !uploadPreset) {
+            alert("Please configure VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET in your .env or GitHub Secrets.");
+            return;
+        }
+
+        const widget = window.cloudinary.createUploadWidget(
+            {
+                cloudName: cloudName,
+                uploadPreset: uploadPreset,
+                folder: 'solid_weddings_gallery',
+                tags: ['gallery'],
+                sources: ['local', 'url', 'camera'],
+                multiple: true,
+            },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log("Upload success:", result.info);
+                    // Optional: Refresh data if we were fetching from Cloudinary
+                    alert(`Successfully uploaded: ${result.info.original_filename}`);
+                }
+            }
+        );
+        widget.open();
+    };
+
     const handleLogout = () => {
         localStorage.removeItem('isAdminAuthenticated');
         navigate('/admin/login');
@@ -121,8 +168,12 @@ const Dashboard = () => {
                 >
                     Manage Categories
                 </button>
-                {/* Placeholder for future tabs */}
-                <button className="btn btn-outline" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Manage Photos (Coming Soon)</button>
+                <button
+                    className={`btn ${activeTab === 'photos' ? 'btn-primary' : 'btn-outline'}`}
+                    onClick={() => setActiveTab('photos')}
+                >
+                    Manage Photos
+                </button>
             </div>
 
             {/* MAIN CONTENT */}
@@ -130,6 +181,25 @@ const Dashboard = () => {
                 <div>Loading...</div>
             ) : (
                 <div className="dashboard-content">
+                    {activeTab === 'photos' && (
+                        <div className="photos-manager" style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '15px', boxShadow: '0 5px 20px rgba(0,0,0,0.05)' }}>
+                            <h3>Cloudinary Uploads</h3>
+                            <p>Upload photos directly to your Cloudinary storage.</p>
+                            <div style={{ marginTop: '2rem' }}>
+                                <button className="btn btn-primary" onClick={openCloudinaryWidget} style={{ fontSize: '1.2rem', padding: '15px 30px' }}>
+                                    <FaPlus /> Upload Photos
+                                </button>
+                            </div>
+                            <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: '#666' }}>
+                                <p>Status:</p>
+                                <ul style={{ listStyle: 'none', padding: 0 }}>
+                                    <li>Cloud Name: {import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ? "✅ Connected" : "❌ Missing"}</li>
+                                    <li>Preset: {import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET ? "✅ Configured" : "❌ Missing"}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+
                     {activeTab === 'categories' && (
                         <div className="categories-manager">
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
