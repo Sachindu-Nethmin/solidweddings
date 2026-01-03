@@ -24,11 +24,13 @@ export default async function handler(req, res) {
         const url = new URL(req.url, `http://${req.headers.host}`);
         const folder = url.searchParams.get('folder');
 
-        const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-        const apiKey = process.env.CLOUDINARY_API_KEY;
-        const apiSecret = process.env.CLOUDINARY_API_SECRET;
+        // Sanitize keys (remove accidental spaces from copy-paste)
+        const cloudName = (process.env.CLOUDINARY_CLOUD_NAME || '').trim();
+        const apiKey = (process.env.CLOUDINARY_API_KEY || '').trim();
+        const apiSecret = (process.env.CLOUDINARY_API_SECRET || '').trim();
 
         if (!cloudName || !apiKey || !apiSecret) {
+            console.error("Missing Cloudinary Keys");
             return res.status(500).json({ error: 'Missing Cloudinary Environment Variables' });
         }
 
