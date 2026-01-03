@@ -219,17 +219,17 @@ const AlbumEditor = () => {
         }
     };
 
-    // Upload to Server
-    const uploadPhoto = async (file, category, album) => {
+    // --- Upload Strategies ---
+
+    // 1. Local Filesystem Upload (Dev Only)
+    const uploadLocal = async (file, category, album) => {
         const formData = new FormData();
-        // Append text fields FIRST for Multer stability
         formData.append('category', category);
         formData.append('albumName', album);
         formData.append('photo', file);
 
-        // Add timeout ensuring we don't hang forever
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
 
         try {
             const res = await fetch('http://localhost:3001/api/upload', {
@@ -238,16 +238,38 @@ const AlbumEditor = () => {
                 signal: controller.signal
             });
             clearTimeout(timeoutId);
-
-            if (!res.ok) {
-                const text = await res.text();
-                throw new Error(`Upload failed: ${res.status} ${text}`);
-            }
+            if (!res.ok) throw new Error("Local upload failed");
             return await res.json();
         } catch (err) {
             clearTimeout(timeoutId);
             throw err;
         }
+    };
+
+    // 2. Cloudinary Upload (Production/Vercel)
+    const uploadCloudinary = async (file, category, album) => {
+        // Get Signature
+        const sigRes = await fetch('/api/sign-upload');
+        if (!sigRes.ok) throw new Error("Backend signer unreachable (Are you on Vercel?)");
+        const { signature, timestamp, cloudName, apiKey } = await sigRes.json();
+
+        // Upload
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('api_key', apiKey);
+        formData.append('timestamp', timestamp);
+        formData.append('signature', signature);
+        formData.append('folder', `solidweddings/${category}/${albumName}`);
+
+        const cloudinaryRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!cloudinaryRes.ok) throw new Error("Cloudinary upload failed");
+        const data = await cloudinaryRes.json();
+
+        return { success: true, filePath: data.secure_url };
     };
 
     const handlePhotosChange = async (e) => {
@@ -304,18 +326,50 @@ const AlbumEditor = () => {
         try {
             // 1. Process Pending Uploads
             if (uploads.length > 0) {
+                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
                 for (const item of uploads) {
-                    const result = await uploadPhoto(item.p.file, selectedCategory, albumName);
+                    let result = { success: false };
+
+                    // Priority 1: Cloudinary (If keys exist, it's best)
+                    // Priority 2: Localhost Filesystem (If on dev)
+                    // Priority 3: Base64 Fallback (Demo)
+
+                    // For this project, let's prefer Localhost on Dev to keep existing flow, 
+                    // and Cloudinary on Vercel.
+
+                    if (isLocalhost) {
+                        try {
+                            result = await uploadLocal(item.p.file, selectedCategory, albumName);
+                        } catch (e) {
+                            console.warn("Local upload failed, trying Cloudinary...", e);
+                        }
+                    }
+
+                    if (!result.success) {
+                        try {
+                            result = await uploadCloudinary(item.p.file, selectedCategory, albumName);
+                        } catch (e) {
+                            console.warn("Cloudinary upload failed (Check Keys), falling back to Demo Mode.", e);
+                        }
+                    }
+
+                    // Fallback to Demo Mode (Base64)
+                    if (!result.success) {
+                        console.log("Using LocalStorage (Base64) for image persistence (Demo Mode)");
+                        result = { success: true, filePath: item.p.src };
+                    }
+
                     if (result.success) {
                         processedPhotos[item.idx] = {
                             ...item.p,
                             isNew: false,
-                            src: result.filePath, // Update to server path
-                            file: undefined, // Clear file
-                            id: result.filePath // USE PATH AS ID to match galleryService IDs
+                            src: result.filePath,
+                            file: undefined,
+                            id: result.filePath
                         };
                     } else {
-                        throw new Error("Upload response failed");
+                        throw new Error("All upload methods failed");
                     }
                 }
             }
