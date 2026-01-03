@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         });
 
         // Generate Signature
-        const timestamp = Math.round((new Date()).getTime() / 1000);
+        const timestamp = Math.floor(Date.now() / 1000); // Ensure Integer
 
         // Params to sign (must match what is sent to Cloudinary)
         const paramsToSign = {
@@ -55,6 +55,9 @@ export default async function handler(req, res) {
         }
 
         const signature = cloudinary.utils.api_sign_request(paramsToSign, apiSecret);
+
+        console.log("Signing Params:", paramsToSign);
+        console.log("Generated Sig:", signature);
 
         res.status(200).json({
             signature,

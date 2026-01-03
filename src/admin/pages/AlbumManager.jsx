@@ -44,8 +44,12 @@ const AlbumManager = () => {
                                 const src = fsPhoto.src;
                                 const decodedParts = decodeURIComponent(src).split('/');
                                 const photoIdx = decodedParts.indexOf('photos');
-                                if (photoIdx !== -1 && decodedParts.length > photoIdx + 2) {
-                                    originalAlbumName = decodedParts[photoIdx + 2];
+                                if (photoIdx !== -1) {
+                                    if (decodedParts.length > photoIdx + 3) {
+                                        originalAlbumName = decodedParts[photoIdx + 2];
+                                    } else {
+                                        originalAlbumName = 'General';
+                                    }
                                 }
                             }
                         }

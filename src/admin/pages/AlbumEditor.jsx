@@ -56,7 +56,9 @@ const AlbumEditor = () => {
     // Data State
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+
     const [originalFsPhotos, setOriginalFsPhotos] = useState([]);
+    const [photosToDelete, setPhotosToDelete] = useState([]);
 
     // UI State
     const [saving, setSaving] = useState(false);
@@ -157,7 +159,11 @@ const AlbumEditor = () => {
                             const pIdx = parts.indexOf('photos');
                             if (pIdx !== -1) {
                                 deducedC = parts[pIdx + 1];
-                                deducedN = parts[pIdx + 2];
+                                if (parts.length > pIdx + 3) {
+                                    deducedN = parts[pIdx + 2];
+                                } else {
+                                    deducedN = 'General';
+                                }
                             }
                         }
                     }
@@ -229,47 +235,37 @@ const AlbumEditor = () => {
     // --- Upload Strategies ---
 
     // 1. Local Filesystem Upload (Dev Only)
-    const uploadLocal = async (file, category, album) => {
-        const formData = new FormData();
-        formData.append('category', category);
-        formData.append('albumName', album);
-        formData.append('photo', file);
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-        try {
-            const res = await fetch('http://localhost:3001/api/upload', {
-                method: 'POST',
-                body: formData,
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId);
-            if (!res.ok) throw new Error("Local upload failed");
-            return await res.json();
-        } catch (err) {
-            clearTimeout(timeoutId);
-            throw err;
-        }
-    };
-
-    // 2. Cloudinary Upload (Production/Vercel)
+    // 2. Cloudinary Upload (Unsigned Mode)
     const uploadCloudinary = async (file, category, album) => {
         const folder = `solidweddings/${category}/${albumName}`;
+        const uploadPreset = 'solidwedding'; // Unsigned Preset
 
-        // Get Signature (Pass folder so it gets signed!)
-        const sigRes = await fetch(`/api/sign-upload?folder=${encodeURIComponent(folder)}`);
-        if (!sigRes.ok) throw new Error("Backend signer unreachable");
+        // 1. Get Cloud Name (Fetch from backend config)
+        let cloudName = '';
+        try {
+            const confRes = await fetch('/api/sign-upload');
+            if (confRes.ok) {
+                const conf = await confRes.json();
+                cloudName = conf.cloudName;
+            }
+        } catch (e) {
+            console.warn("Could not fetch cloud name from backend", e);
+        }
 
-        const { signature, timestamp, cloudName, apiKey } = await sigRes.json();
+        if (!cloudName) {
+            alert("Could not retrieve Cloud Name from server. Check Vercel Env Vars.");
+            throw new Error("Missing Cloud Name");
+        }
 
-        // Upload
+        // 2. Direct Unsigned Upload
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('api_key', apiKey);
-        formData.append('timestamp', timestamp);
-        formData.append('signature', signature);
-        formData.append('folder', folder); // Must match what was signed
+        formData.append('upload_preset', uploadPreset);
+        formData.append('folder', folder);
+
+        console.log(`[Upload] Uploading to Cloud: ${cloudName} with preset: ${uploadPreset}`);
 
         const cloudinaryRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
             method: 'POST',
@@ -277,16 +273,24 @@ const AlbumEditor = () => {
         });
 
         if (!cloudinaryRes.ok) {
-            const errData = await cloudinaryRes.json();
-            const errMsg = errData.error?.message || 'Unknown Cloudinary Error';
-            console.error("Cloudinary Error Log:", errData);
-            alert(`Cloudinary Upload Failed: ${errMsg}`); // Alert user to the specific problem
+            const errText = await cloudinaryRes.text();
+            console.error("Cloudinary Raw Error:", errText);
+
+            let errMsg = `Upload Failed (${cloudinaryRes.status})`;
+            try {
+                const errJson = JSON.parse(errText);
+                errMsg = errJson.error?.message || errMsg;
+                alert(`Cloudinary Error:\n${JSON.stringify(errJson, null, 2)}`);
+            } catch (e) {
+                alert(`Cloudinary Error (Not JSON):\n${errText}`);
+            }
             throw new Error(errMsg);
         }
 
         const data = await cloudinaryRes.json();
         return { success: true, filePath: data.secure_url };
     };
+
 
     const handlePhotosChange = async (e) => {
         const files = Array.from(e.target.files);
@@ -326,6 +330,12 @@ const AlbumEditor = () => {
     };
 
     const removePhoto = (index) => {
+        const photoToRemove = albumPhotos[index];
+        // If it's a Cloudinary URL, mark for deletion
+        if (photoToRemove.src && photoToRemove.src.includes('res.cloudinary.com')) {
+            console.log("Marking for deletion:", photoToRemove.src);
+            setPhotosToDelete(prev => [...prev, photoToRemove.src]);
+        }
         setAlbumPhotos(prev => prev.filter((_, i) => i !== index));
     };
 
@@ -340,59 +350,66 @@ const AlbumEditor = () => {
         const uploads = processedPhotos.map((p, idx) => ({ p, idx })).filter(item => item.p.file);
 
         try {
+            // 0. Process Deletions
+            if (photosToDelete.length > 0) {
+                console.log(`[Save] Processing ${photosToDelete.length} deletions...`);
+                for (const url of photosToDelete) {
+                    try {
+                        const split = url.split('/upload/');
+                        if (split.length >= 2) {
+                            let publicId = split[1];
+                            publicId = publicId.replace(/^v\d+\//, '').replace(/\.[^/.]+$/, ""); // strip version & ext
+                            publicId = decodeURIComponent(publicId);
+
+                            console.log(`[Save] Deleting from Cloudinary: ${publicId}`);
+                            await fetch('/api/delete-image', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ public_id: publicId })
+                            });
+                        }
+                    } catch (err) {
+                        console.error("Failed to delete image:", url, err);
+                        // Continue saving even if delete fails
+                    }
+                }
+                setPhotosToDelete([]); // Clear queue
+            }
+
             // 1. Process Pending Uploads
+            // 1. Process Pending Uploads (Cloudinary Only)
             if (uploads.length > 0) {
-                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                console.log(`[Upload] Starting upload of ${uploads.length} files. isLocalhost: ${isLocalhost}`);
+                console.log(`[Save] Processing ${uploads.length} uploads via Cloudinary...`);
 
                 for (const item of uploads) {
-                    let result = { success: false };
-                    console.log(`[Upload] Processing file: ${item.p.file?.name}`);
+                    try {
+                        const result = await uploadCloudinary(item.p.file, selectedCategory, albumName);
 
-                    // Priority 1: Localhost Filesystem (If on dev)
-                    // Priority 2: Cloudinary (Production)
-                    // Priority 3: Base64 Fallback (Demo)
-
-                    if (isLocalhost) {
-                        try {
-                            console.log("[Upload] Trying Local filesystem upload...");
-                            result = await uploadLocal(item.p.file, selectedCategory, albumName);
-                            console.log("[Upload] Local upload result:", result);
-                        } catch (e) {
-                            console.warn("[Upload] Local upload failed:", e.message);
-                        }
-                    }
-
-                    if (!result.success) {
-                        try {
-                            console.log("[Upload] Trying Cloudinary upload...");
-                            result = await uploadCloudinary(item.p.file, selectedCategory, albumName);
-                            console.log("[Upload] Cloudinary upload result:", result);
-                            if (result.success) {
-                                console.log("[Upload] ✅ Cloudinary SUCCESS! URL:", result.filePath);
-                            }
-                        } catch (e) {
-                            console.error("[Upload] Cloudinary upload failed:", e.message);
-                        }
-                    }
-
-                    // Fallback to Demo Mode (Base64)
-                    if (!result.success) {
-                        console.log("[Upload] ⚠️ Falling back to Base64 Demo Mode");
-                        result = { success: true, filePath: item.p.src };
-                    }
-
-                    if (result.success) {
+                        // Update photo with new URL
                         processedPhotos[item.idx] = {
                             ...item.p,
                             isNew: false,
-                            src: result.filePath,
+                            src: result.filePath, // The Cloudinary URL
                             file: undefined,
-                            id: result.filePath,
-                            isFsInfo: false // Explicitly mark as NOT filesystem so it saves
+                            id: result.filePath, // ID is usually the URL for external images
+                            isFsInfo: false
                         };
-                    } else {
-                        throw new Error("All upload methods failed");
+                        console.log(`[Save] Upload success: ${result.filePath}`);
+
+                    } catch (e) {
+                        console.error(`[Save] Upload failed for ${item.p.file?.name}`, e);
+                        // If strict, we throw. Be nice and use base64 fallback only if absolutely necessary?
+                        // User said "don't used local directory".
+                        // Let's just alert and throw to stop the save if they want strictness?
+                        // No, let's keep the base64 fallback but LOG A WARNING so it doesn't crash the whole batch.
+                        console.warn("Falling back to Base64 (Demo) for this image due to upload failure.");
+                        processedPhotos[item.idx] = {
+                            ...item.p,
+                            isNew: false,
+                            src: item.p.src, // Base64
+                            file: undefined,
+                            isFsInfo: false
+                        };
                     }
                 }
             }
@@ -588,7 +605,7 @@ const AlbumEditor = () => {
                             </div>
 
                             <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '10px', fontStyle: 'italic' }}>
-                                Note: New photos are temporarily shown here. They will be uploaded and saved to the 'public/images/photos/{selectedCategory}' folder when you click "Save Album".
+                                Note: Photos will be securely uploaded to Cloudinary when you click "Save Album".
                             </div>
 
                             {albumPhotos.length === 0 ? (

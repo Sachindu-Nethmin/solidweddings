@@ -5,4 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   base: '/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://solidweddings.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 }))
