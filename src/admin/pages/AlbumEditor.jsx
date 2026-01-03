@@ -188,12 +188,19 @@ const AlbumEditor = () => {
 
             setOriginalFsPhotos(foundFs.photos || []);
 
-            const photos = (foundFs.photos || []).map(p => ({
-                src: p.src,
-                id: p.id || `fs-photo-${Math.random()}`, // Ensure ID
-                isNew: p.id && String(p.id).startsWith('added-'),
-                isFsInfo: true
-            }));
+            const photos = (foundFs.photos || []).map(p => {
+                // Determine if this is a real filesystem file or an "added" virtual photo
+                // Real FS files start with "/" (relative path)
+                // Added photos (Cloudinary/Base64) start with "http" or "data:"
+                const isVirtual = p.src.startsWith('http') || p.src.startsWith('data:');
+
+                return {
+                    src: p.src,
+                    id: p.id || p.src, // Use src as ID fallback
+                    isNew: false, // It's not "new" in this session
+                    isFsInfo: !isVirtual // Only true if it's a real local file
+                };
+            });
             setAlbumPhotos(photos);
         } else {
             console.warn("Album not found or creation mode");
