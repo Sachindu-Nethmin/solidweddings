@@ -255,9 +255,12 @@ const AlbumEditor = () => {
 
     // 2. Cloudinary Upload (Production/Vercel)
     const uploadCloudinary = async (file, category, album) => {
-        // Get Signature
-        const sigRes = await fetch('/api/sign-upload');
-        if (!sigRes.ok) throw new Error("Backend signer unreachable (Are you on Vercel?)");
+        const folder = `solidweddings/${category}/${albumName}`;
+
+        // Get Signature (Pass folder so it gets signed!)
+        const sigRes = await fetch(`/api/sign-upload?folder=${encodeURIComponent(folder)}`);
+        if (!sigRes.ok) throw new Error("Backend signer unreachable");
+
         const { signature, timestamp, cloudName, apiKey } = await sigRes.json();
 
         // Upload
@@ -266,16 +269,22 @@ const AlbumEditor = () => {
         formData.append('api_key', apiKey);
         formData.append('timestamp', timestamp);
         formData.append('signature', signature);
-        formData.append('folder', `solidweddings/${category}/${albumName}`);
+        formData.append('folder', folder); // Must match what was signed
 
         const cloudinaryRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
             method: 'POST',
             body: formData
         });
 
-        if (!cloudinaryRes.ok) throw new Error("Cloudinary upload failed");
-        const data = await cloudinaryRes.json();
+        if (!cloudinaryRes.ok) {
+            const errData = await cloudinaryRes.json();
+            const errMsg = errData.error?.message || 'Unknown Cloudinary Error';
+            console.error("Cloudinary Error Log:", errData);
+            alert(`Cloudinary Upload Failed: ${errMsg}`); // Alert user to the specific problem
+            throw new Error(errMsg);
+        }
 
+        const data = await cloudinaryRes.json();
         return { success: true, filePath: data.secure_url };
     };
 

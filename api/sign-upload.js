@@ -24,18 +24,25 @@ export default async function handler(req, res) {
 
         // Generate Signature
         const timestamp = Math.round((new Date()).getTime() / 1000);
+        const folder = req.query.folder;
 
-        // We can sign specific upload parameters here if we want to restrict uploads
-        // For standard upload, we sign with timestamp.
-        const signature = cloudinary.utils.api_sign_request({
+        // Params to sign (must match what is sent to Cloudinary)
+        const paramsToSign = {
             timestamp: timestamp
-        }, apiSecret);
+        };
+
+        if (folder) {
+            paramsToSign.folder = folder;
+        }
+
+        const signature = cloudinary.utils.api_sign_request(paramsToSign, apiSecret);
 
         res.status(200).json({
             signature,
             timestamp,
             cloudName,
-            apiKey
+            apiKey,
+            folder // Return it back to confirm
         });
 
     } catch (error) {
