@@ -2,7 +2,8 @@ name: Check Build Status
 
 on:
   push:
-    branches: ["**"]     # Run on all branches
+    branches-ignore: 
+      - master    # Run on all branches except master (deploy.yml handles master)
   pull_request:
     branches: ["master"] # Run on Pull Requests to master
 
