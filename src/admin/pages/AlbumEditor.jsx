@@ -343,36 +343,42 @@ const AlbumEditor = () => {
             // 1. Process Pending Uploads
             if (uploads.length > 0) {
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                console.log(`[Upload] Starting upload of ${uploads.length} files. isLocalhost: ${isLocalhost}`);
 
                 for (const item of uploads) {
                     let result = { success: false };
+                    console.log(`[Upload] Processing file: ${item.p.file?.name}`);
 
-                    // Priority 1: Cloudinary (If keys exist, it's best)
-                    // Priority 2: Localhost Filesystem (If on dev)
+                    // Priority 1: Localhost Filesystem (If on dev)
+                    // Priority 2: Cloudinary (Production)
                     // Priority 3: Base64 Fallback (Demo)
-
-                    // For this project, let's prefer Localhost on Dev to keep existing flow, 
-                    // and Cloudinary on Vercel.
 
                     if (isLocalhost) {
                         try {
+                            console.log("[Upload] Trying Local filesystem upload...");
                             result = await uploadLocal(item.p.file, selectedCategory, albumName);
+                            console.log("[Upload] Local upload result:", result);
                         } catch (e) {
-                            console.warn("Local upload failed, trying Cloudinary...", e);
+                            console.warn("[Upload] Local upload failed:", e.message);
                         }
                     }
 
                     if (!result.success) {
                         try {
+                            console.log("[Upload] Trying Cloudinary upload...");
                             result = await uploadCloudinary(item.p.file, selectedCategory, albumName);
+                            console.log("[Upload] Cloudinary upload result:", result);
+                            if (result.success) {
+                                console.log("[Upload] ✅ Cloudinary SUCCESS! URL:", result.filePath);
+                            }
                         } catch (e) {
-                            console.warn("Cloudinary upload failed (Check Keys), falling back to Demo Mode.", e);
+                            console.error("[Upload] Cloudinary upload failed:", e.message);
                         }
                     }
 
                     // Fallback to Demo Mode (Base64)
                     if (!result.success) {
-                        console.log("Using LocalStorage (Base64) for image persistence (Demo Mode)");
+                        console.log("[Upload] ⚠️ Falling back to Base64 Demo Mode");
                         result = { success: true, filePath: item.p.src };
                     }
 
