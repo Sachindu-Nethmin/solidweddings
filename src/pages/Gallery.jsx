@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaArrowLeft } from 'react-icons/fa';
 import '../styles/Gallery.css';
 import { fetchGalleryData } from '../services/galleryService';
 
 const Gallery = () => {
+  const location = useLocation();
   // --- STATE ---
   const [galleryData, setGalleryData] = useState({}); // Raw data map
   const [categories, setCategories] = useState([]);   // Array of {id, displayName, data} objects
@@ -30,6 +31,11 @@ const Gallery = () => {
 
         setGalleryData(raw);
         setCategories(display);
+
+        // Check for incoming category via state
+        if (location.state && location.state.categoryId) {
+          setSelectedCategory(location.state.categoryId);
+        }
 
         // 2. Fetch Hero Images (keep this local as it's just random display logic)
         // ... well, actually fetchGalleryData scans 'photos', not 'weddings' root where hero images might be.
@@ -56,7 +62,7 @@ const Gallery = () => {
       }
     };
     loadImages();
-  }, []);
+  }, [location.state]);
 
   // --- HERO LOGIC ---
   useEffect(() => {

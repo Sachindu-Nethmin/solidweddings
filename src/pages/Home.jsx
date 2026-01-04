@@ -172,7 +172,7 @@ const Home = () => {
           --accent-gold: #c0a062;
           --accent-gold-light: #d9c6a5;
           --shadow: 0 16px 50px rgba(45, 45, 45, 0.08);
-          --radius: 20px;
+          --radius: 30px; /* Increased radius based on mockup */
           --header-offset: 90px;
         }
 
@@ -411,7 +411,7 @@ const Home = () => {
           background: var(--card);
           border-radius: var(--radius);
           overflow: hidden;
-          box-shadow: var(--shadow);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
           transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
           border: 1px solid rgba(0,0,0,0.05); /* Subtle border like mockup */
           display: flex;
@@ -580,11 +580,10 @@ const Home = () => {
                       src={service.image}
                       alt={service.title}
                       className="service-image"
-                      onClick={() => navigate('/gallery')}
-                      style={{ cursor: 'pointer' }}
+                      className="service-image"
                     />
                   </div>
-                  <div className="service-content">
+                  <div className="service-content" onClick={() => navigate('/gallery', { state: { categoryId: service.id } })} style={{ cursor: 'pointer' }}>
                     <h3 className="service-title">{service.title}</h3>
                     <p className="service-description">{service.description}</p>
                     <Link
