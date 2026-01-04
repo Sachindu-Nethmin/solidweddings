@@ -17,69 +17,52 @@ const Home = () => {
     `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`
   ];
 
-  // Component mount animation & Data Fetch
+  // Component mount animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
 
-    const loadServices = async () => {
-      try {
-        const { display } = await fetchGalleryData();
-
-        // Description Map from User Mockup
-        const descriptionMap = {
-          "Wedding": "Complete wedding day coverage capturing every precious moment.",
-          "Homecoming": "Beautiful coverage of your homecoming celebration.",
-          "Destination": "Capturing your love story in breathtaking locations worldwide.",
-          "Private Session": "Intimate and personalized photography sessions for couples.",
-          "Bridal": "Elegant portraits focusing on the beauty and style of the bride.",
-          "Engagement": "Celebrate your commitment with a romantic engagement session."
-        };
-
-        // Simple dedupe logic
-        const candidates = new Map();
-        display.forEach(cat => {
-          const nameKey = cat.displayName.toLowerCase();
-          const hasImages = cat.data && cat.data.allImages.length > 0;
-          if (!candidates.has(nameKey)) {
-            candidates.set(nameKey, cat);
-          } else {
-            const existing = candidates.get(nameKey);
-            const existingHasImages = existing.data && existing.data.allImages.length > 0;
-            if (!existingHasImages && hasImages) {
-              candidates.set(nameKey, cat);
-            }
-          }
-        });
-
-        const finalServices = Array.from(candidates.values()).map(cat => {
-          const title = cat.displayName.charAt(0).toUpperCase() + cat.displayName.slice(1);
-          return {
-            id: cat.id,
-            title: title,
-            image: cat.data.allImages[0]?.src || '',
-            // Use mapped description or fallback
-            description: descriptionMap[title] || `Explore our beautiful ${title} collection.`,
-            count: cat.data.allImages.length
-          };
-        }).filter(s => s.image);
-
-        // Sort to match the user's order if possible (Wedding, Homecoming, Destination...)
-        const order = ["Wedding", "Homecoming", "Destination", "Private Session", "Bridal", "Engagement"];
-        finalServices.sort((a, b) => {
-          const idxA = order.indexOf(a.title);
-          const idxB = order.indexOf(b.title);
-          if (idxA !== -1 && idxB !== -1) return idxA - idxB;
-          if (idxA !== -1) return -1;
-          if (idxB !== -1) return 1;
-          return 0;
-        });
-
-        setServices(finalServices);
-      } catch (err) {
-        console.error("Failed to load services", err);
+    // Static Services Configuration
+    // Using images from public/images/weddings as requested
+    const staticServices = [
+      {
+        id: "Wedding",
+        title: "Wedding",
+        image: `${import.meta.env.BASE_URL}images/weddings/467502583_943824090943065_7221224242965653699_n.jpg`,
+        description: "Complete wedding day coverage capturing every precious moment."
+      },
+      {
+        id: "Homecoming",
+        title: "Homecoming",
+        image: `${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`,
+        description: "Beautiful coverage of your homecoming celebration."
+      },
+      {
+        id: "Destination",
+        title: "Destination",
+        image: `${import.meta.env.BASE_URL}images/weddings/467643997_943824010943073_1011805423029436531_n.jpg`,
+        description: "Capturing your love story in breathtaking locations worldwide."
+      },
+      {
+        id: "Private Session",
+        title: "Private Session",
+        image: `${import.meta.env.BASE_URL}images/weddings/467717505_943824147609726_5116480860040812036_n.jpg`,
+        description: "Intimate and personalized photography sessions for couples."
+      },
+      {
+        id: "Bridal",
+        title: "Bridal",
+        image: `${import.meta.env.BASE_URL}images/weddings/467970224_943824540943020_5717475141864415184_n.jpg`,
+        description: "Elegant portraits focusing on the beauty and style of the bride."
+      },
+      {
+        id: "Engagement",
+        title: "Engagement",
+        image: `${import.meta.env.BASE_URL}images/weddings/467581955_943824264276381_72587053085497663_n.jpg`,
+        description: "Celebrate your commitment with a romantic engagement session."
       }
-    };
-    loadServices();
+    ];
+
+    setServices(staticServices);
 
     return () => clearTimeout(timer);
   }, []);
@@ -134,6 +117,7 @@ const Home = () => {
   }, []);
 
   // Intersection Observer for scroll animations
+  // Intersection Observer for scroll animations
   useEffect(() => {
     const observerOptions = {
       rootMargin: '120px',
@@ -143,21 +127,19 @@ const Home = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          const delay = index * 150;
+          // Use a small delay for smoother entrance
           setTimeout(() => {
             entry.target.classList.add('animate-in');
-          }, delay);
+          }, index * 100);
         }
       });
     }, observerOptions);
 
-    // Observe elements with scroll animation
-    document.querySelectorAll('.scroll-animate').forEach(el => {
-      observer.observe(el);
-    });
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [services]);
 
   return (
     <div className={`home-page ${isLoaded ? 'loaded' : ''}`}>
@@ -579,7 +561,6 @@ const Home = () => {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="service-image"
                       className="service-image"
                     />
                   </div>
