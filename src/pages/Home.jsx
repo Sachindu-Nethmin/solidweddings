@@ -24,18 +24,19 @@ const Home = () => {
     const loadServices = async () => {
       try {
         const { display } = await fetchGalleryData();
-        // Filter out categories with no images if desired, or keep them to show services
-        // Ideally we show categories that have images.
-        // Also apply the same deduplication/capitalization logic as Gallery if needed?
-        // fetchGalleryData returns 'display' which is the list of categories.
-        // We should deduplicate if necessary, but for now let's just take them.
-        // Actually, let's just map them.
 
-        // Simple dedupe logic just in case, similar to Gallery.jsx
-        const uniqueCategories = [];
-        const seenNames = new Set();
+        // Description Map from User Mockup
+        const descriptionMap = {
+          "Wedding": "Complete wedding day coverage capturing every precious moment.",
+          "Homecoming": "Beautiful coverage of your homecoming celebration.",
+          "Destination": "Capturing your love story in breathtaking locations worldwide.",
+          "Private Session": "Intimate and personalized photography sessions for couples.",
+          "Bridal": "Elegant portraits focusing on the beauty and style of the bride.",
+          "Engagement": "Celebrate your commitment with a romantic engagement session."
+        };
+
+        // Simple dedupe logic
         const candidates = new Map();
-
         display.forEach(cat => {
           const nameKey = cat.displayName.toLowerCase();
           const hasImages = cat.data && cat.data.allImages.length > 0;
@@ -50,17 +51,30 @@ const Home = () => {
           }
         });
 
-        const finalServices = Array.from(candidates.values()).map(cat => ({
-          id: cat.id,
-          title: cat.displayName.charAt(0).toUpperCase() + cat.displayName.slice(1),
-          image: cat.data.allImages[0]?.src || '', // Fallback or empty
-          // Create a generic description or map specific descriptions if we had a config
-          description: `Explore our beautiful ${cat.displayName} collection.`,
-          count: cat.data.allImages.length
-        })).filter(s => s.image); // Only show services with images
+        const finalServices = Array.from(candidates.values()).map(cat => {
+          const title = cat.displayName.charAt(0).toUpperCase() + cat.displayName.slice(1);
+          return {
+            id: cat.id,
+            title: title,
+            image: cat.data.allImages[0]?.src || '',
+            // Use mapped description or fallback
+            description: descriptionMap[title] || `Explore our beautiful ${title} collection.`,
+            count: cat.data.allImages.length
+          };
+        }).filter(s => s.image);
+
+        // Sort to match the user's order if possible (Wedding, Homecoming, Destination...)
+        const order = ["Wedding", "Homecoming", "Destination", "Private Session", "Bridal", "Engagement"];
+        finalServices.sort((a, b) => {
+          const idxA = order.indexOf(a.title);
+          const idxB = order.indexOf(b.title);
+          if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+          if (idxA !== -1) return -1;
+          if (idxB !== -1) return 1;
+          return 0;
+        });
 
         setServices(finalServices);
-
       } catch (err) {
         console.error("Failed to load services", err);
       }
@@ -399,6 +413,9 @@ const Home = () => {
           overflow: hidden;
           box-shadow: var(--shadow);
           transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+          border: 1px solid rgba(0,0,0,0.05); /* Subtle border like mockup */
+          display: flex;
+          flex-direction: column;
         }
         .service-card:hover {
           transform: translateY(-5px);
@@ -407,7 +424,7 @@ const Home = () => {
 
         .service-image {
           width: 100%;
-          height: 200px;
+          height: 300px; /* Taller image as per mockup */
           object-fit: cover;
           transition: transform 0.4s ease;
         }
@@ -416,28 +433,31 @@ const Home = () => {
         }
 
         .service-content {
-          padding: 30px;
+          padding: 40px 32px; /* Increased padding */
+          text-align: left;   /* Left alignment as per mockup */
+          flex: 1;
         }
 
         .service-title {
           font-family: 'Playfair Display', serif;
-          font-size: 1.3rem;
-          font-weight: 600;
-          margin-bottom: 12px;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 16px;
           color: var(--text-primary);
         }
 
         .service-description {
           color: var(--text-muted);
           line-height: 1.6;
-          margin-bottom: 20px;
+          margin-bottom: 0; 
+          font-size: 1.05rem;
         }
 
         .service-price {
-          font-weight: 600;
-          color: var(--accent-gold);
-          font-size: 1.1rem;
+            /* Hiding "View Collection" link text style inside dynamic loop if wanted, or styling it here */
+            display: none !important; /* Hide the link text to match mockup clean look, or keep it subtle? Mockup doesn't show button. */
         }
+
 
         /* CTA Section */
         .cta-section {
