@@ -64,10 +64,9 @@ export const saveAlbumSettings = (settings) => {
 export const fetchGalleryData = async () => {
     const baseUrl = import.meta.env.BASE_URL;
 
-    // Note: glob patterns must be literals, so we duplicate the pattern here
-    // Path relative to THIS file (src/services/galleryService.js)
-    // src/services -> .. -> src -> .. -> root -> public
-    const modules = import.meta.glob('../../public/images/photos/**/*.{jpg,jpeg,png,webp,avif}');
+    // Note: Use root-relative path for glob to be safer across environments
+    // Extensions include uppercase for Linux case-sensitivity
+    const modules = import.meta.glob('/public/images/photos/**/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP,avif,AVIF}');
 
     const data = {};
     const detectedCategories = new Set();
@@ -75,7 +74,7 @@ export const fetchGalleryData = async () => {
     // 1. Load File System Data
     for (const path in modules) {
         const parts = path.split('/');
-        // path example: ../../public/images/photos/Wedding/Album1/img.jpg
+        // path example: /public/images/photos/Wedding/Album1/img.jpg
         const photosIndex = parts.indexOf('photos');
 
         if (photosIndex !== -1 && parts.length > photosIndex + 2) {
@@ -90,8 +89,9 @@ export const fetchGalleryData = async () => {
 
             const filename = parts[parts.length - 1];
 
-            // Construct src: removing ../../public
-            const relativePath = path.replace('../../public', '');
+            // Construct src: removing /public prefix to match served path
+            // path is like /public/images/... -> we want /images/...
+            const relativePath = path.replace('/public', '');
             const src = `${baseUrl.replace(/\/$/, '')}${relativePath}`;
 
             if (!data[categoryId]) {
