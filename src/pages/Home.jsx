@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchGalleryData } from '../services/galleryService';
 
 const Home = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [services, setServices] = useState([]);
+  const navigate = useNavigate();
   const heroRef = useRef(null);
 
   const heroImages = [
@@ -14,9 +17,56 @@ const Home = () => {
     `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`
   ];
 
-  // Component mount animation
+  // Component mount animation & Data Fetch
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
+
+    const loadServices = async () => {
+      try {
+        const { display } = await fetchGalleryData();
+        // Filter out categories with no images if desired, or keep them to show services
+        // Ideally we show categories that have images.
+        // Also apply the same deduplication/capitalization logic as Gallery if needed?
+        // fetchGalleryData returns 'display' which is the list of categories.
+        // We should deduplicate if necessary, but for now let's just take them.
+        // Actually, let's just map them.
+
+        // Simple dedupe logic just in case, similar to Gallery.jsx
+        const uniqueCategories = [];
+        const seenNames = new Set();
+        const candidates = new Map();
+
+        display.forEach(cat => {
+          const nameKey = cat.displayName.toLowerCase();
+          const hasImages = cat.data && cat.data.allImages.length > 0;
+          if (!candidates.has(nameKey)) {
+            candidates.set(nameKey, cat);
+          } else {
+            const existing = candidates.get(nameKey);
+            const existingHasImages = existing.data && existing.data.allImages.length > 0;
+            if (!existingHasImages && hasImages) {
+              candidates.set(nameKey, cat);
+            }
+          }
+        });
+
+        const finalServices = Array.from(candidates.values()).map(cat => ({
+          id: cat.id,
+          title: cat.displayName.charAt(0).toUpperCase() + cat.displayName.slice(1),
+          image: cat.data.allImages[0]?.src || '', // Fallback or empty
+          // Create a generic description or map specific descriptions if we had a config
+          description: `Explore our beautiful ${cat.displayName} collection.`,
+          count: cat.data.allImages.length
+        })).filter(s => s.image); // Only show services with images
+
+        setServices(finalServices);
+
+      } catch (err) {
+        console.error("Failed to load services", err);
+      }
+    };
+    loadServices();
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -503,27 +553,34 @@ const Home = () => {
           <div className="scroll-animate">
             <h2 className="section-title">Our Services</h2>
             <div className="services-grid">
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`} alt="Wedding Photography" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Wedding Photography</h3>
-                  <p className="service-description">Complete wedding day coverage from preparation to celebration</p>
+              {services.map((service, index) => (
+                <div key={service.id} className="service-card scroll-animate" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div style={{ overflow: 'hidden' }}>
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="service-image"
+                      onClick={() => navigate('/gallery')}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </div>
+                  <div className="service-content">
+                    <h3 className="service-title">{service.title}</h3>
+                    <p className="service-description">{service.description}</p>
+                    <Link
+                      to="/gallery"
+                      state={{ categoryId: service.id }} // Pass state if we want Gallery to auto-select (optional enhancement)
+                      className="service-price"
+                      style={{ textDecoration: 'none', fontSize: '0.9rem', display: 'inline-block', marginTop: '10px' }}
+                    >
+                      View Collection →
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`} alt="Pre-Wedding Shoots" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Pre-Wedding Shoots</h3>
-                  <p className="service-description">Romantic sessions to capture your love story before the big day</p>
-                </div>
-              </div>
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467614283_943824474276360_1770150232184232428_n.jpg`} alt="Portrait Sessions" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Portrait Sessions</h3>
-                  <p className="service-description">Professional portraits for couples, families, and individuals</p>
-                </div>
-              </div>
+              ))}
+              {services.length === 0 && (
+                <div style={{ gridColumn: '1/-1', textAlign: 'center' }}>Loading services...</div>
+              )}
             </div>
           </div>
         </div>

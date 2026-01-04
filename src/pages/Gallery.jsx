@@ -324,66 +324,118 @@ const Gallery = () => {
             All Albums
           </button>
 
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-              onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }}
-            >
-              {cat.displayName}
-            </button>
-          ))}
+          {(() => {
+            // Deduplicate categories by displayName (case-insensitive)
+            // Priority: Has images > Does not have images
+            const uniqueCategories = [];
+            const seenNames = new Set();
+
+            // Sort to prioritize those with data?
+            // Actually, just filter.
+            // We can pre-process to pick the best candidate for each name.
+            const candidates = new Map();
+
+            categories.forEach(cat => {
+              const nameKey = cat.displayName.toLowerCase();
+              const hasImages = galleryData[cat.id] && galleryData[cat.id].allImages.length > 0;
+
+              if (!candidates.has(nameKey)) {
+                candidates.set(nameKey, cat);
+              } else {
+                const existing = candidates.get(nameKey);
+                const existingHasImages = galleryData[existing.id] && galleryData[existing.id].allImages.length > 0;
+
+                // If existing is empty but new one has images, replace
+                if (!existingHasImages && hasImages) {
+                  candidates.set(nameKey, cat);
+                }
+              }
+            });
+
+            // Convert map values back to array and sort by original config order/display order
+            // But map iterator order is insertion order, so we roughly preserve order.
+            return Array.from(candidates.values()).map(cat => {
+              const displayName = cat.displayName;
+              const capitalized = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+
+              return (
+                <button
+                  key={cat.id}
+                  className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+                  onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }}
+                >
+                  {capitalized}
+                </button>
+              )
+            });
+          })()}
         </div>
 
-        {/* VIEW A: ROOT (ALL CATEGORIES) */}
+        {/* VIEW A: ROOT (ALL ALBUMS) */}
         {!selectedCategory && (
           <div className="albums-grid" style={{ animation: 'fadeIn 0.8s ease' }}>
             {categories.length === 0 ? (
               <div style={{ width: '100%', textAlign: 'center' }}>No images found.</div>
             ) : (
-              categories.map(cat => {
-                const catData = galleryData[cat.id]; // Access by ID
-                if (!catData) return null; // Safety check
+              // Flatten all albums from all categories
+              categories.flatMap(cat => {
+                const catData = galleryData[cat.id];
+                if (!catData || !catData.albums) return [];
 
-                const cover = catData.allImages[0]?.src;
+                return Object.keys(catData.albums).map(albumName => {
+                  const albumImages = catData.albums[albumName];
+                  if (!albumImages || albumImages.length === 0) return null;
 
-                // If it's a virtual category with no images, maybe show placeholder?
-                if (catData.type === 'virtual' && !cover) {
-                  return (
-                    <div key={cat.id} className="album-card" onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }}>
-                      <div className="album-cover" style={{ background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
-                        Category Empty
+                  return {
+                    key: `${cat.id}-${albumName}`,
+                    catId: cat.id,
+                    albumName: albumName, // This is the folder name, e.g. "NADEEJA & MINURA Engagement"
+                    cover: albumImages[0]?.src,
+                    count: albumImages.length
+                  };
+                }).filter(Boolean); // Remote nulls
+              }).length === 0 ? (
+                <div style={{ width: '100%', textAlign: 'center' }}>No albums found.</div>
+              ) : (
+                categories.flatMap(cat => {
+                  const catData = galleryData[cat.id];
+                  if (!catData || !catData.albums) return [];
+                  return Object.keys(catData.albums).map(albumName => {
+                    const albumImages = catData.albums[albumName];
+                    if (!albumImages || albumImages.length === 0) return null;
+                    return {
+                      uniqueId: `${cat.id}-${albumName}`,
+                      catId: cat.id,
+                      albumName: albumName,
+                      cover: albumImages[0]?.src,
+                      count: albumImages.length
+                    };
+                  });
+                })
+                  .filter(Boolean)
+                  .map(albumItem => (
+                    <div
+                      key={albumItem.uniqueId}
+                      className="album-card"
+                      onClick={() => {
+                        // Direct to Album View (View C)
+                        setSelectedCategory(albumItem.catId);
+                        setSelectedAlbum(albumItem.albumName);
+                      }}
+                    >
+                      <div className="album-cover">
+                        <img src={albumItem.cover} alt={albumItem.albumName} loading="lazy" />
                       </div>
                       <div className="album-info">
-                        <h3>{cat.displayName}</h3>
-                        <span>(New)</span>
+                        <h3>{albumItem.albumName}</h3>
+                        <span>{albumItem.count} Photos</span>
                       </div>
                     </div>
-                  );
-                }
-
-                if (!cover) return null; // Don't show empty real categories if we can't
-
-                return (
-                  <div
-                    key={cat.id}
-                    className="album-card"
-                    onClick={() => { setSelectedCategory(cat.id); setSelectedAlbum(null); }} // Use ID
-                  >
-                    <div className="album-cover">
-                      <img src={cover} alt={cat.displayName} />
-                    </div>
-                    <div className="album-info">
-                      <h3>{cat.displayName}</h3>
-                      <span>{catData.allImages.length} Photos</span>
-                    </div>
-                  </div>
-                );
-              })
+                  ))
+              )
             )}
-                  </div>
-                )
-              }
+          </div>
+        )}
 
         {/* VIEW B: CATEGORY (LIST OF ALBUMS) */}
         {selectedCategory && !selectedAlbum && galleryData[selectedCategory] && (
@@ -464,28 +516,28 @@ const Gallery = () => {
       </div>
 
       {/* 3. LIGHTBOX */}
-        {lightboxImage && (
-          <div className="lightbox" onClick={closeLightbox}>
-            <button className="lightbox-close" onClick={closeLightbox}><FaTimes /></button>
-            <button className="nav-btn prev" onClick={prevImage}><FaChevronLeft /></button>
-            <img src={lightboxImage.src} className="lightbox-image" onClick={e => e.stopPropagation()} alt="" />
-            <button className="nav-btn next" onClick={nextImage}><FaChevronRight /></button>
-          </div>
-        )}
+      {lightboxImage && (
+        <div className="lightbox" onClick={closeLightbox}>
+          <button className="lightbox-close" onClick={closeLightbox}><FaTimes /></button>
+          <button className="nav-btn prev" onClick={prevImage}><FaChevronLeft /></button>
+          <img src={lightboxImage.src} className="lightbox-image" onClick={e => e.stopPropagation()} alt="" />
+          <button className="nav-btn next" onClick={nextImage}><FaChevronRight /></button>
+        </div>
+      )}
 
-        {/* 4. CTA SECTION (Updated to Home Style) */}
-        <section className="cta-section">
-          <div className="cta-content">
-            <h2 className="cta-title">Ready to Capture Your Story?</h2>
-            <p className="cta-text">Let's create timeless memories that you'll cherish forever.</p>
-            <div className="hero-cta">
-              <Link to="/contact" className="btn btn-outline">Book Your Session</Link>
-            </div>
+      {/* 4. CTA SECTION (Updated to Home Style) */}
+      <section className="cta-section">
+        <div className="cta-content">
+          <h2 className="cta-title">Ready to Capture Your Story?</h2>
+          <p className="cta-text">Let's create timeless memories that you'll cherish forever.</p>
+          <div className="hero-cta">
+            <Link to="/contact" className="btn btn-outline">Book Your Session</Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-      );
+    </div>
+  );
 };
 
-      export default Gallery;
+export default Gallery;

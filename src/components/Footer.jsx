@@ -13,40 +13,40 @@ const Footer = () => {
           </p>
           <p>
             <i className="fas fa-envelope"></i>
-            <a href="mailto:snapssolid@gmail.com">snapssolid@gmail.com</a>
+            <a href="mailto:solidwedding@gmail.com">solidwedding@gmail.com</a>
           </p>
         </div>
-        
+
         {/* Social Media Icons */}
         <div className="social-icons-footer">
           <h3>Follow Us</h3>
           <div className="social-links-row">
-            <a 
-              href="https://web.facebook.com/solidweddings" 
-              target="_blank" 
+            <a
+              href="https://web.facebook.com/solidweddings"
+              target="_blank"
               rel="noopener noreferrer"
               className="social-link"
             >
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a 
-              href="https://www.instagram.com/solid_weddings/" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/solid_weddings/"
+              target="_blank"
               rel="noopener noreferrer"
               className="social-link"
             >
               <i className="fab fa-instagram"></i>
             </a>
-            <a 
-              href="https://wa.me/+94702288999" 
-              target="_blank" 
+            <a
+              href="https://wa.me/+94702288999"
+              target="_blank"
               rel="noopener noreferrer"
               className="social-link"
             >
               <i className="fab fa-whatsapp"></i>
             </a>
-            <a 
-              href="tel:+94702288999" 
+            <a
+              href="tel:+94702288999"
               className="social-link"
             >
               <i className="fas fa-phone"></i>
