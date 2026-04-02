@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { public_id } = req.body;
+        const { public_id } = req.body || {};
 
         if (!public_id) {
             return res.status(400).json({ error: 'Missing public_id' });

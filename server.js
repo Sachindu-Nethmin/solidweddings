@@ -69,20 +69,20 @@ app.post('/api/upload', upload.single('photo'), (req, res) => {
     // Move file
     const targetPath = path.join(targetDir, req.file.filename);
 
-    fs.rename(req.file.path, targetPath, (err) => {
-        if (err) {
-            console.error(err);
+    // Move file - copy and then unlink is more robust than rename for cross-partition moves
+    fs.copyFile(req.file.path, targetPath, (copyErr) => {
+        if (copyErr) {
+            console.error(copyErr);
             return res.status(500).send('Error saving file.');
         }
-
-        // Return the public URL
-        // URL format: /images/photos/{category}/{album}/{filename}
-        const publicUrl = `/images/photos/${category}/${albumName}/${req.file.filename}`;
-
-        // Return consistent JSON
-        res.json({
-            success: true,
-            filePath: publicUrl
+        fs.unlink(req.file.path, (unlinkErr) => {
+            if (unlinkErr) console.warn("Failed to clean up temp file:", unlinkErr);
+            
+            const publicUrl = `/images/photos/${category}/${albumName}/${req.file.filename}`;
+            res.json({
+                success: true,
+                filePath: publicUrl
+            });
         });
     });
 });

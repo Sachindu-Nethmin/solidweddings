@@ -376,12 +376,12 @@ const AlbumEditor = () => {
                 setPhotosToDelete([]); // Clear queue
             }
 
-            // 1. Process Pending Uploads
             // 1. Process Pending Uploads (Cloudinary Only)
             if (uploads.length > 0) {
                 console.log(`[Save] Processing ${uploads.length} uploads via Cloudinary...`);
 
-                for (const item of uploads) {
+                // Parallelize uploads to speed up the process for large albums
+                await Promise.all(uploads.map(async (item) => {
                     try {
                         const result = await uploadCloudinary(item.p.file, selectedCategory, albumName);
 
@@ -398,10 +398,7 @@ const AlbumEditor = () => {
 
                     } catch (e) {
                         console.error(`[Save] Upload failed for ${item.p.file?.name}`, e);
-                        // If strict, we throw. Be nice and use base64 fallback only if absolutely necessary?
-                        // User said "don't used local directory".
-                        // Let's just alert and throw to stop the save if they want strictness?
-                        // No, let's keep the base64 fallback but LOG A WARNING so it doesn't crash the whole batch.
+                        // Fallback to Base64 (Demo) for this image due to upload failure.
                         console.warn("Falling back to Base64 (Demo) for this image due to upload failure.");
                         processedPhotos[item.idx] = {
                             ...item.p,
@@ -411,7 +408,7 @@ const AlbumEditor = () => {
                             isFsInfo: false
                         };
                     }
-                }
+                }));
             }
 
             // 2. Save Config
