@@ -5,8 +5,8 @@ const AdminAuthContext = createContext(null);
 
 export const useAdminAuth = () => useContext(AdminAuthContext);
 
-const ADMIN_USER_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
-const ADMIN_PASS_HASH = '26d0c00d9bd59054613b83d3bb736437b881c69cad4e4f52636ecd5166f424f3';
+const ADMIN_USER_HASH = import.meta.env.VITE_ADMIN_USER_HASH || '';
+const ADMIN_PASS_HASH = import.meta.env.VITE_ADMIN_PASS_HASH || '';
 
 const computeHash = async (str) => {
     const msgBuffer = new TextEncoder().encode(str);
