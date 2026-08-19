@@ -15,6 +15,7 @@ env
 .env
 .env.local
 .env.*
+!.env.example
 
 # Test files with secrets
 test_drive.mjs
