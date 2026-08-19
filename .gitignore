@@ -32,3 +32,4 @@ test_drive.mjs
 *.njsproj
 *.sln
 *.sw?
+.vercel
