@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaLock, FaArrowRight, FaExclamationCircle } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaArrowRight, FaExclamationCircle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAdminAuth } from '../contexts/AdminAuthContext';
-import '../styles/AdminLogin.css';
+import { useClientAuth } from '../../contexts/ClientAuthContext';
+import '../../styles/ClientPortal.css';
 
-const Login = () => {
-    const [username, setUsername] = useState('');
+const ClientLogin = () => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const { signIn, user } = useClientAuth();
     const navigate = useNavigate();
-    const { signIn, isAdmin } = useAdminAuth();
 
     useEffect(() => {
-        if (isAdmin) {
-            navigate('/admin/dashboard');
+        if (user) {
+            navigate('/client/dashboard');
         }
-    }, [isAdmin, navigate]);
+    }, [user, navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,19 +24,19 @@ const Login = () => {
         setError('');
 
         try {
-            await signIn(username, password);
-            navigate('/admin/dashboard');
+            await signIn(email, password);
+            navigate('/client/dashboard');
         } catch (err) {
-            setError(err.message || 'Invalid username or password');
+            setError(err.message || 'Invalid email or password');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="admin-login-container">
-            <div className="admin-login-card fade-in">
-                <div className="admin-login-header">
+        <div className="client-login-container">
+            <div className="client-login-card fade-in">
+                <div className="client-login-header">
                     <div style={{
                         background: '#333',
                         padding: '15px',
@@ -50,7 +50,6 @@ const Login = () => {
                         <img
                             src="/images/logos/logo.png"
                             alt="Solid Weddings Logo"
-                            className="admin-logo"
                             style={{
                                 display: 'block',
                                 height: '50px',
@@ -58,19 +57,18 @@ const Login = () => {
                                 objectFit: 'contain'
                             }}
                             onError={(e) => {
-                                console.error("Logo load failed", e);
                                 e.target.style.display = 'none';
                                 e.target.parentElement.innerHTML = '<span style="color:white; font-family:serif; font-size: 1.2rem; white-space:nowrap;">SOLID WEDDINGS</span>';
                             }}
                         />
                     </div>
-                    <h2>Welcome Back</h2>
-                    <p>Sign in to your admin dashboard</p>
+                    <h2>Client Portal</h2>
+                    <p>Sign in to view your galleries</p>
                 </div>
 
                 <form onSubmit={handleLogin}>
                     {error && (
-                        <div className="error-message" style={{
+                        <div style={{
                             background: '#ffeceb',
                             color: '#ff6b6b',
                             padding: '12px',
@@ -87,17 +85,17 @@ const Login = () => {
                     )}
 
                     <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="email">Email</label>
                         <div className="input-wrapper">
                             <input
-                                type="text"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter your username"
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
                                 required
                             />
-                            <FaUser className="input-icon" />
+                            <FaEnvelope className="input-icon" />
                         </div>
                     </div>
 
@@ -130,4 +128,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default ClientLogin;

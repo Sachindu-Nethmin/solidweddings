@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
-    FaHome, FaImages, FaUtensils, FaEnvelope, FaSignOutAlt, FaBars, FaBell, FaUserCircle, FaFolder
+    FaHome, FaImages, FaUtensils, FaEnvelope, FaSignOutAlt, FaBars, FaBell, FaUserCircle, FaFolder, FaUsers
 } from 'react-icons/fa';
+import { useAdminAuth } from '../contexts/AdminAuthContext';
 import '../styles/AdminDashboard.css';
 
 const AdminLayout = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { signOut } = useAdminAuth();
 
     const handleLogout = () => {
         if (window.confirm('Are you sure you want to logout?')) {
-            localStorage.removeItem('isAdminAuthenticated');
+            signOut();
             navigate('/admin/login');
         }
     };
@@ -22,6 +24,7 @@ const AdminLayout = () => {
             case '/admin/dashboard': return 'Dashboard Overview';
             case '/admin/categories': return 'Category Manager';
             case '/admin/photos': return 'Photo Library';
+            case '/admin/clients': return 'Client Manager';
             default: return 'Admin Panel';
         }
     };
@@ -46,6 +49,9 @@ const AdminLayout = () => {
                     </NavLink>
                     <NavLink to="/admin/albums" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                         <FaImages /> Albums
+                    </NavLink>
+                    <NavLink to="/admin/clients" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+                        <FaUsers /> Clients
                     </NavLink>
                     {/* Placeholder links */}
                     <div className="sidebar-link" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
