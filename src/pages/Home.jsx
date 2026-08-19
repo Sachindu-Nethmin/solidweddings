@@ -14,6 +14,39 @@ const Home = () => {
     `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`
   ];
 
+  const services = [
+    {
+      title: "Wedding",
+      description: "Complete wedding day coverage capturing every precious moment.",
+      image: `${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`
+    },
+    {
+      title: "Homecoming",
+      description: "Beautiful coverage of your homecoming celebration.",
+      image: `${import.meta.env.BASE_URL}images/weddings/467744778_943824437609697_1708973942382290310_n.jpg`
+    },
+    {
+      title: "Destination",
+      description: "Capturing your love story in breathtaking locations worldwide.",
+      image: `${import.meta.env.BASE_URL}images/weddings/453353797_868177951841013_4737084022978926838_n.jpg`
+    },
+    {
+      title: "Private Session",
+      description: "Intimate and personalized photography sessions for couples.",
+      image: `${import.meta.env.BASE_URL}images/weddings/467614283_943824474276360_1770150232184232428_n.jpg`
+    },
+    {
+      title: "Bridal",
+      description: "Elegant portraits focusing on the beauty and style of the bride.",
+      image: `${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`
+    },
+    {
+      title: "Engagement",
+      description: "Celebrate your commitment with a romantic engagement session.",
+      image: `${import.meta.env.BASE_URL}images/weddings/467502583_943824090943065_7221224242965653699_n.jpg`
+    }
+  ];
+
   // Component mount animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -503,27 +536,15 @@ const Home = () => {
           <div className="scroll-animate">
             <h2 className="section-title">Our Services</h2>
             <div className="services-grid">
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467459120_943824510943023_6632681943136575200_n.jpg`} alt="Wedding Photography" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Wedding Photography</h3>
-                  <p className="service-description">Complete wedding day coverage from preparation to celebration</p>
+              {services.map((service, index) => (
+                <div key={index} className="service-card scroll-animate" style={{ transitionDelay: `${index * 100}ms` }}>
+                  <img src={service.image} alt={service.title} className="service-image" />
+                  <div className="service-content">
+                    <h3 className="service-title">{service.title}</h3>
+                    <p className="service-description">{service.description}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467525385_943824337609707_4503835412837400410_n.jpg`} alt="Pre-Wedding Shoots" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Pre-Wedding Shoots</h3>
-                  <p className="service-description">Romantic sessions to capture your love story before the big day</p>
-                </div>
-              </div>
-              <div className="service-card scroll-animate">
-                <img src={`${import.meta.env.BASE_URL}images/weddings/467614283_943824474276360_1770150232184232428_n.jpg`} alt="Portrait Sessions" className="service-image" />
-                <div className="service-content">
-                  <h3 className="service-title">Portrait Sessions</h3>
-                  <p className="service-description">Professional portraits for couples, families, and individuals</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

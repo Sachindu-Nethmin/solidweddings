@@ -14,7 +14,7 @@ The contact form now automatically sends emails to your business email address w
 1. In your EmailJS dashboard, go to **Email Services**
 2. Click **Add New Service**
 3. Choose **Gmail** (recommended) or your preferred email provider
-4. Connect your business email: `snapssolid@gmail.com`
+4. Connect your business email: `solidwedding@gmail.com`
 5. Copy the **Service ID** (e.g., `service_xyz123`)
 
 ### 3. Create Email Template

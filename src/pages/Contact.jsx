@@ -142,7 +142,7 @@ const Contact = () => {
         venue: formData.venue,
         package: formData.package,
         message: formData.message,
-        to_email: 'snapssolid@gmail.com', // Your business email
+        to_email: 'solidwedding@gmail.com', // Your business email
         reply_to: formData.email
       };
 
@@ -510,8 +510,8 @@ const Contact = () => {
                   <div className="contact-details">
                     <h3>Email</h3>
                     <p>
-                      <a href="mailto:snapssolid@gmail.com">
-                        snapssolid@gmail.com
+                      <a href="mailto:solidwedding@gmail.com">
+                        solidwedding@gmail.com
                       </a>
                     </p>
                   </div>
