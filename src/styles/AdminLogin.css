@@ -1,0 +1,126 @@
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    background-image: radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 142, 142, 0.05) 0%, transparent 50%);
+    position: relative;
+    z-index: 2000;
+    padding-top: 80px;
+}
+
+.admin-login-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.admin-login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+}
+
+.admin-login-header {
+    margin-bottom: 2.5rem;
+}
+
+.admin-login-header h2 {
+    font-family: var(--hero-title-font);
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.admin-login-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 14px 14px 60px !important;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafeff;
+}
+
+.input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1);
+}
+
+.form-group input:focus+.input-icon {
+    color: #ff6b6b;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-link {
+    margin-top: 2rem;
+    display: inline-block;
+    color: #888;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #ff6b6b;
+}
