@@ -139,3 +139,27 @@
 .back-link:hover {
     color: var(--gold-dark);
 }
+
+@media (max-width: 640px) {
+    .admin-login-container {
+        padding: 60px 16px 16px;
+    }
+
+    .admin-login-card {
+        padding: 2rem 1.5rem;
+        margin: 0 8px;
+    }
+
+    .admin-login-header h2 {
+        font-size: 2rem;
+    }
+
+    .form-group input {
+        padding: 14px 14px 14px 50px !important;
+        font-size: 16px;
+    }
+
+    .input-icon {
+        left: 16px;
+    }
+}

@@ -29,6 +29,7 @@ export default function Navbar() {
 
   return (
     <nav className={navClass} id="nav">
+      {menuOpen && <div className="nav-backdrop" onClick={() => setMenuOpen(false)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.4)', zIndex: 498 }} />}
       <div className="container-lg nav-inner">
         <Link to="/" className="brand">
           <img src={`${import.meta.env.BASE_URL}assets/logo-white.png`} className="brand-logo brand-logo-light" alt="Solid Weddings" />

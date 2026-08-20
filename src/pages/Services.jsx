@@ -82,7 +82,7 @@ export default function Services() {
             <span className="form-label">What We Offer</span>
             <h2>Specialized <em>Services</em></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(340px,1fr))', gap: 36 }}>
+          <div className="albums-grid" style={{ gap: 36 }}>
             {SERVICES.map(s => (
               <div key={s.t} className="reveal card" style={{ overflow: 'hidden' }}>
                 <div style={{ height: 260, overflow: 'hidden' }}>
@@ -111,9 +111,9 @@ export default function Services() {
             <span className="form-label">Pricing</span>
             <h2>Wedding <em>Packages</em></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 36, maxWidth: 1100, margin: '0 auto' }}>
+          <div className="albums-grid" style={{ gap: 36, maxWidth: 1100, margin: '0 auto' }}>
             {PACKAGES.map(p => (
-              <div key={p.name} className={`reveal glass-card${p.featured ? ' featured' : ''}`} style={{ padding: '48px 32px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', overflow: 'visible', ...(p.featured ? { border: '2px solid var(--gold)', transform: 'scale(1.04)' } : {}) }}>
+              <div key={p.name} className={`reveal glass-card${p.featured ? ' featured' : ''}`} style={{ padding: '48px 32px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', overflow: 'visible', ...(p.featured ? { border: '2px solid var(--gold)' } : {}) }}>
                 {p.featured && <div className="popular-badge">Most Popular</div>}
                 <h3 style={{ fontSize: 26, marginBottom: 8 }}>{p.name} Package</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>

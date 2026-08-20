@@ -70,9 +70,9 @@ export default function Home() {
             </div>
             <div className="reveal" style={{ position: 'relative' }}>
               <div className="glass-card" style={{ padding: 10, borderRadius: 'var(--radius-lg)' }}>
-                <img src={heroPool[0]} alt="Studio" style={{ width: '100%', borderRadius: 'var(--radius)', height: 480, objectFit: 'cover' }} />
+                <img src={heroPool[0]} alt="Studio" style={{ width: '100%', borderRadius: 'var(--radius)', height: 'min(480px, 60vw)', objectFit: 'cover' }} />
               </div>
-              <div className="glass-card" style={{ position: 'absolute', bottom: -28, left: -28, padding: '24px 30px', maxWidth: 250 }}>
+              <div className="glass-card floating-quote" style={{ position: 'absolute', bottom: -28, left: -28, padding: '24px 30px', maxWidth: 250 }}>
                 <i className="fas fa-quote-left" style={{ color: 'var(--gold)', fontSize: 22, marginBottom: 10 }} />
                 <p style={{ fontSize: 14, fontWeight: 500, margin: 0 }}>"They didn't just take photos, they captured our emotions."</p>
               </div>
@@ -88,7 +88,7 @@ export default function Home() {
             <span className="form-label" style={{ color: 'var(--gold-text)' }}>Offerings</span>
             <h2>Our Specialized <em>Services</em></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 32 }}>
+          <div className="albums-grid" style={{ gap: 32 }}>
             {services.map(s => (
               <div key={s.t} className="reveal card" style={{ overflow: 'hidden' }}>
                 <div style={{ height: 280, overflow: 'hidden' }}>

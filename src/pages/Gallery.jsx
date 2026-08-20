@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaArrowLeft } from 'react-icons/fa';
 import '../styles/Gallery.css';
@@ -15,6 +15,7 @@ const Gallery = () => {
   const [lightboxImage, setLightboxImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [heroImages, setHeroImages] = useState([]);
+  const touchRef = useRef(null);
 
   useReveal([categories]);
 
@@ -52,6 +53,20 @@ const Gallery = () => {
   const openLightbox = (img) => { setLightboxImage(img); document.body.style.overflow = 'hidden'; };
   const closeLightbox = () => { setLightboxImage(null); document.body.style.overflow = ''; };
 
+  const handleTouchStart = (e) => { touchRef.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    if (touchRef.current === null) return;
+    const diff = touchRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      const imgs = getContextImages();
+      if (!lightboxImage || imgs.length === 0) return;
+      const idx = imgs.findIndex(i => i.id === lightboxImage.id);
+      if (diff > 0) setLightboxImage(imgs[(idx + 1) % imgs.length]);
+      else setLightboxImage(imgs[(idx - 1 + imgs.length) % imgs.length]);
+    }
+    touchRef.current = null;
+  };
+
   const getContextImages = () => {
     if (!selectedCategory || !galleryData[selectedCategory]) return [];
     if (selectedAlbum) return galleryData[selectedCategory].albums[selectedAlbum] || [];
@@ -83,7 +98,7 @@ const Gallery = () => {
         </div>
       </HeroSlideshow>
 
-      <div className="container-lg" style={{ padding: '3rem 2rem', minHeight: '50vh' }}>
+      <div className="container-lg" style={{ padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)', minHeight: '50vh' }}>
         <div className="category-filters" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
           <button className={`filter-btn${selectedCategory === null ? ' active' : ''}`}
             onClick={() => { setSelectedCategory(null); setSelectedAlbum(null); }}
@@ -178,7 +193,7 @@ const Gallery = () => {
 
       {/* LIGHTBOX */}
       {lightboxImage && (
-        <div className="lightbox" onClick={closeLightbox} style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,.92)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="lightbox" onClick={closeLightbox} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,.92)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <button onClick={closeLightbox} style={{ position: 'absolute', top: 24, right: 24, background: 'none', border: 'none', color: '#fff', fontSize: 28, cursor: 'pointer', zIndex: 10 }}><FaTimes /></button>
           <button onClick={prevImage} style={{ position: 'absolute', left: 20, background: 'none', border: 'none', color: '#fff', fontSize: 32, cursor: 'pointer', padding: 16 }}><FaChevronLeft /></button>
           <img src={lightboxImage.src} onClick={e => e.stopPropagation()} alt="" style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', borderRadius: 8 }} />
@@ -186,8 +201,8 @@ const Gallery = () => {
         </div>
       )}
 
-      <section className="section-padding" style={{ background: 'var(--ink)', color: '#fff' }}>
-        <div className="container-lg" style={{ textAlign: 'center' }}>
+      <section className="section-padding" style={{ background: 'var(--ink)', color: '#fff', position: 'relative' }}>
+        <div className="container-lg" style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
           <div className="reveal">
             <h2 style={{ color: '#fff', marginBottom: 24 }}>Ready to Capture Your <em>Story?</em></h2>
             <p style={{ maxWidth: 600, margin: '0 auto 40px', opacity: .8 }}>Let's create timeless memories that you'll cherish forever.</p>

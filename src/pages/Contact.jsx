@@ -65,15 +65,15 @@ export default function Contact() {
               <h2 style={{ marginBottom: 24 }}>Get Your Free <em>Quote</em></h2>
               <p style={{ color: 'var(--ink-3)', marginBottom: 32 }}>Fill out the form and we'll get back to you within 24 hours.</p>
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="contact-form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <input required placeholder="Full Name *" className={inputCls} value={formData.name} onChange={e => set('name', e.target.value)} />
                   <input required type="email" placeholder="Email *" className={inputCls} value={formData.email} onChange={e => set('email', e.target.value)} />
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="contact-form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <input required type="tel" placeholder="Phone *" className={inputCls} value={formData.phone} onChange={e => set('phone', e.target.value)} />
                   <input type="date" className={inputCls} value={formData.weddingDate} onChange={e => set('weddingDate', e.target.value)} />
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="contact-form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <input placeholder="Wedding Venue" className={inputCls} value={formData.venue} onChange={e => set('venue', e.target.value)} />
                   <select className={selectCls} value={formData.package} onChange={e => set('package', e.target.value)}>
                     <option value="">Select Package</option>
@@ -138,7 +138,7 @@ export default function Contact() {
             <span className="form-label">FAQ</span>
             <h2>Frequently Asked <em>Questions</em></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 28, maxWidth: 1100, margin: '0 auto' }}>
+          <div className="albums-grid" style={{ gap: 28, maxWidth: 1100, margin: '0 auto' }}>
             {FAQ.map(f => (
               <div key={f.q} className="reveal glass-card" style={{ padding: 32 }}>
                 <h3 style={{ fontSize: 18, marginBottom: 12 }}>{f.q}</h3>
