@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaSignOutAlt, FaImages, FaFolder, FaEnvelope } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaSignOutAlt, FaImages, FaFolder, FaEnvelope, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { useClientAuth } from '../../contexts/ClientAuthContext';
 import { fetchGalleryData } from '../../services/galleryService';
+import { supabase } from '../../lib/supabase';
 import '../../styles/ClientPortal.css';
+
+const STATUS_MAP = {
+    pending: { icon: FaClock, color: '#d97706', bg: '#fef3c7', label: 'Pending' },
+    confirmed: { icon: FaCheckCircle, color: '#16a34a', bg: '#dcfce7', label: 'Confirmed' },
+    cancelled: { icon: FaTimesCircle, color: '#dc2626', bg: '#fee2e2', label: 'Cancelled' },
+};
 
 const ClientDashboard = () => {
     const { user, clientProfile, loading: authLoading, signOut, getAssignedGalleries } = useClientAuth();
     const navigate = useNavigate();
     const [galleries, setGalleries] = useState([]);
+    const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState('galleries');
 
     useEffect(() => {
         if (!authLoading && !user) {
@@ -49,16 +58,30 @@ const ClientDashboard = () => {
             setGalleries(matchedGalleries);
         } catch (err) {
             console.error('Failed to load galleries:', err);
-        } finally {
-            setLoading(false);
         }
     }, [getAssignedGalleries]);
 
+    const loadBookings = React.useCallback(async () => {
+        if (!user?.email) return;
+        try {
+            const { data, error } = await supabase
+                .from('bookings')
+                .select('*')
+                .eq('client_email', user.email)
+                .order('wedding_date', { ascending: false });
+            if (error) throw error;
+            setBookings(data || []);
+        } catch (err) {
+            console.error('Failed to load bookings:', err);
+        }
+    }, [user?.email]);
+
     useEffect(() => {
         if (user) {
-            loadGalleries();
+            setLoading(true);
+            Promise.all([loadGalleries(), loadBookings()]).finally(() => setLoading(false));
         }
-    }, [user, loadGalleries]);
+    }, [user, loadGalleries, loadBookings]);
 
     const handleLogout = async () => {
         if (window.confirm('Are you sure you want to logout?')) {
@@ -114,6 +137,15 @@ const ClientDashboard = () => {
                         </div>
                     </div>
                     <div className="stat-card">
+                        <div className="stat-icon" style={{ background: 'linear-gradient(135deg, #f093fb, #f5576c)' }}>
+                            <FaCalendarAlt />
+                        </div>
+                        <div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#333' }}>{bookings.length}</div>
+                            <div style={{ color: '#666', fontSize: '0.85rem' }}>Bookings</div>
+                        </div>
+                    </div>
+                    <div className="stat-card">
                         <div className="stat-icon" style={{ background: 'linear-gradient(135deg, #43e97b, #38f9d7)' }}>
                             <FaEnvelope />
                         </div>
@@ -124,28 +156,84 @@ const ClientDashboard = () => {
                     </div>
                 </div>
 
-                {galleries.length === 0 ? (
-                    <div className="empty-state">
-                        <FaImages style={{ fontSize: '3rem', color: '#ddd', marginBottom: '1rem' }} />
-                        <h2>No Galleries Assigned</h2>
-                        <p>Your photographer hasn't assigned any galleries to your account yet.</p>
-                    </div>
-                ) : (
-                    <div className="gallery-grid">
-                        {galleries.map(gallery => (
-                            <div
-                                key={gallery.id}
-                                className="gallery-card"
-                                onClick={() => navigate(`/client/gallery/${encodeURIComponent(gallery.categoryId)}/${encodeURIComponent(gallery.name)}`)}
-                            >
-                                <img src={gallery.cover} alt={gallery.name} className="gallery-card-cover" />
-                                <div className="gallery-card-info">
-                                    <h3>{gallery.name}</h3>
-                                    <p>{gallery.category} · {gallery.photoCount} photos</p>
+                {/* Tabs */}
+                <div className="client-tabs">
+                    <button className={`client-tab ${activeTab === 'galleries' ? 'active' : ''}`} onClick={() => setActiveTab('galleries')}>
+                        <FaImages /> My Galleries
+                    </button>
+                    <button className={`client-tab ${activeTab === 'bookings' ? 'active' : ''}`} onClick={() => setActiveTab('bookings')}>
+                        <FaCalendarAlt /> My Bookings
+                    </button>
+                </div>
+
+                {activeTab === 'galleries' && (
+                    galleries.length === 0 ? (
+                        <div className="empty-state">
+                            <FaImages style={{ fontSize: '3rem', color: '#ddd', marginBottom: '1rem' }} />
+                            <h2>No Galleries Assigned</h2>
+                            <p>Your photographer hasn't assigned any galleries to your account yet.</p>
+                        </div>
+                    ) : (
+                        <div className="gallery-grid">
+                            {galleries.map(gallery => (
+                                <div
+                                    key={gallery.id}
+                                    className="gallery-card"
+                                    onClick={() => navigate(`/client/gallery/${encodeURIComponent(gallery.categoryId)}/${encodeURIComponent(gallery.name)}`)}
+                                >
+                                    <img src={gallery.cover} alt={gallery.name} className="gallery-card-cover" />
+                                    <div className="gallery-card-info">
+                                        <h3>{gallery.name}</h3>
+                                        <p>{gallery.category} · {gallery.photoCount} photos</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )
+                )}
+
+                {activeTab === 'bookings' && (
+                    bookings.length === 0 ? (
+                        <div className="empty-state">
+                            <FaCalendarAlt style={{ fontSize: '3rem', color: '#ddd', marginBottom: '1rem' }} />
+                            <h2>No Bookings Yet</h2>
+                            <p>You haven't made any booking requests yet.</p>
+                            <Link to="/booking" className="btn-primary" style={{ marginTop: '1rem', display: 'inline-flex' }}>Book a Session</Link>
+                        </div>
+                    ) : (
+                        <div className="bookings-list">
+                            {bookings.map(booking => {
+                                const s = STATUS_MAP[booking.status] || STATUS_MAP.pending;
+                                const StatusIcon = s.icon;
+                                const date = new Date(booking.wedding_date + 'T00:00:00');
+                                return (
+                                    <div key={booking.id} className="booking-card">
+                                        <div className="booking-card-header">
+                                            <div className="booking-card-date">
+                                                <div className="booking-date-day">{date.getDate()}</div>
+                                                <div className="booking-date-month">{date.toLocaleString('en-US', { month: 'short' })}</div>
+                                                <div className="booking-date-year">{date.getFullYear()}</div>
+                                            </div>
+                                            <div className="booking-card-info">
+                                                <h3>{booking.package_name} Package</h3>
+                                                <div className="booking-card-meta">
+                                                    {booking.venue && (
+                                                        <span><FaMapMarkerAlt /> {booking.venue}</span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="booking-card-status" style={{ background: s.bg, color: s.color }}>
+                                                <StatusIcon /> {s.label}
+                                            </div>
+                                        </div>
+                                        {booking.message && (
+                                            <div className="booking-card-message">{booking.message}</div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )
                 )}
             </div>
         </div>

@@ -97,7 +97,7 @@ const ClientSignup = () => {
                         boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                     }}>
                         <img
-                            src="/assets/logo-ink.png"
+                            src="/assets/logo-gold.png"
                             alt="Solid Weddings Logo"
                             style={{
                                 display: 'block',
@@ -107,7 +107,7 @@ const ClientSignup = () => {
                             }}
                             onError={(e) => {
                                 e.target.style.display = 'none';
-                                e.target.parentElement.innerHTML = '<span style="color:white; font-family:serif; font-size: 1.2rem; white-space:nowrap;">SOLID WEDDINGS</span>';
+                                e.target.parentElement.innerHTML = '<span style="color:#b89d5c; font-family:serif; font-size: 1.2rem; white-space:nowrap;">SOLID WEDDINGS</span>';
                             }}
                         />
                     </div>

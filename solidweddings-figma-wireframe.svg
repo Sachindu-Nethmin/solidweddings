@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="19200" height="52000" viewBox="0 0 19200 52000">
+<defs>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap');
+    .hd { font-family: 'Playfair Display', Georgia, serif; }
+    .bd { font-family: 'Poppins', sans-serif; }
+    .lb { font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; }
+  </style>
+  <filter id="s1" x="-4%" y="-4%" width="108%" height="112%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.06"/>
+  </filter>
+  <filter id="s2" x="-4%" y="-4%" width="108%" height="112%">
+    <feDropShadow dx="0" dy="6" stdDeviation="16" flood-color="#000" flood-opacity="0.08"/>
+  </filter>
+</defs>
+<rect width="19200" height="52000" fill="#d8d4ce"/>
+<rect x="40" y="40" width="960" height="580" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="40" y="40" width="960" height="580" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="40" y="584" width="147" height="28" rx="6" fill="#c0a062"/>
+<text x="113.5" y="602" class="bd" font-size="11" fill="#fff" font-weight="600">DESIGN TOKENS</text>
+<text x="40" y="74" class="hd" font-size="26" fill="#1a1714" font-weight="700">Design Tokens & Color Palette</text>
+<rect x="40" y="110" width="160" height="110" rx="14" fill="#c0a062"/>
+<text x="120" y="145" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#c0a062</text>
+<text x="120" y="165" class="bd" font-size="10" fill="#fff" text-anchor="center">Gold</text>
+<text x="120" y="190" class="lb" font-size="8" fill="#fff" text-anchor="center">Primary</text>
+<rect x="220" y="110" width="160" height="110" rx="14" fill="#a8884c"/>
+<text x="300" y="145" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#a8884c</text>
+<text x="300" y="165" class="bd" font-size="10" fill="#fff" text-anchor="center">Gold Text</text>
+<text x="300" y="190" class="lb" font-size="8" fill="#fff" text-anchor="center">Muted Gold</text>
+<rect x="400" y="110" width="160" height="110" rx="14" fill="#1a1714"/>
+<text x="480" y="145" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#1a1714</text>
+<text x="480" y="165" class="bd" font-size="10" fill="#fff" text-anchor="center">Ink</text>
+<text x="480" y="190" class="lb" font-size="8" fill="#fff" text-anchor="center">Headings</text>
+<rect x="580" y="110" width="160" height="110" rx="14" fill="#3a342e"/>
+<text x="660" y="145" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#3a342e</text>
+<text x="660" y="165" class="bd" font-size="10" fill="#fff" text-anchor="center">Ink 2</text>
+<text x="660" y="190" class="lb" font-size="8" fill="#fff" text-anchor="center">Body Text</text>
+<rect x="760" y="110" width="160" height="110" rx="14" fill="#7a716a"/>
+<text x="840" y="145" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#7a716a</text>
+<text x="840" y="165" class="bd" font-size="10" fill="#fff" text-anchor="center">Ink 3</text>
+<text x="840" y="190" class="lb" font-size="8" fill="#fff" text-anchor="center">Muted</text>
+<rect x="40" y="240" width="160" height="110" rx="14" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="120" y="275" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="600">#faf7f2</text>
+<text x="120" y="295" class="bd" font-size="10" fill="#3a342e" text-anchor="center">Cream</text>
+<text x="120" y="320" class="lb" font-size="8" fill="#7a716a" text-anchor="center">Background</text>
+<rect x="220" y="240" width="160" height="110" rx="14" fill="#f3ede3" stroke="#e6ddcf" stroke-width="1"/>
+<text x="300" y="275" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="600">#f3ede3</text>
+<text x="300" y="295" class="bd" font-size="10" fill="#3a342e" text-anchor="center">Cream 2</text>
+<text x="300" y="320" class="lb" font-size="8" fill="#7a716a" text-anchor="center">Alt BG</text>
+<rect x="400" y="240" width="160" height="110" rx="14" fill="#e6ddcf" stroke="#e6ddcf" stroke-width="1"/>
+<text x="480" y="275" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="600">#e6ddcf</text>
+<text x="480" y="295" class="bd" font-size="10" fill="#3a342e" text-anchor="center">Cream 3</text>
+<text x="480" y="320" class="lb" font-size="8" fill="#7a716a" text-anchor="center">Borders</text>
+<rect x="580" y="240" width="160" height="110" rx="14" fill="#f0dca8"/>
+<text x="660" y="275" class="bd" font-size="11" fill="#1a1714" text-anchor="center" font-weight="600">#f0dca8</text>
+<text x="660" y="295" class="bd" font-size="10" fill="#1a1714" text-anchor="center">Light Gold</text>
+<text x="660" y="320" class="lb" font-size="8" fill="#7a716a" text-anchor="center">Hero Kicker</text>
+<rect x="760" y="240" width="160" height="110" rx="14" fill="#d43b3b"/>
+<text x="840" y="275" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="600">#d43b3b</text>
+<text x="840" y="295" class="bd" font-size="10" fill="#fff" text-anchor="center">Error</text>
+<text x="840" y="320" class="lb" font-size="8" fill="#7a716a" text-anchor="center">Validation</text>
+<text x="40" y="410" class="hd" font-size="40" fill="#1a1714" font-weight="700">Playfair Display</text>
+<text x="40" y="440" class="bd" font-size="13" fill="#3a342e">H1: clamp(40px, 6vw, 76px)  ·  H2: clamp(30px, 4vw, 46px)  ·  H3: 26px  ·  H4: 19px</text>
+<text x="40" y="475" class="bd" font-size="22" fill="#3a342e" font-weight="500">Poppins</text>
+<text x="40" y="505" class="bd" font-size="13" fill="#3a342e">Body: 14px  ·  Labels: 11px uppercase 0.22em  ·  Nav: 13px  ·  Buttons: 14px</text>
+<text x="40" y="550" class="bd" font-size="12" fill="#3a342e">Container: 1240px  ·  Nav: 76px  ·  Section Padding: 64–120px  ·  Card Radius: 14px  ·  Large: 24px  ·  Buttons: 999px pill</text>
+<text x="40" y="575" class="bd" font-size="12" fill="#3a342e">Breakpoints: 900px (nav)  ·  860px (grid)  ·  768px (mobile)  ·  480px (small)</text>
+<rect x="40" y="720" width="1240" height="2600" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="40" y="720" width="1240" height="2600" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="40" y="3284" width="138" height="28" rx="6" fill="#c0a062"/>
+<text x="109.0" y="3302" class="bd" font-size="11" fill="#fff" font-weight="600">HOME DESKTOP</text>
+<rect x="0" y="760" width="1240" height="76" rx="0" fill="none" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="40" y="776" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="50" y="798" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="520" y="804" class="bd" font-size="13" fill="#1a1714">Home</text>
+<text x="610" y="804" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="710" y="804" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="800" y="804" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="896" y="804" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<rect x="1020" y="785" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1048" y="804" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<rect x="0" y="836" width="1240" height="540" rx="0" fill="#1a1714"/>
+<rect x="0" y="1106" width="1240" height="270" rx="0" fill="#000" opacity="0.3"/>
+<text x="620" y="1066" class="lb" font-size="13" fill="#f0dca8" letter-spacing="0.32em" text-anchor="center">CAPTURING LOVE STORIES</text>
+<text x="620" y="1126" class="hd" font-size="58" fill="#fff" text-anchor="center" font-weight="700">Your Wedding,</text>
+<text x="620" y="1181" class="hd" font-size="58" fill="#fff" text-anchor="center" font-weight="700">Beautifully Told</text>
+<rect x="505" y="1206" width="230" height="44" rx="999" fill="#c0a062"/>
+<text x="620" y="1233" class="bd" font-size="14" fill="#fff" text-anchor="center" font-weight="600">Book a Consultation</text>
+<rect x="80" y="1420" width="260" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="100" y="1458" class="hd" font-size="30" fill="#c0a062" font-weight="700">200+</text>
+<text x="100" y="1478" class="bd" font-size="13" fill="#7a716a">Weddings</text>
+<rect x="370" y="1420" width="260" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="390" y="1458" class="hd" font-size="30" fill="#c0a062" font-weight="700">10+</text>
+<text x="390" y="1478" class="bd" font-size="13" fill="#7a716a">Years Exp</text>
+<rect x="660" y="1420" width="260" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="680" y="1458" class="hd" font-size="30" fill="#c0a062" font-weight="700">500+</text>
+<text x="680" y="1478" class="bd" font-size="13" fill="#7a716a">Happy Couples</text>
+<rect x="950" y="1420" width="260" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="970" y="1458" class="hd" font-size="30" fill="#c0a062" font-weight="700">50+</text>
+<text x="970" y="1478" class="bd" font-size="13" fill="#7a716a">Awards</text>
+<rect x="80" y="1540" width="520" height="340" rx="24" fill="#e6ddcf"/>
+<text x="340" y="1720" class="bd" font-size="14" fill="#7a716a" text-anchor="center">About Image</text>
+<text x="660" y="1580" class="lb" font-size="11" fill="#a8884c">OUR STORY</text>
+<text x="660" y="1620" class="hd" font-size="36" fill="#1a1714" font-weight="700">Photography is</text>
+<text x="660" y="1662" class="hd" font-size="36" fill="#1a1714" font-weight="700">Our Passion</text>
+<text x="660" y="1700" class="bd" font-size="14" fill="#3a342e">We are a team of passionate wedding photographers</text>
+<text x="660" y="1720" class="bd" font-size="14" fill="#3a342e">based in Sri Lanka, dedicated to capturing the most</text>
+<text x="660" y="1740" class="bd" font-size="14" fill="#3a342e">precious moments of your special day.</text>
+<rect x="660" y="1770" width="160" height="40" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="740" y="1795" class="bd" font-size="13" fill="#c0a062" text-anchor="center" font-weight="500">Learn More →</text>
+<rect x="0" y="1940" width="1240" height="400" rx="0" fill="#f3ede3"/>
+<text x="620" y="1975" class="lb" font-size="11" fill="#a8884c" text-anchor="center">WHAT WE OFFER</text>
+<text x="620" y="2010" class="hd" font-size="36" fill="#1a1714" text-anchor="center" font-weight="700">Our Services</text>
+<rect x="80" y="2035" width="360" height="270" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="80" y="2035" width="360" height="150" rx="24" fill="#e6ddcf"/>
+<text x="260" y="2115" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="104" y="2210" class="hd" font-size="18" fill="#1a1714" font-weight="600">Wedding Photography</text>
+<text x="104" y="2238" class="bd" font-size="13" fill="#7a716a">Full day coverage of your special day</text>
+<rect x="470" y="2035" width="360" height="270" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="470" y="2035" width="360" height="150" rx="24" fill="#e6ddcf"/>
+<text x="650" y="2115" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="494" y="2210" class="hd" font-size="18" fill="#1a1714" font-weight="600">Bridal Portraits</text>
+<text x="494" y="2238" class="bd" font-size="13" fill="#7a716a">Elegant bridal photoshoot sessions</text>
+<rect x="860" y="2035" width="360" height="270" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="860" y="2035" width="360" height="150" rx="24" fill="#e6ddcf"/>
+<text x="1040" y="2115" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="884" y="2210" class="hd" font-size="18" fill="#1a1714" font-weight="600">Engagement Shoots</text>
+<text x="884" y="2238" class="bd" font-size="13" fill="#7a716a">Capturing your love story journey</text>
+<rect x="0" y="2360" width="1240" height="140" rx="0" fill="#1a1714"/>
+<text x="620" y="2408" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Ready to Capture Your Story?</text>
+<text x="620" y="2440" class="bd" font-size="14" fill="#faf7f2" text-anchor="center">Let's create something beautiful together</text>
+<rect x="540" y="2456" width="160" height="36" rx="999" fill="#c0a062"/>
+<text x="620" y="2479" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Get In Touch</text>
+<rect x="0" y="2520" width="1240" height="260" rx="0" fill="#1a1714"/>
+<text x="80" y="2550" class="lb" font-size="10" fill="#faf7f2" opacity="0.6">SOLID WEDDINGS</text>
+<text x="80" y="2575" class="bd" font-size="12" fill="#7a716a">Capturing love stories across Sri Lanka with artistry and heart.</text>
+<circle cx="96" cy="2610" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="96" y="2614" class="bd" font-size="10" fill="#7a716a" text-anchor="center">ig</text>
+<circle cx="131" cy="2610" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="131" y="2614" class="bd" font-size="10" fill="#7a716a" text-anchor="center">fb</text>
+<circle cx="166" cy="2610" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="166" y="2614" class="bd" font-size="10" fill="#7a716a" text-anchor="center">yt</text>
+<text x="540" y="2550" class="lb" font-size="10" fill="#faf7f2">QUICK LINKS</text>
+<text x="540" y="2580" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="540" y="2602" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="540" y="2624" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="540" y="2646" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="540" y="2668" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<text x="820" y="2550" class="lb" font-size="10" fill="#faf7f2">CONTACT</text>
+<text x="820" y="2580" class="bd" font-size="13" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="820" y="2605" class="bd" font-size="13" fill="#7a716a">info@solidweddings.com</text>
+<text x="820" y="2630" class="bd" font-size="13" fill="#7a716a">Colombo, Sri Lanka</text>
+<line x1="80" y1="2720" x2="1160" y2="2720" stroke="#3a342e" stroke-width="1"/>
+<text x="80" y="2745" class="bd" font-size="11" fill="#7a716a">© 2024 Solid Weddings. All rights reserved.</text>
+<text x="1160" y="2745" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Crafted with heart in Sri Lanka</text>
+<rect x="1340" y="720" width="1240" height="2400" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="1340" y="720" width="1240" height="2400" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="1340" y="3084" width="147" height="28" rx="6" fill="#c0a062"/>
+<text x="1413.5" y="3102" class="bd" font-size="11" fill="#fff" font-weight="600">ABOUT DESKTOP</text>
+<rect x="0" y="760" width="1240" height="76" rx="0" fill="none" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="40" y="776" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="50" y="798" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="520" y="804" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="610" y="804" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="710" y="804" class="bd" font-size="13" fill="#1a1714">About</text>
+<text x="800" y="804" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="896" y="804" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<rect x="1020" y="785" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1048" y="804" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<rect x="0" y="836" width="1240" height="280" rx="0" fill="#1a1714"/>
+<text x="620" y="980" class="lb" font-size="13" fill="#f0dca8" text-anchor="center">OUR STORY</text>
+<text x="620" y="1020" class="hd" font-size="48" fill="#fff" text-anchor="center" font-weight="700">About Us</text>
+<rect x="80" y="1150" width="520" height="320" rx="24" fill="#e6ddcf"/>
+<text x="340" y="1320" class="bd" font-size="14" fill="#7a716a" text-anchor="center">Studio Photo</text>
+<text x="660" y="1180" class="lb" font-size="11" fill="#a8884c">HOW WE STARTED</text>
+<text x="660" y="1215" class="hd" font-size="34" fill="#1a1714" font-weight="700">Our Origin</text>
+<text x="660" y="1250" class="bd" font-size="14" fill="#3a342e">Founded with a deep love for storytelling, Solid</text>
+<text x="660" y="1270" class="bd" font-size="14" fill="#3a342e">Weddings has grown into one of Sri Lanka's most</text>
+<text x="660" y="1290" class="bd" font-size="14" fill="#3a342e">sought-after wedding photography studios.</text>
+<text x="620" y="1550" class="lb" font-size="11" fill="#a8884c" text-anchor="center">OUR VALUES</text>
+<text x="620" y="1585" class="hd" font-size="34" fill="#1a1714" text-anchor="center" font-weight="700">What We Stand For</text>
+<rect x="80" y="1605" width="265" height="150" rx="24" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="120" cy="1640" r="18" fill="#c0a062"/>
+<text x="120" y="1645" class="bd" font-size="14" fill="#fff" text-anchor="center">♥</text>
+<text x="148" y="1645" class="hd" font-size="16" fill="#1a1714" font-weight="600">Passion</text>
+<text x="100" y="1680" class="bd" font-size="12" fill="#7a716a">We pour our heart into every shot</text>
+<rect x="370" y="1605" width="265" height="150" rx="24" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="410" cy="1640" r="18" fill="#c0a062"/>
+<text x="410" y="1645" class="bd" font-size="14" fill="#fff" text-anchor="center">✦</text>
+<text x="438" y="1645" class="hd" font-size="16" fill="#1a1714" font-weight="600">Quality</text>
+<text x="390" y="1680" class="bd" font-size="12" fill="#7a716a">Only the highest standards</text>
+<rect x="660" y="1605" width="265" height="150" rx="24" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="700" cy="1640" r="18" fill="#c0a062"/>
+<text x="700" y="1645" class="bd" font-size="14" fill="#fff" text-anchor="center">◎</text>
+<text x="728" y="1645" class="hd" font-size="16" fill="#1a1714" font-weight="600">Authenticity</text>
+<text x="680" y="1680" class="bd" font-size="12" fill="#7a716a">Real moments, real emotions</text>
+<rect x="950" y="1605" width="265" height="150" rx="24" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="990" cy="1640" r="18" fill="#c0a062"/>
+<text x="990" y="1645" class="bd" font-size="14" fill="#fff" text-anchor="center">◈</text>
+<text x="1018" y="1645" class="hd" font-size="16" fill="#1a1714" font-weight="600">Trust</text>
+<text x="970" y="1680" class="bd" font-size="12" fill="#7a716a">Building lasting relationships</text>
+<rect x="0" y="1790" width="1240" height="340" rx="0" fill="#f3ede3"/>
+<text x="500" y="1830" class="lb" font-size="11" fill="#a8884c">WHY US</text>
+<text x="500" y="1865" class="hd" font-size="34" fill="#1a1714" font-weight="700">Why Choose Us</text>
+<text x="500" y="1900" class="bd" font-size="14" fill="#3a342e">With over a decade of experience, we bring artistic</text>
+<text x="500" y="1920" class="bd" font-size="14" fill="#3a342e">vision and technical expertise to every wedding.</text>
+<rect x="500" y="1945" width="170" height="40" rx="999" fill="#c0a062"/>
+<text x="585" y="1970" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">View Portfolio</text>
+<rect x="820" y="1820" width="380" height="280" rx="24" fill="#e6ddcf"/>
+<text x="1010" y="1960" class="bd" font-size="14" fill="#7a716a" text-anchor="center">Team Photo</text>
+<rect x="0" y="2170" width="1240" height="140" rx="0" fill="#1a1714"/>
+<text x="620" y="2218" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Let's Work Together</text>
+<text x="620" y="2250" class="bd" font-size="14" fill="#faf7f2" text-anchor="center">Let's create something beautiful together</text>
+<rect x="550" y="2266" width="140" height="36" rx="999" fill="#c0a062"/>
+<text x="620" y="2289" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Contact Us</text>
+<rect x="0" y="2330" width="1240" height="260" rx="0" fill="#1a1714"/>
+<text x="80" y="2360" class="lb" font-size="10" fill="#faf7f2" opacity="0.6">SOLID WEDDINGS</text>
+<text x="80" y="2385" class="bd" font-size="12" fill="#7a716a">Capturing love stories across Sri Lanka with artistry and heart.</text>
+<circle cx="96" cy="2420" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="96" y="2424" class="bd" font-size="10" fill="#7a716a" text-anchor="center">ig</text>
+<circle cx="131" cy="2420" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="131" y="2424" class="bd" font-size="10" fill="#7a716a" text-anchor="center">fb</text>
+<circle cx="166" cy="2420" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="166" y="2424" class="bd" font-size="10" fill="#7a716a" text-anchor="center">yt</text>
+<text x="540" y="2360" class="lb" font-size="10" fill="#faf7f2">QUICK LINKS</text>
+<text x="540" y="2390" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="540" y="2412" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="540" y="2434" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="540" y="2456" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="540" y="2478" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<text x="820" y="2360" class="lb" font-size="10" fill="#faf7f2">CONTACT</text>
+<text x="820" y="2390" class="bd" font-size="13" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="820" y="2415" class="bd" font-size="13" fill="#7a716a">info@solidweddings.com</text>
+<text x="820" y="2440" class="bd" font-size="13" fill="#7a716a">Colombo, Sri Lanka</text>
+<line x1="80" y1="2530" x2="1160" y2="2530" stroke="#3a342e" stroke-width="1"/>
+<text x="80" y="2555" class="bd" font-size="11" fill="#7a716a">© 2024 Solid Weddings. All rights reserved.</text>
+<text x="1160" y="2555" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Crafted with heart in Sri Lanka</text>
+<rect x="2640" y="720" width="1240" height="3200" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="2640" y="720" width="1240" height="3200" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="2640" y="3884" width="174" height="28" rx="6" fill="#c0a062"/>
+<text x="2727.0" y="3902" class="bd" font-size="11" fill="#fff" font-weight="600">SERVICES DESKTOP</text>
+<rect x="0" y="760" width="1240" height="76" rx="0" fill="none" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="40" y="776" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="50" y="798" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="520" y="804" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="610" y="804" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="710" y="804" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="800" y="804" class="bd" font-size="13" fill="#1a1714">Services</text>
+<text x="896" y="804" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<rect x="1020" y="785" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1048" y="804" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<rect x="0" y="836" width="1240" height="280" rx="0" fill="#1a1714"/>
+<text x="620" y="980" class="lb" font-size="13" fill="#f0dca8" text-anchor="center">WHAT WE OFFER</text>
+<text x="620" y="1020" class="hd" font-size="48" fill="#fff" text-anchor="center" font-weight="700">Our Services</text>
+<rect x="80" y="1160" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="80" y="1160" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="260" y="1255" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="104" y="1370" class="hd" font-size="18" fill="#1a1714" font-weight="600">Wedding Photography</text>
+<text x="104" y="1395" class="bd" font-size="12" fill="#7a716a">✓ Full day coverage</text>
+<text x="104" y="1415" class="bd" font-size="12" fill="#7a716a">✓ Multiple photographers</text>
+<rect x="470" y="1160" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="470" y="1160" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="650" y="1255" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="494" y="1370" class="hd" font-size="18" fill="#1a1714" font-weight="600">Bridal Portraits</text>
+<text x="494" y="1395" class="bd" font-size="12" fill="#7a716a">✓ Studio or outdoor</text>
+<text x="494" y="1415" class="bd" font-size="12" fill="#7a716a">✓ Professional styling</text>
+<rect x="860" y="1160" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="860" y="1160" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="1040" y="1255" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="884" y="1370" class="hd" font-size="18" fill="#1a1714" font-weight="600">Engagement Shoots</text>
+<text x="884" y="1395" class="bd" font-size="12" fill="#7a716a">✓ Pre-wedding sessions</text>
+<text x="884" y="1415" class="bd" font-size="12" fill="#7a716a">✓ Creative concepts</text>
+<rect x="80" y="1490" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="80" y="1490" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="260" y="1585" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="104" y="1700" class="hd" font-size="18" fill="#1a1714" font-weight="600">Destination Weddings</text>
+<text x="104" y="1725" class="bd" font-size="12" fill="#7a716a">✓ Travel-ready coverage</text>
+<text x="104" y="1745" class="bd" font-size="12" fill="#7a716a">✓ Location scouting</text>
+<rect x="470" y="1490" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="470" y="1490" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="650" y="1585" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="494" y="1700" class="hd" font-size="18" fill="#1a1714" font-weight="600">Homecoming Coverage</text>
+<text x="494" y="1725" class="bd" font-size="12" fill="#7a716a">✓ Post-wedding events</text>
+<text x="494" y="1745" class="bd" font-size="12" fill="#7a716a">✓ Candid moments</text>
+<rect x="860" y="1490" width="360" height="290" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="860" y="1490" width="360" height="170" rx="24" fill="#e6ddcf"/>
+<text x="1040" y="1585" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Photo</text>
+<text x="884" y="1700" class="hd" font-size="18" fill="#1a1714" font-weight="600">Private Sessions</text>
+<text x="884" y="1725" class="bd" font-size="12" fill="#7a716a">✓ Couples & portraits</text>
+<text x="884" y="1745" class="bd" font-size="12" fill="#7a716a">✓ Intimate settings</text>
+<rect x="0" y="1880" width="1240" height="460" rx="0" fill="#f3ede3"/>
+<text x="620" y="1915" class="lb" font-size="11" fill="#a8884c" text-anchor="center">PRICING</text>
+<text x="620" y="1950" class="hd" font-size="34" fill="#1a1714" text-anchor="center" font-weight="700">Our Packages</text>
+<rect x="80" y="1975" width="360" height="330" rx="24" fill="#fff" filter="url(#s2)"/>
+<text x="260" y="2015" class="hd" font-size="20" fill="#1a1714" text-anchor="center" font-weight="600">Silver</text>
+<text x="260" y="2055" class="hd" font-size="34" fill="#c0a062" text-anchor="center" font-weight="700">LKR 85K</text>
+<line x1="120" y1="2075" x2="400" y2="2075" stroke="#e6ddcf" stroke-width="1"/>
+<text x="110" y="2105" class="bd" font-size="12" fill="#3a342e">✓ 6 hours coverage</text>
+<text x="110" y="2129" class="bd" font-size="12" fill="#3a342e">✓ 1 photographer</text>
+<text x="110" y="2153" class="bd" font-size="12" fill="#3a342e">✓ 200+ edited photos</text>
+<text x="110" y="2177" class="bd" font-size="12" fill="#3a342e">✓ Online gallery</text>
+<rect x="140" y="2245" width="240" height="40" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="260" y="2270" class="bd" font-size="13" fill="#c0a062" text-anchor="center" font-weight="500">Select Plan</text>
+<rect x="470" y="1965" width="360" height="350" rx="24" fill="#1a1714" filter="url(#s2)"/>
+<rect x="600" y="1957" width="100" height="22" rx="11" fill="#c0a062"/>
+<text x="650" y="1972" class="bd" font-size="9" fill="#fff" text-anchor="center" font-weight="600">POPULAR</text>
+<text x="650" y="2005" class="hd" font-size="20" fill="#faf7f2" text-anchor="center" font-weight="600">Gold</text>
+<text x="650" y="2045" class="hd" font-size="34" fill="#c0a062" text-anchor="center" font-weight="700">LKR 145K</text>
+<line x1="510" y1="2065" x2="790" y2="2065" stroke="#3a342e" stroke-width="1"/>
+<text x="500" y="2095" class="bd" font-size="12" fill="#faf7f2">✓ Full day coverage</text>
+<text x="500" y="2119" class="bd" font-size="12" fill="#faf7f2">✓ 2 photographers</text>
+<text x="500" y="2143" class="bd" font-size="12" fill="#faf7f2">✓ 500+ edited photos</text>
+<text x="500" y="2167" class="bd" font-size="12" fill="#faf7f2">✓ Online gallery</text>
+<text x="500" y="2191" class="bd" font-size="12" fill="#faf7f2">✓ Photo album</text>
+<rect x="530" y="2255" width="240" height="40" rx="999" fill="#c0a062"/>
+<text x="650" y="2280" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Select Plan</text>
+<rect x="860" y="1975" width="360" height="330" rx="24" fill="#fff" filter="url(#s2)"/>
+<text x="1040" y="2015" class="hd" font-size="20" fill="#1a1714" text-anchor="center" font-weight="600">Platinum</text>
+<text x="1040" y="2055" class="hd" font-size="34" fill="#c0a062" text-anchor="center" font-weight="700">LKR 225K</text>
+<line x1="900" y1="2075" x2="1180" y2="2075" stroke="#e6ddcf" stroke-width="1"/>
+<text x="890" y="2105" class="bd" font-size="12" fill="#3a342e">✓ Full day + overtime</text>
+<text x="890" y="2129" class="bd" font-size="12" fill="#3a342e">✓ 3 photographers</text>
+<text x="890" y="2153" class="bd" font-size="12" fill="#3a342e">✓ 800+ edited photos</text>
+<text x="890" y="2177" class="bd" font-size="12" fill="#3a342e">✓ Premium album</text>
+<text x="890" y="2201" class="bd" font-size="12" fill="#3a342e">✓ Video highlights</text>
+<rect x="920" y="2245" width="240" height="40" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1040" y="2270" class="bd" font-size="13" fill="#c0a062" text-anchor="center" font-weight="500">Select Plan</text>
+<rect x="0" y="2380" width="1240" height="140" rx="0" fill="#1a1714"/>
+<text x="620" y="2428" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Ready to Book?</text>
+<text x="620" y="2460" class="bd" font-size="14" fill="#faf7f2" text-anchor="center">Let's create something beautiful together</text>
+<rect x="545" y="2476" width="150" height="36" rx="999" fill="#c0a062"/>
+<text x="620" y="2499" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Get a Quote</text>
+<rect x="0" y="2540" width="1240" height="260" rx="0" fill="#1a1714"/>
+<text x="80" y="2570" class="lb" font-size="10" fill="#faf7f2" opacity="0.6">SOLID WEDDINGS</text>
+<text x="80" y="2595" class="bd" font-size="12" fill="#7a716a">Capturing love stories across Sri Lanka with artistry and heart.</text>
+<circle cx="96" cy="2630" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="96" y="2634" class="bd" font-size="10" fill="#7a716a" text-anchor="center">ig</text>
+<circle cx="131" cy="2630" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="131" y="2634" class="bd" font-size="10" fill="#7a716a" text-anchor="center">fb</text>
+<circle cx="166" cy="2630" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="166" y="2634" class="bd" font-size="10" fill="#7a716a" text-anchor="center">yt</text>
+<text x="540" y="2570" class="lb" font-size="10" fill="#faf7f2">QUICK LINKS</text>
+<text x="540" y="2600" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="540" y="2622" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="540" y="2644" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="540" y="2666" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="540" y="2688" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<text x="820" y="2570" class="lb" font-size="10" fill="#faf7f2">CONTACT</text>
+<text x="820" y="2600" class="bd" font-size="13" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="820" y="2625" class="bd" font-size="13" fill="#7a716a">info@solidweddings.com</text>
+<text x="820" y="2650" class="bd" font-size="13" fill="#7a716a">Colombo, Sri Lanka</text>
+<line x1="80" y1="2740" x2="1160" y2="2740" stroke="#3a342e" stroke-width="1"/>
+<text x="80" y="2765" class="bd" font-size="11" fill="#7a716a">© 2024 Solid Weddings. All rights reserved.</text>
+<text x="1160" y="2765" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Crafted with heart in Sri Lanka</text>
+<rect x="3940" y="720" width="1240" height="2600" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="3940" y="720" width="1240" height="2600" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="3940" y="3284" width="165" height="28" rx="6" fill="#c0a062"/>
+<text x="4022.5" y="3302" class="bd" font-size="11" fill="#fff" font-weight="600">GALLERY DESKTOP</text>
+<rect x="0" y="760" width="1240" height="76" rx="0" fill="none" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="40" y="776" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="50" y="798" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="520" y="804" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="610" y="804" class="bd" font-size="13" fill="#1a1714">Gallery</text>
+<text x="710" y="804" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="800" y="804" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="896" y="804" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<rect x="1020" y="785" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1048" y="804" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<rect x="0" y="836" width="1240" height="280" rx="0" fill="#1a1714"/>
+<text x="620" y="980" class="lb" font-size="13" fill="#f0dca8" text-anchor="center">PORTFOLIO</text>
+<text x="620" y="1020" class="hd" font-size="48" fill="#fff" text-anchor="center" font-weight="700">Our Gallery</text>
+<rect x="350" y="1150" width="70" height="32" rx="999" fill="#c0a062"/>
+<text x="385" y="1171" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="500">All</text>
+<rect x="434" y="1150" width="110" height="32" rx="999" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="489" y="1171" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Wedding</text>
+<rect x="558" y="1150" width="100" height="32" rx="999" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="608" y="1171" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Bridal</text>
+<rect x="672" y="1150" width="140" height="32" rx="999" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="742" y="1171" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Engagement</text>
+<rect x="826" y="1150" width="150" height="32" rx="999" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="901" y="1171" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Destination</text>
+<rect x="80" y="1210" width="270" height="380" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="80" y="1510" width="270" height="80" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="100" y="1540" class="hd" font-size="18" fill="#fff" font-weight="600">Weddings</text>
+<text x="100" y="1565" class="bd" font-size="11" fill="#faf7f2">3 albums · 120+ photos</text>
+<rect x="370" y="1210" width="270" height="380" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="370" y="1510" width="270" height="80" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="390" y="1540" class="hd" font-size="18" fill="#fff" font-weight="600">Bridal</text>
+<text x="390" y="1565" class="bd" font-size="11" fill="#faf7f2">2 albums · 80+ photos</text>
+<rect x="660" y="1210" width="270" height="380" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="660" y="1510" width="270" height="80" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="680" y="1540" class="hd" font-size="18" fill="#fff" font-weight="600">Engagement</text>
+<text x="680" y="1565" class="bd" font-size="11" fill="#faf7f2">4 albums · 150+ photos</text>
+<rect x="950" y="1210" width="270" height="380" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="950" y="1510" width="270" height="80" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="970" y="1540" class="hd" font-size="18" fill="#fff" font-weight="600">Destination</text>
+<text x="970" y="1565" class="bd" font-size="11" fill="#faf7f2">2 albums · 60+ photos</text>
+<text x="620" y="1630" class="bd" font-size="14" fill="#7a716a" text-anchor="center">▼ Album View — Masonry Photo Grid ▼</text>
+<rect x="0" y="1660" width="290" height="260" rx="14" fill="#e6ddcf"/>
+<rect x="0" y="1932" width="290" height="180" rx="14" fill="#e6ddcf"/>
+<rect x="0" y="2124" width="290" height="260" rx="14" fill="#e6ddcf"/>
+<rect x="312" y="1660" width="290" height="180" rx="14" fill="#e6ddcf"/>
+<rect x="312" y="1852" width="290" height="260" rx="14" fill="#e6ddcf"/>
+<rect x="312" y="2124" width="290" height="200" rx="14" fill="#e6ddcf"/>
+<rect x="624" y="1660" width="290" height="220" rx="14" fill="#e6ddcf"/>
+<rect x="624" y="1892" width="290" height="260" rx="14" fill="#e6ddcf"/>
+<rect x="624" y="2164" width="290" height="180" rx="14" fill="#e6ddcf"/>
+<text x="620" y="2460" class="bd" font-size="11" fill="#7a716a" text-anchor="center">← 3-column masonry grid with lightbox overlay →</text>
+<rect x="0" y="2500" width="1240" height="260" rx="0" fill="#1a1714"/>
+<text x="80" y="2530" class="lb" font-size="10" fill="#faf7f2" opacity="0.6">SOLID WEDDINGS</text>
+<text x="80" y="2555" class="bd" font-size="12" fill="#7a716a">Capturing love stories across Sri Lanka with artistry and heart.</text>
+<circle cx="96" cy="2590" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="96" y="2594" class="bd" font-size="10" fill="#7a716a" text-anchor="center">ig</text>
+<circle cx="131" cy="2590" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="131" y="2594" class="bd" font-size="10" fill="#7a716a" text-anchor="center">fb</text>
+<circle cx="166" cy="2590" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="166" y="2594" class="bd" font-size="10" fill="#7a716a" text-anchor="center">yt</text>
+<text x="540" y="2530" class="lb" font-size="10" fill="#faf7f2">QUICK LINKS</text>
+<text x="540" y="2560" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="540" y="2582" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="540" y="2604" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="540" y="2626" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="540" y="2648" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<text x="820" y="2530" class="lb" font-size="10" fill="#faf7f2">CONTACT</text>
+<text x="820" y="2560" class="bd" font-size="13" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="820" y="2585" class="bd" font-size="13" fill="#7a716a">info@solidweddings.com</text>
+<text x="820" y="2610" class="bd" font-size="13" fill="#7a716a">Colombo, Sri Lanka</text>
+<line x1="80" y1="2700" x2="1160" y2="2700" stroke="#3a342e" stroke-width="1"/>
+<text x="80" y="2725" class="bd" font-size="11" fill="#7a716a">© 2024 Solid Weddings. All rights reserved.</text>
+<text x="1160" y="2725" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Crafted with heart in Sri Lanka</text>
+<rect x="5240" y="720" width="1240" height="2800" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="5240" y="720" width="1240" height="2800" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="5240" y="3484" width="165" height="28" rx="6" fill="#c0a062"/>
+<text x="5322.5" y="3502" class="bd" font-size="11" fill="#fff" font-weight="600">CONTACT DESKTOP</text>
+<rect x="0" y="760" width="1240" height="76" rx="0" fill="none" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="40" y="776" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="50" y="798" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="520" y="804" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="610" y="804" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="710" y="804" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="800" y="804" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="896" y="804" class="bd" font-size="13" fill="#1a1714">Contact</text>
+<rect x="1020" y="785" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="1048" y="804" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<rect x="0" y="836" width="1240" height="280" rx="0" fill="#1a1714"/>
+<text x="620" y="980" class="lb" font-size="13" fill="#f0dca8" text-anchor="center">GET IN TOUCH</text>
+<text x="620" y="1020" class="hd" font-size="48" fill="#fff" text-anchor="center" font-weight="700">Contact Us</text>
+<text x="100" y="1160" class="hd" font-size="28" fill="#1a1714" font-weight="700">Send a Message</text>
+<text x="100" y="1190" class="lb" font-size="9" fill="#7a716a">FULL NAME</text>
+<rect x="100" y="1200" width="520" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="100" y="1252" class="lb" font-size="9" fill="#7a716a">EMAIL</text>
+<rect x="100" y="1262" width="520" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="100" y="1314" class="lb" font-size="9" fill="#7a716a">PHONE</text>
+<rect x="100" y="1324" width="520" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="100" y="1376" class="lb" font-size="9" fill="#7a716a">WEDDING DATE</text>
+<rect x="100" y="1386" width="250" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="370" y="1376" class="lb" font-size="9" fill="#7a716a">VENUE</text>
+<rect x="370" y="1386" width="250" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="100" y="1438" class="lb" font-size="9" fill="#7a716a">PACKAGE</text>
+<rect x="100" y="1448" width="520" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="100" y="1500" class="lb" font-size="9" fill="#7a716a">MESSAGE</text>
+<rect x="100" y="1510" width="520" height="110" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="100" y="1636" width="180" height="44" rx="999" fill="#c0a062"/>
+<text x="190" y="1663" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Send Message</text>
+<rect x="700" y="1160" width="460" height="360" rx="24" fill="#f3ede3"/>
+<text x="730" y="1195" class="hd" font-size="20" fill="#1a1714" font-weight="600">Contact Info</text>
+<text x="730" y="1230" class="bd" font-size="13" fill="#3a342e">📞 +94 XX XXX XXXX</text>
+<text x="730" y="1260" class="bd" font-size="13" fill="#3a342e">✉ info@solidweddings.com</text>
+<text x="730" y="1290" class="bd" font-size="13" fill="#3a342e">📍 Colombo, Sri Lanka</text>
+<text x="730" y="1335" class="lb" font-size="10" fill="#7a716a">BUSINESS HOURS</text>
+<text x="730" y="1360" class="bd" font-size="13" fill="#3a342e">Mon – Sat: 9:00 AM – 6:00 PM</text>
+<text x="730" y="1385" class="bd" font-size="13" fill="#3a342e">Sun: By appointment</text>
+<rect x="700" y="1420" width="460" height="100" rx="0" fill="#e6ddcf"/>
+<text x="930" y="1475" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Map Embed</text>
+<rect x="0" y="1560" width="1240" height="340" rx="0" fill="#f3ede3"/>
+<text x="620" y="1590" class="lb" font-size="11" fill="#a8884c" text-anchor="center">FAQ</text>
+<text x="620" y="1620" class="hd" font-size="28" fill="#1a1714" text-anchor="center" font-weight="700">Frequently Asked Questions</text>
+<rect x="80" y="1645" width="560" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="100" y="1673" class="bd" font-size="13" fill="#1a1714" font-weight="500">How far in advance should I book?</text>
+<text x="100" y="1697" class="bd" font-size="12" fill="#7a716a">We recommend booking 3-6 months ahead...</text>
+<rect x="670" y="1645" width="560" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="690" y="1673" class="bd" font-size="13" fill="#1a1714" font-weight="500">Do you travel for destination weddings?</text>
+<text x="690" y="1697" class="bd" font-size="12" fill="#7a716a">Yes! We love destination weddings...</text>
+<rect x="80" y="1745" width="560" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="100" y="1773" class="bd" font-size="13" fill="#1a1714" font-weight="500">How many photos will we receive?</text>
+<text x="100" y="1797" class="bd" font-size="12" fill="#7a716a">It depends on the package you choose...</text>
+<rect x="670" y="1745" width="560" height="80" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="690" y="1773" class="bd" font-size="13" fill="#1a1714" font-weight="500">When will we receive our photos?</text>
+<text x="690" y="1797" class="bd" font-size="12" fill="#7a716a">Typically within 4-6 weeks...</text>
+<rect x="0" y="1940" width="1240" height="260" rx="0" fill="#1a1714"/>
+<text x="80" y="1970" class="lb" font-size="10" fill="#faf7f2" opacity="0.6">SOLID WEDDINGS</text>
+<text x="80" y="1995" class="bd" font-size="12" fill="#7a716a">Capturing love stories across Sri Lanka with artistry and heart.</text>
+<circle cx="96" cy="2030" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="96" y="2034" class="bd" font-size="10" fill="#7a716a" text-anchor="center">ig</text>
+<circle cx="131" cy="2030" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="131" y="2034" class="bd" font-size="10" fill="#7a716a" text-anchor="center">fb</text>
+<circle cx="166" cy="2030" r="14" fill="none" stroke="#7a716a" stroke-width="1"/>
+<text x="166" y="2034" class="bd" font-size="10" fill="#7a716a" text-anchor="center">yt</text>
+<text x="540" y="1970" class="lb" font-size="10" fill="#faf7f2">QUICK LINKS</text>
+<text x="540" y="2000" class="bd" font-size="13" fill="#7a716a">Home</text>
+<text x="540" y="2022" class="bd" font-size="13" fill="#7a716a">Gallery</text>
+<text x="540" y="2044" class="bd" font-size="13" fill="#7a716a">About</text>
+<text x="540" y="2066" class="bd" font-size="13" fill="#7a716a">Services</text>
+<text x="540" y="2088" class="bd" font-size="13" fill="#7a716a">Contact</text>
+<text x="820" y="1970" class="lb" font-size="10" fill="#faf7f2">CONTACT</text>
+<text x="820" y="2000" class="bd" font-size="13" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="820" y="2025" class="bd" font-size="13" fill="#7a716a">info@solidweddings.com</text>
+<text x="820" y="2050" class="bd" font-size="13" fill="#7a716a">Colombo, Sri Lanka</text>
+<line x1="80" y1="2140" x2="1160" y2="2140" stroke="#3a342e" stroke-width="1"/>
+<text x="80" y="2165" class="bd" font-size="11" fill="#7a716a">© 2024 Solid Weddings. All rights reserved.</text>
+<text x="1160" y="2165" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Crafted with heart in Sri Lanka</text>
+<rect x="6640" y="720" width="375" height="4200" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="6640" y="720" width="375" height="4200" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="6640" y="4884" width="129" height="28" rx="6" fill="#a8884c"/>
+<text x="6704.5" y="4902" class="bd" font-size="11" fill="#fff" font-weight="600">HOME MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="56" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16" y="794" width="100" height="22" rx="3" fill="#c0a062" opacity="0.15"/>
+<text x="22" y="809" class="bd" font-size="8" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<line x1="340" y1="800" x2="360" y2="800" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="808" x2="360" y2="808" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="816" x2="355" y2="816" stroke="#1a1714" stroke-width="2"/>
+<rect x="0" y="840" width="375" height="420" rx="0" fill="#1a1714"/>
+<rect x="0" y="1050" width="375" height="210" rx="0" fill="#000" opacity="0.3"/>
+<text x="188" y="1010" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">CAPTURING LOVE</text>
+<text x="188" y="1060" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Your Wedding,</text>
+<text x="188" y="1095" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Beautifully Told</text>
+<rect x="148" y="1120" width="80" height="36" rx="999" fill="#c0a062"/>
+<text x="188" y="1143" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Book Now</text>
+<rect x="16" y="1290" width="165" height="70" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="1320" class="hd" font-size="22" fill="#c0a062" font-weight="700">200+</text>
+<text x="32" y="1340" class="bd" font-size="10" fill="#7a716a">Weddings</text>
+<rect x="205" y="1290" width="165" height="70" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="221" y="1320" class="hd" font-size="22" fill="#c0a062" font-weight="700">10+</text>
+<text x="221" y="1340" class="bd" font-size="10" fill="#7a716a">Years Exp</text>
+<rect x="16" y="1372" width="165" height="70" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="1402" class="hd" font-size="22" fill="#c0a062" font-weight="700">500+</text>
+<text x="32" y="1422" class="bd" font-size="10" fill="#7a716a">Couples</text>
+<rect x="205" y="1372" width="165" height="70" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="221" y="1402" class="hd" font-size="22" fill="#c0a062" font-weight="700">50+</text>
+<text x="221" y="1422" class="bd" font-size="10" fill="#7a716a">Awards</text>
+<rect x="16" y="1480" width="343" height="200" rx="24" fill="#e6ddcf"/>
+<text x="188" y="1590" class="bd" font-size="12" fill="#7a716a" text-anchor="center">About Image</text>
+<text x="16" y="1710" class="lb" font-size="10" fill="#a8884c">OUR STORY</text>
+<text x="16" y="1738" class="hd" font-size="24" fill="#1a1714" font-weight="700">Photography is Our Passion</text>
+<text x="16" y="1768" class="bd" font-size="13" fill="#3a342e">We are a team of passionate wedding</text>
+<text x="16" y="1786" class="bd" font-size="13" fill="#3a342e">photographers dedicated to capturing your</text>
+<text x="16" y="1804" class="bd" font-size="13" fill="#3a342e">most precious moments.</text>
+<rect x="16" y="1825" width="130" height="36" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="81" y="1848" class="bd" font-size="12" fill="#c0a062" text-anchor="center" font-weight="500">Learn More →</text>
+<text x="188" y="1890" class="lb" font-size="10" fill="#a8884c" text-anchor="center">WHAT WE OFFER</text>
+<text x="188" y="1918" class="hd" font-size="26" fill="#1a1714" text-anchor="center" font-weight="700">Our Services</text>
+<rect x="16" y="1940" width="343" height="85" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1940" width="80" height="85" rx="24" fill="#e6ddcf"/>
+<text x="115" y="1975" class="hd" font-size="15" fill="#1a1714" font-weight="600">Wedding Photography</text>
+<text x="115" y="1995" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="2040" width="343" height="85" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="2040" width="80" height="85" rx="24" fill="#e6ddcf"/>
+<text x="115" y="2075" class="hd" font-size="15" fill="#1a1714" font-weight="600">Bridal Portraits</text>
+<text x="115" y="2095" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="2140" width="343" height="85" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="2140" width="80" height="85" rx="24" fill="#e6ddcf"/>
+<text x="115" y="2175" class="hd" font-size="15" fill="#1a1714" font-weight="600">Engagement Shoots</text>
+<text x="115" y="2195" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="2240" width="343" height="85" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="2240" width="80" height="85" rx="24" fill="#e6ddcf"/>
+<text x="115" y="2275" class="hd" font-size="15" fill="#1a1714" font-weight="600">Destination Weddings</text>
+<text x="115" y="2295" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="0" y="2360" width="375" height="120" rx="0" fill="#1a1714"/>
+<text x="188" y="2400" class="hd" font-size="20" fill="#fff" text-anchor="center" font-weight="700">Ready to Capture</text>
+<text x="188" y="2425" class="hd" font-size="20" fill="#fff" text-anchor="center" font-weight="700">Your Story?</text>
+<rect x="138" y="2438" width="100" height="32" rx="999" fill="#c0a062"/>
+<text x="188" y="2458" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Contact Us</text>
+<rect x="0" y="2500" width="375" height="200" rx="0" fill="#1a1714"/>
+<text x="24" y="2530" class="lb" font-size="9" fill="#faf7f2">SOLID WEDDINGS</text>
+<text x="24" y="2555" class="bd" font-size="12" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="24" y="2578" class="bd" font-size="12" fill="#7a716a">info@solidweddings.com</text>
+<text x="24" y="2601" class="bd" font-size="12" fill="#7a716a">Colombo, Sri Lanka</text>
+<text x="188" y="2640" class="bd" font-size="10" fill="#7a716a" text-anchor="center">© 2024 Solid Weddings</text>
+<rect x="7100" y="720" width="375" height="2800" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="7100" y="720" width="375" height="2800" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="7100" y="3484" width="138" height="28" rx="6" fill="#a8884c"/>
+<text x="7169.0" y="3502" class="bd" font-size="11" fill="#fff" font-weight="600">ABOUT MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="56" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16" y="794" width="100" height="22" rx="3" fill="#c0a062" opacity="0.15"/>
+<text x="22" y="809" class="bd" font-size="8" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<line x1="340" y1="800" x2="360" y2="800" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="808" x2="360" y2="808" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="816" x2="355" y2="816" stroke="#1a1714" stroke-width="2"/>
+<rect x="0" y="840" width="375" height="280" rx="0" fill="#1a1714"/>
+<rect x="0" y="980" width="375" height="140" rx="0" fill="#000" opacity="0.3"/>
+<text x="188" y="940" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">CAPTURING LOVE</text>
+<text x="188" y="990" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">About Us</text>
+<text x="188" y="1025" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700"></text>
+<rect x="148" y="1050" width="80" height="36" rx="999" fill="#c0a062"/>
+<text x="188" y="1073" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Book Now</text>
+<text x="188" y="1045" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">OUR STORY</text>
+<rect x="16" y="1090" width="343" height="200" rx="24" fill="#e6ddcf"/>
+<text x="188" y="1200" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Studio Photo</text>
+<text x="16" y="1320" class="lb" font-size="10" fill="#a8884c">HOW WE STARTED</text>
+<text x="16" y="1348" class="hd" font-size="26" fill="#1a1714" font-weight="700">Our Origin</text>
+<text x="16" y="1378" class="bd" font-size="13" fill="#3a342e">Founded with a deep love for storytelling.</text>
+<text x="16" y="1398" class="bd" font-size="13" fill="#3a342e">We've grown into one of Sri Lanka's most</text>
+<text x="16" y="1418" class="bd" font-size="13" fill="#3a342e">sought-after wedding photography studios.</text>
+<text x="188" y="1470" class="lb" font-size="10" fill="#a8884c" text-anchor="center">OUR VALUES</text>
+<text x="188" y="1498" class="hd" font-size="26" fill="#1a1714" text-anchor="center" font-weight="700">What We Stand For</text>
+<rect x="16" y="1520" width="343" height="55" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="46" cy="1548" r="14" fill="#c0a062"/>
+<text x="46" y="1553" class="bd" font-size="11" fill="#fff" text-anchor="center">♥</text>
+<text x="68" y="1553" class="hd" font-size="15" fill="#1a1714" font-weight="600">Passion</text>
+<rect x="16" y="1590" width="343" height="55" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="46" cy="1618" r="14" fill="#c0a062"/>
+<text x="46" y="1623" class="bd" font-size="11" fill="#fff" text-anchor="center">✦</text>
+<text x="68" y="1623" class="hd" font-size="15" fill="#1a1714" font-weight="600">Quality</text>
+<rect x="16" y="1660" width="343" height="55" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="46" cy="1688" r="14" fill="#c0a062"/>
+<text x="46" y="1693" class="bd" font-size="11" fill="#fff" text-anchor="center">◎</text>
+<text x="68" y="1693" class="hd" font-size="15" fill="#1a1714" font-weight="600">Authenticity</text>
+<rect x="16" y="1730" width="343" height="55" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="46" cy="1758" r="14" fill="#c0a062"/>
+<text x="46" y="1763" class="bd" font-size="11" fill="#fff" text-anchor="center">◈</text>
+<text x="68" y="1763" class="hd" font-size="15" fill="#1a1714" font-weight="600">Trust</text>
+<rect x="0" y="1810" width="375" height="100" rx="0" fill="#1a1714"/>
+<text x="188" y="1850" class="hd" font-size="20" fill="#fff" text-anchor="center" font-weight="700">Let's Work Together</text>
+<rect x="0" y="1930" width="375" height="200" rx="0" fill="#1a1714"/>
+<text x="24" y="1960" class="lb" font-size="9" fill="#faf7f2">SOLID WEDDINGS</text>
+<text x="24" y="1985" class="bd" font-size="12" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="24" y="2008" class="bd" font-size="12" fill="#7a716a">info@solidweddings.com</text>
+<text x="24" y="2031" class="bd" font-size="12" fill="#7a716a">Colombo, Sri Lanka</text>
+<text x="188" y="2070" class="bd" font-size="10" fill="#7a716a" text-anchor="center">© 2024 Solid Weddings</text>
+<rect x="7560" y="720" width="375" height="3600" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="7560" y="720" width="375" height="3600" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="7560" y="4284" width="165" height="28" rx="6" fill="#a8884c"/>
+<text x="7642.5" y="4302" class="bd" font-size="11" fill="#fff" font-weight="600">SERVICES MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="56" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16" y="794" width="100" height="22" rx="3" fill="#c0a062" opacity="0.15"/>
+<text x="22" y="809" class="bd" font-size="8" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<line x1="340" y1="800" x2="360" y2="800" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="808" x2="360" y2="808" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="816" x2="355" y2="816" stroke="#1a1714" stroke-width="2"/>
+<rect x="0" y="840" width="375" height="280" rx="0" fill="#1a1714"/>
+<rect x="0" y="980" width="375" height="140" rx="0" fill="#000" opacity="0.3"/>
+<text x="188" y="940" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">CAPTURING LOVE</text>
+<text x="188" y="990" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Our Services</text>
+<text x="188" y="1025" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700"></text>
+<rect x="148" y="1050" width="80" height="36" rx="999" fill="#c0a062"/>
+<text x="188" y="1073" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Book Now</text>
+<rect x="16" y="1150" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1150" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1185" class="hd" font-size="15" fill="#1a1714" font-weight="600">Wedding Photography</text>
+<text x="112" y="1208" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="1260" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1260" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1295" class="hd" font-size="15" fill="#1a1714" font-weight="600">Bridal Portraits</text>
+<text x="112" y="1318" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="1370" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1370" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1405" class="hd" font-size="15" fill="#1a1714" font-weight="600">Engagement Shoots</text>
+<text x="112" y="1428" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="1480" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1480" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1515" class="hd" font-size="15" fill="#1a1714" font-weight="600">Destination Weddings</text>
+<text x="112" y="1538" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="1590" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1590" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1625" class="hd" font-size="15" fill="#1a1714" font-weight="600">Homecoming</text>
+<text x="112" y="1648" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="16" y="1700" width="343" height="95" rx="24" fill="#fff" filter="url(#s1)"/>
+<rect x="16" y="1700" width="80" height="95" rx="24" fill="#e6ddcf"/>
+<text x="112" y="1735" class="hd" font-size="15" fill="#1a1714" font-weight="600">Private Sessions</text>
+<text x="112" y="1758" class="bd" font-size="12" fill="#c0a062">View details →</text>
+<rect x="0" y="1860" width="375" height="320" rx="0" fill="#f3ede3"/>
+<text x="188" y="1890" class="lb" font-size="10" fill="#a8884c" text-anchor="center">PRICING</text>
+<text x="188" y="1915" class="hd" font-size="24" fill="#1a1714" text-anchor="center" font-weight="700">Our Packages</text>
+<rect x="40" y="1935" width="295" height="65" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="55" y="1962" class="hd" font-size="16" fill="#1a1714" font-weight="600">Silver</text>
+<text x="320" y="1962" class="hd" font-size="16" fill="#c0a062" text-anchor="end" font-weight="700">LKR 85K</text>
+<rect x="40" y="2015" width="295" height="65" rx="14" fill="#1a1714" filter="url(#s1)"/>
+<text x="55" y="2042" class="hd" font-size="16" fill="#faf7f2" font-weight="600">Gold</text>
+<text x="320" y="2042" class="hd" font-size="16" fill="#c0a062" text-anchor="end" font-weight="700">LKR 145K</text>
+<rect x="40" y="2095" width="295" height="65" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="55" y="2122" class="hd" font-size="16" fill="#1a1714" font-weight="600">Platinum</text>
+<text x="320" y="2122" class="hd" font-size="16" fill="#c0a062" text-anchor="end" font-weight="700">LKR 225K</text>
+<rect x="0" y="2200" width="375" height="100" rx="0" fill="#1a1714"/>
+<text x="188" y="2240" class="hd" font-size="20" fill="#fff" text-anchor="center" font-weight="700">Ready to Book?</text>
+<rect x="0" y="2320" width="375" height="200" rx="0" fill="#1a1714"/>
+<text x="24" y="2350" class="lb" font-size="9" fill="#faf7f2">SOLID WEDDINGS</text>
+<text x="24" y="2375" class="bd" font-size="12" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="24" y="2398" class="bd" font-size="12" fill="#7a716a">info@solidweddings.com</text>
+<text x="24" y="2421" class="bd" font-size="12" fill="#7a716a">Colombo, Sri Lanka</text>
+<text x="188" y="2460" class="bd" font-size="10" fill="#7a716a" text-anchor="center">© 2024 Solid Weddings</text>
+<rect x="8020" y="720" width="375" height="3000" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="8020" y="720" width="375" height="3000" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="8020" y="3684" width="156" height="28" rx="6" fill="#a8884c"/>
+<text x="8098.0" y="3702" class="bd" font-size="11" fill="#fff" font-weight="600">GALLERY MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="56" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16" y="794" width="100" height="22" rx="3" fill="#c0a062" opacity="0.15"/>
+<text x="22" y="809" class="bd" font-size="8" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<line x1="340" y1="800" x2="360" y2="800" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="808" x2="360" y2="808" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="816" x2="355" y2="816" stroke="#1a1714" stroke-width="2"/>
+<rect x="0" y="840" width="375" height="280" rx="0" fill="#1a1714"/>
+<rect x="0" y="980" width="375" height="140" rx="0" fill="#000" opacity="0.3"/>
+<text x="188" y="940" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">CAPTURING LOVE</text>
+<text x="188" y="990" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Our Gallery</text>
+<text x="188" y="1025" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700"></text>
+<rect x="148" y="1050" width="80" height="36" rx="999" fill="#c0a062"/>
+<text x="188" y="1073" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Book Now</text>
+<rect x="16" y="1150" width="60" height="30" rx="999" fill="#c0a062"/>
+<text x="46" y="1170" class="bd" font-size="11" fill="#fff" text-anchor="center" font-weight="500">All</text>
+<rect x="86" y="1150" width="100" height="30" rx="999" fill="#fff"/>
+<text x="136" y="1170" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="500">Wedding</text>
+<rect x="196" y="1150" width="90" height="30" rx="999" fill="#fff"/>
+<text x="241" y="1170" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="500">Bridal</text>
+<rect x="296" y="1150" width="130" height="30" rx="999" fill="#fff"/>
+<text x="361" y="1170" class="bd" font-size="11" fill="#3a342e" text-anchor="center" font-weight="500">Engagement</text>
+<rect x="16" y="1200" width="343" height="180" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="16" y="1330" width="343" height="50" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="36" y="1358" class="hd" font-size="16" fill="#fff" font-weight="600">Weddings</text>
+<text x="300" y="1358" class="bd" font-size="11" fill="#faf7f2" text-anchor="end">3 albums</text>
+<rect x="16" y="1400" width="343" height="180" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="16" y="1530" width="343" height="50" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="36" y="1558" class="hd" font-size="16" fill="#fff" font-weight="600">Bridal</text>
+<text x="300" y="1558" class="bd" font-size="11" fill="#faf7f2" text-anchor="end">2 albums</text>
+<rect x="16" y="1600" width="343" height="180" rx="24" fill="#e6ddcf" filter="url(#s1)"/>
+<rect x="16" y="1730" width="343" height="50" rx="0" fill="#1a1714" opacity="0.7"/>
+<text x="36" y="1758" class="hd" font-size="16" fill="#fff" font-weight="600">Engagement</text>
+<text x="300" y="1758" class="bd" font-size="11" fill="#faf7f2" text-anchor="end">4 albums</text>
+<rect x="0" y="1850" width="375" height="200" rx="0" fill="#1a1714"/>
+<text x="24" y="1880" class="lb" font-size="9" fill="#faf7f2">SOLID WEDDINGS</text>
+<text x="24" y="1905" class="bd" font-size="12" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="24" y="1928" class="bd" font-size="12" fill="#7a716a">info@solidweddings.com</text>
+<text x="24" y="1951" class="bd" font-size="12" fill="#7a716a">Colombo, Sri Lanka</text>
+<text x="188" y="1990" class="bd" font-size="10" fill="#7a716a" text-anchor="center">© 2024 Solid Weddings</text>
+<rect x="8480" y="720" width="375" height="3800" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="8480" y="720" width="375" height="3800" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="8480" y="4484" width="156" height="28" rx="6" fill="#a8884c"/>
+<text x="8558.0" y="4502" class="bd" font-size="11" fill="#fff" font-weight="600">CONTACT MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="56" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16" y="794" width="100" height="22" rx="3" fill="#c0a062" opacity="0.15"/>
+<text x="22" y="809" class="bd" font-size="8" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<line x1="340" y1="800" x2="360" y2="800" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="808" x2="360" y2="808" stroke="#1a1714" stroke-width="2"/>
+<line x1="340" y1="816" x2="355" y2="816" stroke="#1a1714" stroke-width="2"/>
+<rect x="0" y="840" width="375" height="280" rx="0" fill="#1a1714"/>
+<rect x="0" y="980" width="375" height="140" rx="0" fill="#000" opacity="0.3"/>
+<text x="188" y="940" class="lb" font-size="10" fill="#f0dca8" text-anchor="center">CAPTURING LOVE</text>
+<text x="188" y="990" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700">Contact Us</text>
+<text x="188" y="1025" class="hd" font-size="30" fill="#fff" text-anchor="center" font-weight="700"></text>
+<rect x="148" y="1050" width="80" height="36" rx="999" fill="#c0a062"/>
+<text x="188" y="1073" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Book Now</text>
+<text x="24" y="1150" class="hd" font-size="22" fill="#1a1714" font-weight="700">Send a Message</text>
+<text x="24" y="1180" class="lb" font-size="9" fill="#7a716a">FULL NAME</text>
+<rect x="24" y="1190" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1235" class="lb" font-size="9" fill="#7a716a">EMAIL</text>
+<rect x="24" y="1245" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1290" class="lb" font-size="9" fill="#7a716a">PHONE</text>
+<rect x="24" y="1300" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1345" class="lb" font-size="9" fill="#7a716a">WEDDING DATE</text>
+<rect x="24" y="1355" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1400" class="lb" font-size="9" fill="#7a716a">VENUE</text>
+<rect x="24" y="1410" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1455" class="lb" font-size="9" fill="#7a716a">PACKAGE</text>
+<rect x="24" y="1465" width="327" height="38" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="24" y="1520" class="lb" font-size="9" fill="#7a716a">MESSAGE</text>
+<rect x="24" y="1530" width="327" height="100" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="24" y="1645" width="160" height="40" rx="999" fill="#c0a062"/>
+<text x="104" y="1670" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Send Message</text>
+<rect x="16" y="1710" width="343" height="240" rx="24" fill="#f3ede3"/>
+<text x="36" y="1740" class="hd" font-size="18" fill="#1a1714" font-weight="600">Contact Info</text>
+<text x="36" y="1770" class="bd" font-size="12" fill="#3a342e">📞 +94 XX XXX XXXX</text>
+<text x="36" y="1795" class="bd" font-size="12" fill="#3a342e">✉ info@solidweddings.com</text>
+<text x="36" y="1820" class="bd" font-size="12" fill="#3a342e">📍 Colombo, Sri Lanka</text>
+<text x="36" y="1860" class="bd" font-size="12" fill="#3a342e">Mon–Sat: 9AM–6PM</text>
+<text x="188" y="1980" class="lb" font-size="10" fill="#a8884c" text-anchor="center">FAQ</text>
+<text x="188" y="2005" class="hd" font-size="22" fill="#1a1714" text-anchor="center" font-weight="700">Frequently Asked</text>
+<text x="188" y="2030" class="hd" font-size="22" fill="#1a1714" text-anchor="center" font-weight="700">Questions</text>
+<rect x="16" y="2050" width="343" height="60" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="2072" class="bd" font-size="12" fill="#1a1714" font-weight="500">How far in advance should I book?</text>
+<text x="32" y="2092" class="bd" font-size="11" fill="#7a716a">3-6 months ahead...</text>
+<rect x="16" y="2120" width="343" height="60" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="2142" class="bd" font-size="12" fill="#1a1714" font-weight="500">Do you travel?</text>
+<text x="32" y="2162" class="bd" font-size="11" fill="#7a716a">Yes! Destination weddings...</text>
+<rect x="16" y="2190" width="343" height="60" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="2212" class="bd" font-size="12" fill="#1a1714" font-weight="500">How many photos?</text>
+<text x="32" y="2232" class="bd" font-size="11" fill="#7a716a">Depends on your package...</text>
+<rect x="16" y="2260" width="343" height="60" rx="14" fill="#fff" filter="url(#s1)"/>
+<text x="32" y="2282" class="bd" font-size="12" fill="#1a1714" font-weight="500">When will we receive photos?</text>
+<text x="32" y="2302" class="bd" font-size="11" fill="#7a716a">Within 4-6 weeks...</text>
+<rect x="0" y="2340" width="375" height="200" rx="0" fill="#1a1714"/>
+<text x="24" y="2370" class="lb" font-size="9" fill="#faf7f2">SOLID WEDDINGS</text>
+<text x="24" y="2395" class="bd" font-size="12" fill="#7a716a">+94 XX XXX XXXX</text>
+<text x="24" y="2418" class="bd" font-size="12" fill="#7a716a">info@solidweddings.com</text>
+<text x="24" y="2441" class="bd" font-size="12" fill="#7a716a">Colombo, Sri Lanka</text>
+<text x="188" y="2480" class="bd" font-size="10" fill="#7a716a" text-anchor="center">© 2024 Solid Weddings</text>
+<rect x="8940" y="720" width="1240" height="700" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="8940" y="720" width="1240" height="700" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="8940" y="1384" width="210" height="28" rx="6" fill="#c0a062"/>
+<text x="9045.0" y="1402" class="bd" font-size="11" fill="#fff" font-weight="600">CLIENT LOGIN DESKTOP</text>
+<rect x="400" y="760" width="440" height="400" rx="24" fill="#fff" filter="url(#s2)"/>
+<text x="620" y="810" class="lb" font-size="11" fill="#c0a062" text-anchor="center">SOLID WEDDINGS</text>
+<text x="620" y="845" class="hd" font-size="30" fill="#1a1714" text-anchor="center" font-weight="700">Client Login</text>
+<text x="460" y="890" class="lb" font-size="9" fill="#7a716a">EMAIL</text>
+<rect x="460" y="900" width="320" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="460" y="970" class="lb" font-size="9" fill="#7a716a">PASSWORD</text>
+<rect x="460" y="980" width="320" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="460" y="1045" width="320" height="44" rx="999" fill="#c0a062"/>
+<text x="620" y="1072" class="bd" font-size="14" fill="#fff" text-anchor="center" font-weight="600">Sign In</text>
+<text x="620" y="1120" class="bd" font-size="12" fill="#7a716a" text-anchor="center">Don't have an account? Sign up</text>
+<rect x="9500" y="720" width="375" height="700" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="9500" y="720" width="375" height="700" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="9500" y="1384" width="201" height="28" rx="6" fill="#a8884c"/>
+<text x="9600.5" y="1402" class="bd" font-size="11" fill="#fff" font-weight="600">CLIENT LOGIN MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="16" y="800" width="343" height="380" rx="24" fill="#fff" filter="url(#s2)"/>
+<text x="188" y="840" class="lb" font-size="10" fill="#c0a062" text-anchor="center">CLIENT LOGIN</text>
+<text x="188" y="875" class="hd" font-size="26" fill="#1a1714" text-anchor="center" font-weight="700">Welcome Back</text>
+<text x="40" y="920" class="lb" font-size="9" fill="#7a716a">EMAIL</text>
+<rect x="40" y="930" width="295" height="40" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="40" y="990" class="lb" font-size="9" fill="#7a716a">PASSWORD</text>
+<rect x="40" y="1000" width="295" height="40" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="40" y="1060" width="295" height="40" rx="999" fill="#c0a062"/>
+<text x="188" y="1085" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Sign In</text>
+<text x="188" y="1125" class="bd" font-size="11" fill="#7a716a" text-anchor="center">Don't have an account? Sign up</text>
+<rect x="9500" y="1520" width="1240" height="1400" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="9500" y="1520" width="1240" height="1400" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="9500" y="2884" width="246" height="28" rx="6" fill="#c0a062"/>
+<text x="9623.0" y="2902" class="bd" font-size="11" fill="#fff" font-weight="600">CLIENT DASHBOARD DESKTOP</text>
+<rect x="0" y="1560" width="1240" height="64" rx="0" fill="#1a1714"/>
+<text x="40" y="1598" class="lb" font-size="11" fill="#c0a062">SOLID WEDDINGS</text>
+<text x="1200" y="1598" class="bd" font-size="13" fill="#faf7f2" text-anchor="end">Welcome, Client</text>
+<rect x="80" y="1650" width="360" height="80" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="100" y="1685" class="hd" font-size="28" fill="#c0a062" font-weight="700">3</text>
+<text x="100" y="1708" class="bd" font-size="13" fill="#7a716a">Assigned Albums</text>
+<rect x="470" y="1650" width="360" height="80" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="490" y="1685" class="hd" font-size="28" fill="#c0a062" font-weight="700">45</text>
+<text x="490" y="1708" class="bd" font-size="13" fill="#7a716a">Total Photos</text>
+<rect x="860" y="1650" width="360" height="80" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="880" y="1685" class="hd" font-size="28" fill="#c0a062" font-weight="700">2</text>
+<text x="880" y="1708" class="bd" font-size="13" fill="#7a716a">Downloaded</text>
+<text x="80" y="1760" class="hd" font-size="22" fill="#1a1714" font-weight="700">Your Galleries</text>
+<rect x="80" y="1790" width="360" height="220" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="80" y="1790" width="360" height="140" rx="14" fill="#e6ddcf"/>
+<text x="100" y="1955" class="hd" font-size="14" fill="#1a1714" font-weight="600">ISURI & GEETHAN Wedding</text>
+<text x="100" y="1978" class="bd" font-size="12" fill="#7a716a">12 photos</text>
+<rect x="470" y="1790" width="360" height="220" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="470" y="1790" width="360" height="140" rx="14" fill="#e6ddcf"/>
+<text x="490" y="1955" class="hd" font-size="14" fill="#1a1714" font-weight="600">TANIYA Bridal</text>
+<text x="490" y="1978" class="bd" font-size="12" fill="#7a716a">12 photos</text>
+<rect x="860" y="1790" width="360" height="220" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="860" y="1790" width="360" height="140" rx="14" fill="#e6ddcf"/>
+<text x="880" y="1955" class="hd" font-size="14" fill="#1a1714" font-weight="600">KAVEESHA & GANINDU Engagement</text>
+<text x="880" y="1978" class="bd" font-size="12" fill="#7a716a">12 photos</text>
+<rect x="10060" y="720" width="375" height="1600" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="10060" y="720" width="375" height="1600" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="10060" y="2284" width="237" height="28" rx="6" fill="#a8884c"/>
+<text x="10178.5" y="2302" class="bd" font-size="11" fill="#fff" font-weight="600">CLIENT DASHBOARD MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="0" y="784" width="375" height="50" rx="0" fill="#1a1714"/>
+<text x="24" y="814" class="lb" font-size="10" fill="#c0a062">MY DASHBOARD</text>
+<text x="340" y="814" class="bd" font-size="11" fill="#7a716a" text-anchor="end">Logout</text>
+<rect x="16" y="850" width="343" height="45" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="32" y="878" class="hd" font-size="20" fill="#c0a062" font-weight="700">3</text>
+<text x="60" y="878" class="bd" font-size="12" fill="#7a716a">Albums</text>
+<rect x="16" y="905" width="343" height="45" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="32" y="933" class="hd" font-size="20" fill="#c0a062" font-weight="700">45</text>
+<text x="60" y="933" class="bd" font-size="12" fill="#7a716a">Photos</text>
+<rect x="16" y="960" width="343" height="45" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="32" y="988" class="hd" font-size="20" fill="#c0a062" font-weight="700">2</text>
+<text x="60" y="988" class="bd" font-size="12" fill="#7a716a">Downloaded</text>
+<text x="24" y="1030" class="hd" font-size="18" fill="#1a1714" font-weight="700">Your Galleries</text>
+<rect x="16" y="1050" width="343" height="95" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="16" y="1050" width="343" height="60" rx="14" fill="#e6ddcf"/>
+<text x="32" y="1125" class="hd" font-size="13" fill="#1a1714" font-weight="600">ISURI & GEETHAN</text>
+<rect x="16" y="1160" width="343" height="95" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="16" y="1160" width="343" height="60" rx="14" fill="#e6ddcf"/>
+<text x="32" y="1235" class="hd" font-size="13" fill="#1a1714" font-weight="600">TANIYA Bridal</text>
+<rect x="16" y="1270" width="343" height="95" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="16" y="1270" width="343" height="60" rx="14" fill="#e6ddcf"/>
+<text x="32" y="1345" class="hd" font-size="13" fill="#1a1714" font-weight="600">KAVEESHA & GANINDU</text>
+<rect x="10060" y="1520" width="1240" height="700" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="10060" y="1520" width="1240" height="700" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="10060" y="2184" width="201" height="28" rx="6" fill="#c0a062"/>
+<text x="10160.5" y="2202" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN LOGIN DESKTOP</text>
+<rect x="400" y="1560" width="440" height="400" rx="24" fill="#fff" filter="url(#s2)"/>
+<rect x="600" y="1590" width="40" height="40" rx="8" fill="#c0a062"/>
+<text x="620" y="1645" class="hd" font-size="28" fill="#1a1714" text-anchor="center" font-weight="700">Admin Panel</text>
+<text x="460" y="1695" class="lb" font-size="9" fill="#7a716a">USERNAME</text>
+<rect x="460" y="1705" width="320" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="460" y="1775" class="lb" font-size="9" fill="#7a716a">PASSWORD</text>
+<rect x="460" y="1785" width="320" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="460" y="1850" width="320" height="44" rx="999" fill="#ff6b6b"/>
+<text x="620" y="1877" class="bd" font-size="14" fill="#fff" text-anchor="center" font-weight="600">Sign In</text>
+<rect x="10620" y="720" width="375" height="700" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="10620" y="720" width="375" height="700" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="10620" y="1384" width="192" height="28" rx="6" fill="#a8884c"/>
+<text x="10716.0" y="1402" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN LOGIN MOBILE</text>
+<rect x="0" y="760" width="375" height="24" rx="0" fill="#1a1714" opacity="0.05"/>
+<text x="20" y="776" class="bd" font-size="10" fill="#3a342e">9:41</text>
+<rect x="16" y="800" width="343" height="360" rx="24" fill="#fff" filter="url(#s2)"/>
+<text x="188" y="850" class="lb" font-size="10" fill="#c0a062" text-anchor="center">ADMIN PANEL</text>
+<text x="188" y="885" class="hd" font-size="26" fill="#1a1714" text-anchor="center" font-weight="700">Sign In</text>
+<text x="40" y="930" class="lb" font-size="9" fill="#7a716a">USERNAME</text>
+<rect x="40" y="940" width="295" height="40" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="40" y="998" class="lb" font-size="9" fill="#7a716a">PASSWORD</text>
+<rect x="40" y="1008" width="295" height="40" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="40" y="1068" width="295" height="40" rx="999" fill="#ff6b6b"/>
+<text x="188" y="1093" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="600">Sign In</text>
+<rect x="11180" y="720" width="1240" height="1400" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="11180" y="720" width="1240" height="1400" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="11180" y="2084" width="165" height="28" rx="6" fill="#c0a062"/>
+<text x="11262.5" y="2102" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN DASHBOARD</text>
+<rect x="0" y="760" width="260" height="1360" rx="0" fill="#111827"/>
+<rect x="20" y="780" width="30" height="30" rx="8" fill="#c0a062"/>
+<text x="60" y="802" class="lb" font-size="9" fill="#e5e7eb">SOLID WEDDINGS</text>
+<rect x="12" y="860" width="236" height="36" rx="8" fill="#ff6b6b"/>
+<text x="28" y="883" class="bd" font-size="13" fill="#fff">Dashboard</text>
+<rect x="12" y="904" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="927" class="bd" font-size="13" fill="#e5e7eb">Categories</text>
+<rect x="12" y="948" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="971" class="bd" font-size="13" fill="#e5e7eb">Albums</text>
+<rect x="12" y="992" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="1015" class="bd" font-size="13" fill="#e5e7eb">Clients</text>
+<rect x="12" y="2040" width="236" height="36" rx="8" fill="none" stroke="#ff6b6b" stroke-width="1"/>
+<text x="28" y="2063" class="bd" font-size="13" fill="#ff6b6b">Logout</text>
+<rect x="260" y="760" width="980" height="70" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="280" y="802" class="hd" font-size="18" fill="#1a1714" font-weight="600">Dashboard</text>
+<text x="1220" y="802" class="bd" font-size="12" fill="#7a716a" text-anchor="end">Admin User</text>
+<rect x="280" y="860" width="220" height="90" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="280" y="860" width="6" height="90" rx="3" fill="#ff6b6b"/>
+<text x="300" y="895" class="hd" font-size="28" fill="#1a1714" font-weight="700">1,247</text>
+<text x="300" y="918" class="bd" font-size="12" fill="#7a716a">Total Photos</text>
+<rect x="520" y="860" width="220" height="90" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="520" y="860" width="6" height="90" rx="3" fill="#c0a062"/>
+<text x="540" y="895" class="hd" font-size="28" fill="#1a1714" font-weight="700">48</text>
+<text x="540" y="918" class="bd" font-size="12" fill="#7a716a">Albums</text>
+<rect x="760" y="860" width="220" height="90" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="760" y="860" width="6" height="90" rx="3" fill="#00b894"/>
+<text x="780" y="895" class="hd" font-size="28" fill="#1a1714" font-weight="700">6</text>
+<text x="780" y="918" class="bd" font-size="12" fill="#7a716a">Categories</text>
+<rect x="1000" y="860" width="220" height="90" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="1000" y="860" width="6" height="90" rx="3" fill="#74b9ff"/>
+<text x="1020" y="895" class="hd" font-size="28" fill="#1a1714" font-weight="700">12</text>
+<text x="1020" y="918" class="bd" font-size="12" fill="#7a716a">Messages</text>
+<rect x="280" y="980" width="960" height="280" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="300" y="1010" class="hd" font-size="16" fill="#1a1714" font-weight="600">Recent Activity</text>
+<line x1="300" y1="1035" x2="1200" y2="1035" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1053" class="bd" font-size="12" fill="#3a342e">Album "Wedding 1" updated</text>
+<text x="1200" y="1053" class="bd" font-size="11" fill="#7a716a" text-anchor="end">1h ago</text>
+<line x1="300" y1="1087" x2="1200" y2="1087" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1105" class="bd" font-size="12" fill="#3a342e">Album "Wedding 2" updated</text>
+<text x="1200" y="1105" class="bd" font-size="11" fill="#7a716a" text-anchor="end">2h ago</text>
+<line x1="300" y1="1139" x2="1200" y2="1139" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1157" class="bd" font-size="12" fill="#3a342e">Album "Wedding 3" updated</text>
+<text x="1200" y="1157" class="bd" font-size="11" fill="#7a716a" text-anchor="end">3h ago</text>
+<line x1="300" y1="1191" x2="1200" y2="1191" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1209" class="bd" font-size="12" fill="#3a342e">Album "Wedding 4" updated</text>
+<text x="1200" y="1209" class="bd" font-size="11" fill="#7a716a" text-anchor="end">4h ago</text>
+<rect x="12480" y="720" width="1240" height="1200" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="12480" y="720" width="1240" height="1200" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="12480" y="1884" width="174" height="28" rx="6" fill="#c0a062"/>
+<text x="12567.0" y="1902" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN CATEGORIES</text>
+<rect x="0" y="760" width="260" height="1160" rx="0" fill="#111827"/>
+<rect x="20" y="780" width="30" height="30" rx="8" fill="#c0a062"/>
+<text x="60" y="802" class="lb" font-size="9" fill="#e5e7eb">SOLID WEDDINGS</text>
+<rect x="12" y="860" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="883" class="bd" font-size="13" fill="#fff">Dashboard</text>
+<rect x="12" y="904" width="236" height="36" rx="8" fill="#ff6b6b"/>
+<text x="28" y="927" class="bd" font-size="13" fill="#fff">Categories</text>
+<rect x="12" y="948" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="971" class="bd" font-size="13" fill="#e5e7eb">Albums</text>
+<rect x="12" y="992" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="1015" class="bd" font-size="13" fill="#e5e7eb">Clients</text>
+<rect x="260" y="760" width="980" height="70" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="280" y="802" class="hd" font-size="18" fill="#1a1714" font-weight="600">Manage Categories</text>
+<rect x="280" y="860" width="960" height="50" rx="8" fill="#f3ede3"/>
+<text x="300" y="890" class="lb" font-size="10" fill="#7a716a">Category Name</text>
+<text x="1200" y="890" class="lb" font-size="10" fill="#7a716a" text-anchor="end">Actions</text>
+<rect x="280" y="920" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="935" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="935" class="bd" font-size="13" fill="#3a342e">Wedding</text>
+<rect x="1120" y="930" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="940" r="8" fill="#fff"/>
+<text x="1190" y="935" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="935" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="970" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="985" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="985" class="bd" font-size="13" fill="#3a342e">Bridal</text>
+<rect x="1120" y="980" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="990" r="8" fill="#fff"/>
+<text x="1190" y="985" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="985" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1020" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1035" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="1035" class="bd" font-size="13" fill="#3a342e">Engagement</text>
+<rect x="1120" y="1030" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="1040" r="8" fill="#fff"/>
+<text x="1190" y="1035" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="1035" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1070" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1085" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="1085" class="bd" font-size="13" fill="#3a342e">Destination</text>
+<rect x="1120" y="1080" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="1090" r="8" fill="#fff"/>
+<text x="1190" y="1085" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="1085" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1120" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1135" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="1135" class="bd" font-size="13" fill="#3a342e">Homecoming</text>
+<rect x="1120" y="1130" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="1140" r="8" fill="#fff"/>
+<text x="1190" y="1135" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="1135" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1170" width="960" height="46" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="300" y="1185" class="bd" font-size="14" fill="#7a716a">⋮⋮</text>
+<text x="330" y="1185" class="bd" font-size="13" fill="#3a342e">Private Session</text>
+<rect x="1120" y="1180" width="36" height="20" rx="10" fill="#00b894"/>
+<circle cx="1146" cy="1190" r="8" fill="#fff"/>
+<text x="1190" y="1185" class="bd" font-size="11" fill="#74b9ff">Edit</text>
+<text x="1200" y="1185" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1230" width="160" height="38" rx="8" fill="#ff6b6b"/>
+<text x="360" y="1254" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Add Category</text>
+<rect x="13780" y="720" width="1240" height="1200" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="13780" y="720" width="1240" height="1200" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="13780" y="1884" width="138" height="28" rx="6" fill="#c0a062"/>
+<text x="13849.0" y="1902" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN ALBUMS</text>
+<rect x="0" y="760" width="260" height="1160" rx="0" fill="#111827"/>
+<rect x="20" y="780" width="30" height="30" rx="8" fill="#c0a062"/>
+<text x="60" y="802" class="lb" font-size="9" fill="#e5e7eb">SOLID WEDDINGS</text>
+<rect x="12" y="860" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="883" class="bd" font-size="13" fill="#fff">Dashboard</text>
+<rect x="12" y="904" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="927" class="bd" font-size="13" fill="#e5e7eb">Categories</text>
+<rect x="12" y="948" width="236" height="36" rx="8" fill="#ff6b6b"/>
+<text x="28" y="971" class="bd" font-size="13" fill="#fff">Albums</text>
+<rect x="12" y="992" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="1015" class="bd" font-size="13" fill="#e5e7eb">Clients</text>
+<rect x="260" y="760" width="980" height="70" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="280" y="802" class="hd" font-size="18" fill="#1a1714" font-weight="600">Manage Albums</text>
+<rect x="1060" y="775" width="140" height="36" rx="8" fill="#ff6b6b"/>
+<text x="1130" y="798" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Create Album</text>
+<rect x="280" y="860" width="960" height="80" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="280" y="860" width="100" height="80" rx="12" fill="#e6ddcf"/>
+<text x="400" y="885" class="hd" font-size="14" fill="#1a1714" font-weight="600">ISURI & GEETHAN Wedding</text>
+<text x="400" y="910" class="bd" font-size="12" fill="#7a716a">24 photos · Wedding category</text>
+<text x="1200" y="885" class="bd" font-size="12" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1200" y="910" class="bd" font-size="12" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="950" width="960" height="80" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="280" y="950" width="100" height="80" rx="12" fill="#e6ddcf"/>
+<text x="400" y="975" class="hd" font-size="14" fill="#1a1714" font-weight="600">TANIYA Bridal</text>
+<text x="400" y="1000" class="bd" font-size="12" fill="#7a716a">24 photos · Wedding category</text>
+<text x="1200" y="975" class="bd" font-size="12" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1200" y="1000" class="bd" font-size="12" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1040" width="960" height="80" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="280" y="1040" width="100" height="80" rx="12" fill="#e6ddcf"/>
+<text x="400" y="1065" class="hd" font-size="14" fill="#1a1714" font-weight="600">KAVEESHA & GANINDU</text>
+<text x="400" y="1090" class="bd" font-size="12" fill="#7a716a">24 photos · Wedding category</text>
+<text x="1200" y="1065" class="bd" font-size="12" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1200" y="1090" class="bd" font-size="12" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="280" y="1130" width="960" height="80" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<rect x="280" y="1130" width="100" height="80" rx="12" fill="#e6ddcf"/>
+<text x="400" y="1155" class="hd" font-size="14" fill="#1a1714" font-weight="600">SAMANTHA Destination</text>
+<text x="400" y="1180" class="bd" font-size="12" fill="#7a716a">24 photos · Wedding category</text>
+<text x="1200" y="1155" class="bd" font-size="12" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1200" y="1180" class="bd" font-size="12" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="15080" y="720" width="1240" height="1200" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="15080" y="720" width="1240" height="1200" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="15080" y="1884" width="147" height="28" rx="6" fill="#c0a062"/>
+<text x="15153.5" y="1902" class="bd" font-size="11" fill="#fff" font-weight="600">ADMIN CLIENTS</text>
+<rect x="0" y="760" width="260" height="1160" rx="0" fill="#111827"/>
+<rect x="20" y="780" width="30" height="30" rx="8" fill="#c0a062"/>
+<text x="60" y="802" class="lb" font-size="9" fill="#e5e7eb">SOLID WEDDINGS</text>
+<rect x="12" y="860" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="883" class="bd" font-size="13" fill="#fff">Dashboard</text>
+<rect x="12" y="904" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="927" class="bd" font-size="13" fill="#e5e7eb">Categories</text>
+<rect x="12" y="948" width="236" height="36" rx="8" fill="none"/>
+<text x="28" y="971" class="bd" font-size="13" fill="#e5e7eb">Albums</text>
+<rect x="12" y="992" width="236" height="36" rx="8" fill="#ff6b6b"/>
+<text x="28" y="1015" class="bd" font-size="13" fill="#fff">Clients</text>
+<rect x="260" y="760" width="980" height="70" rx="0" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="280" y="802" class="hd" font-size="18" fill="#1a1714" font-weight="600">Manage Clients</text>
+<rect x="280" y="860" width="420" height="300" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="300" y="885" class="hd" font-size="16" fill="#1a1714" font-weight="600">Create Client</text>
+<text x="300" y="920" class="lb" font-size="9" fill="#7a716a">FULL NAME</text>
+<rect x="300" y="930" width="380" height="38" rx="10" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="300" y="975" class="lb" font-size="9" fill="#7a716a">EMAIL</text>
+<rect x="300" y="985" width="380" height="38" rx="10" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="300" y="1030" class="lb" font-size="9" fill="#7a716a">PASSWORD</text>
+<rect x="300" y="1040" width="380" height="38" rx="10" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="300" y="1095" width="160" height="36" rx="8" fill="#ff6b6b"/>
+<text x="380" y="1117" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="600">Create Client</text>
+<rect x="730" y="860" width="490" height="500" rx="12" fill="#fff" stroke="#e6ddcf" stroke-width="1"/>
+<text x="750" y="885" class="hd" font-size="16" fill="#1a1714" font-weight="600">Client List</text>
+<line x1="750" y1="965" x2="1210" y2="965" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="750" y="933" class="bd" font-size="13" fill="#1a1714" font-weight="500">John Doe</text>
+<text x="750" y="951" class="bd" font-size="11" fill="#7a716a">john@email.com · 2 galleries</text>
+<text x="1210" y="933" class="bd" font-size="11" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1210" y="951" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<line x1="750" y1="1025" x2="1210" y2="1025" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="750" y="993" class="bd" font-size="13" fill="#1a1714" font-weight="500">Jane Smith</text>
+<text x="750" y="1011" class="bd" font-size="11" fill="#7a716a">jane@email.com · 1 gallery</text>
+<text x="1210" y="993" class="bd" font-size="11" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1210" y="1011" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<line x1="750" y1="1085" x2="1210" y2="1085" stroke="#e6ddcf" stroke-width="0.5"/>
+<text x="750" y="1053" class="bd" font-size="13" fill="#1a1714" font-weight="500">Alex Perera</text>
+<text x="750" y="1071" class="bd" font-size="11" fill="#7a716a">alex@email.com · 3 galleries</text>
+<text x="1210" y="1053" class="bd" font-size="11" fill="#74b9ff" text-anchor="end">Edit</text>
+<text x="1210" y="1071" class="bd" font-size="11" fill="#ff6b6b" text-anchor="end">Delete</text>
+<rect x="16380" y="720" width="1000" height="3000" rx="8" fill="#faf7f2" stroke="s2" stroke-width="0"/>
+<rect x="16380" y="720" width="1000" height="3000" rx="8" fill="none" stroke="#e6ddcf" stroke-width="1"/>
+<rect x="16380" y="3684" width="210" height="28" rx="6" fill="#c0a062"/>
+<text x="16485.0" y="3702" class="bd" font-size="11" fill="#fff" font-weight="600">COMPONENTS REFERENCE</text>
+<text x="16380" y="754" class="hd" font-size="22" fill="#1a1714" font-weight="700">Button Variants</text>
+<rect x="16380" y="775" width="110" height="40" rx="999" fill="#c0a062"/>
+<text x="16435" y="800" class="bd" font-size="13" fill="#fff" text-anchor="center" font-weight="500">Primary</text>
+<rect x="16510" y="775" width="160" height="40" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="16590" y="800" class="bd" font-size="13" fill="#c0a062" text-anchor="center" font-weight="500">Gold Outline</text>
+<rect x="16690" y="775" width="90" height="40" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="16735" y="800" class="bd" font-size="13" fill="#c0a062" text-anchor="center" font-weight="500">Ghost</text>
+<text x="16380" y="860" class="hd" font-size="22" fill="#1a1714" font-weight="700">Card Types</text>
+<rect x="16380" y="885" width="280" height="160" rx="24" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="16400" y="930" class="hd" font-size="16" fill="#1a1714" font-weight="600">Glass Card</text>
+<text x="16400" y="955" class="bd" font-size="11" fill="#7a716a">radius: 24px, border, shadow</text>
+<rect x="16690" y="885" width="280" height="160" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<text x="16710" y="930" class="hd" font-size="16" fill="#1a1714" font-weight="600">Standard Card</text>
+<text x="16710" y="955" class="bd" font-size="11" fill="#7a716a">radius: 14px, hover lift</text>
+<rect x="17000" y="885" width="280" height="100" rx="14" fill="#fff" stroke="#e6ddcf" stroke-width="1" filter="url(#s1)"/>
+<circle cx="17040" cy="930" r="20" fill="#c0a062"/>
+<text x="17040" y="935" class="bd" font-size="14" fill="#fff" text-anchor="center">★</text>
+<text x="17070" y="935" class="hd" font-size="14" fill="#1a1714" font-weight="600">Stat Card</text>
+<text x="17070" y="955" class="bd" font-size="11" fill="#7a716a">icon + number + label</text>
+<text x="16380" y="1090" class="hd" font-size="22" fill="#1a1714" font-weight="700">Form Inputs</text>
+<text x="16380" y="1120" class="lb" font-size="9" fill="#7a716a">FULL NAME</text>
+<rect x="16380" y="1130" width="400" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="16380" y="1195" class="lb" font-size="9" fill="#7a716a">Password</text>
+<rect x="16380" y="1205" width="400" height="44" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="16380" y="1270" class="lb" font-size="9" fill="#7a716a">Textarea</text>
+<rect x="16380" y="1280" width="400" height="100" rx="12" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="16830" y="1120" class="lb" font-size="9" fill="#a8884c">Focus State</text>
+<rect x="16830" y="1130" width="400" height="44" rx="12" fill="#faf7f2" stroke="#c0a062" stroke-width="1.5"/>
+<rect x="16830" y="1130" width="400" height="44" rx="12" fill="none" stroke="#c0a062" stroke-width="1.5" style="filter: drop-shadow(0 0 0 4px rgba(192,160,98,0.12))"/>
+<text x="16380" y="1420" class="hd" font-size="22" fill="#1a1714" font-weight="700">Filter Pills</text>
+<rect x="16380" y="1445" width="100" height="32" rx="999" fill="#c0a062"/>
+<text x="16430" y="1466" class="bd" font-size="12" fill="#fff" text-anchor="center" font-weight="500">Active</text>
+<rect x="16492" y="1445" width="120" height="32" rx="999" fill="#fff"/>
+<text x="16552" y="1466" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Inactive</text>
+<rect x="16624" y="1445" width="120" height="32" rx="999" fill="#fff"/>
+<text x="16684" y="1466" class="bd" font-size="12" fill="#3a342e" text-anchor="center" font-weight="500">Inactive</text>
+<text x="16380" y="1520" class="hd" font-size="22" fill="#1a1714" font-weight="700">Navigation</text>
+<rect x="16380" y="1545" width="960" height="76" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="0.5"/>
+<rect x="16420" y="1561" width="140" height="34" rx="4" fill="#c0a062" opacity="0.15"/>
+<text x="16430" y="1583" class="bd" font-size="11" fill="#1a1714" font-weight="600">SOLID WEDDINGS</text>
+<text x="16640" y="1589" class="bd" font-size="13" fill="#7a716a">Home Gallery About Services Contact</text>
+<rect x="17160" y="1565" width="110" height="30" rx="999" fill="none" stroke="#c0a062" stroke-width="1.5"/>
+<text x="17188" y="1584" class="bd" font-size="11" fill="#c0a062" font-weight="500">Client Login</text>
+<text x="16860" y="1660" class="bd" font-size="14" fill="#1a1714" text-anchor="center" font-weight="600">Mobile Hamburger</text>
+<rect x="16800" y="1675" width="120" height="80" rx="0" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<line x1="16820" y1="1695" x2="16870" y2="1695" stroke="#1a1714" stroke-width="2.5"/>
+<line x1="16820" y1="1707" x2="16870" y2="1707" stroke="#1a1714" stroke-width="2.5"/>
+<line x1="16820" y1="1719" x2="16860" y2="1719" stroke="#1a1714" stroke-width="2.5"/>
+<text x="16380" y="1800" class="hd" font-size="22" fill="#1a1714" font-weight="700">Custom Scrollbar</text>
+<rect x="16380" y="1825" width="20" height="120" rx="10" fill="#f3ede3"/>
+<rect x="16383" y="1835" width="14" height="50" rx="7" fill="#c0a062"/>
+<text x="16380" y="1990" class="hd" font-size="22" fill="#1a1714" font-weight="700">Section Patterns</text>
+<rect x="16380" y="2020" width="460" height="80" rx="8" fill="#faf7f2" stroke="#e6ddcf" stroke-width="1"/>
+<text x="16610" y="2068" class="bd" font-size="13" fill="#7a716a" text-anchor="center">Cream (#faf7f2)</text>
+<rect x="16870" y="2020" width="460" height="80" rx="8" fill="#f3ede3" stroke="#e6ddcf" stroke-width="1"/>
+<text x="17100" y="2068" class="bd" font-size="13" fill="#7a716a" text-anchor="center">Cream 2 (#f3ede3)</text>
+<rect x="16380" y="2120" width="960" height="80" rx="8" fill="#1a1714"/>
+<text x="16860" y="2168" class="bd" font-size="13" fill="#faf7f2" text-anchor="center">Dark CTA Band (#1a1714)</text>
+<text x="16380" y="2240" class="hd" font-size="22" fill="#1a1714" font-weight="700">Lightbox Overlay</text>
+<rect x="16380" y="2265" width="460" height="320" rx="8" fill="#000" opacity="0.92"/>
+<rect x="16410" y="2285" width="400" height="240" rx="4" fill="#e6ddcf"/>
+<text x="16610" y="2410" class="bd" font-size="24" fill="#fff" text-anchor="center">←  →</text>
+<text x="16610" y="2520" class="bd" font-size="12" fill="#fff" text-anchor="center">1 / 12</text>
+<text x="16820" y="2285" class="bd" font-size="24" fill="#fff" text-anchor="end">×</text>
+</svg>

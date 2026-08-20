@@ -394,6 +394,142 @@
     background: var(--gold-gradient);
 }
 
+.client-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.client-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+}
+
+.client-tab:hover {
+    color: var(--gold-dark);
+}
+
+.client-tab.active {
+    color: var(--gold-dark);
+    border-bottom-color: var(--gold-dark);
+    font-weight: 600;
+}
+
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-light);
+    transition: box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.booking-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.booking-card-date {
+    width: 64px;
+    min-width: 64px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--gold-soft), rgba(184, 157, 92, 0.12));
+    border-radius: 12px;
+    padding: 0.75rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booking-date-day {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    line-height: 1.1;
+}
+
+.booking-date-month {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.booking-date-year {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.booking-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.booking-card-info h3 {
+    font-family: var(--font-display);
+    color: var(--text-dark);
+    font-size: 1.15rem;
+    margin: 0 0 0.35rem 0;
+}
+
+.booking-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.booking-card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.booking-card-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.booking-card-message {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
 @media (max-width: 768px) {
     .gallery-grid {
         grid-template-columns: 1fr;
