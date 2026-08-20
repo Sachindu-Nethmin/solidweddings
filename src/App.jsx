@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -16,6 +16,7 @@ import ClientManager from './admin/pages/ClientManager';
 import { ClientAuthProvider } from './contexts/ClientAuthContext';
 import { AdminAuthProvider, AdminRouteGuard } from './contexts/AdminAuthContext';
 import ClientLogin from './pages/client/ClientLogin';
+import ClientSignup from './pages/client/ClientSignup';
 import ClientDashboard from './pages/client/ClientDashboard';
 import GalleryDetail from './pages/client/GalleryDetail';
 import './App.css';
@@ -44,14 +45,21 @@ function App() {
                 <Route path="dashboard" element={<DashboardHome />} />
                 <Route path="categories" element={<CategoryManager />} />
                 <Route path="albums" element={<AlbumManager />} />
-                <Route path="albums/:categoryId/:albumId" element={<AlbumEditor />} />
+                <Route path="albums/create" element={<AlbumEditor />} />
+                <Route path="albums/edit/:id" element={<AlbumEditor />} />
                 <Route path="clients" element={<ClientManager />} />
+                {/* Unknown admin sub-route: land back on the dashboard instead of a blank page */}
+                <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
               </Route>
 
               {/* Client Routes */}
               <Route path="/client/login" element={<ClientLogin />} />
+              <Route path="/client/signup" element={<ClientSignup />} />
               <Route path="/client/dashboard" element={<ClientDashboard />} />
               <Route path="/client/gallery/:categoryId/:albumId" element={<GalleryDetail />} />
+
+              {/* Unknown route anywhere else: land back on the homepage instead of a blank page */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
         </AdminAuthProvider>

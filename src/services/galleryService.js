@@ -62,6 +62,7 @@ export const saveAlbumSettings = (settings) => {
 
 
 export const fetchGalleryData = async () => {
+    try {
     const baseUrl = import.meta.env.BASE_URL;
 
     // Note: glob patterns must be literals, so we duplicate the pattern here
@@ -80,12 +81,12 @@ export const fetchGalleryData = async () => {
 
         if (photosIndex !== -1 && parts.length > photosIndex + 2) {
             // Level 1: Category ID (Folder Name)
-            const categoryId = decodeURIComponent(parts[photosIndex + 1]);
+            const categoryId = (() => { try { return decodeURIComponent(parts[photosIndex + 1]); } catch { return parts[photosIndex + 1]; } })();
             detectedCategories.add(categoryId);
 
             let albumName = "General";
             if (parts.length > photosIndex + 3) {
-                albumName = decodeURIComponent(parts[photosIndex + 2]);
+                albumName = (() => { try { return decodeURIComponent(parts[photosIndex + 2]); } catch { return parts[photosIndex + 2]; } })();
             }
 
             const filename = parts[parts.length - 1];
@@ -358,4 +359,8 @@ export const fetchGalleryData = async () => {
         raw: finalResult,
         display: categoryDisplays
     };
+    } catch (err) {
+        console.error('[GalleryService] Fatal error in fetchGalleryData:', err);
+        return { raw: {}, display: [] };
+    }
 };

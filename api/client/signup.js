@@ -1,11 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
-import { requireAdmin } from '../_lib/adminAuth.js';
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
         res.status(200).end();
@@ -16,13 +15,10 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    if (!requireAdmin(req, res)) return;
-
     const supabaseUrl = process.env.VITE_SUPABASE_URL;
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !serviceRoleKey) {
-        console.error('Missing Supabase environment variables');
         return res.status(500).json({ error: 'Server configuration error' });
     }
 
@@ -32,7 +28,11 @@ export default async function handler(req, res) {
         const { email, password, full_name } = req.body;
 
         if (!email || !password || !full_name) {
-            return res.status(400).json({ error: 'Email, password, and full_name are required' });
+            return res.status(400).json({ error: 'Name, email, and password are required' });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({ error: 'Password must be at least 6 characters' });
         }
 
         const { data: userData, error: userError } = await supabase.auth.admin.createUser({
@@ -42,7 +42,6 @@ export default async function handler(req, res) {
         });
 
         if (userError) {
-            console.error('User creation error:', userError);
             return res.status(400).json({ error: userError.message });
         }
 
@@ -55,19 +54,13 @@ export default async function handler(req, res) {
             });
 
         if (profileError) {
-            console.error('Profile creation error:', profileError);
             await supabase.auth.admin.deleteUser(userData.user.id);
             return res.status(400).json({ error: profileError.message });
         }
 
-        res.status(200).json({
-            user: {
-                id: userData.user.id,
-                email: userData.user.email
-            }
-        });
+        res.status(200).json({ message: 'Account created successfully' });
     } catch (error) {
-        console.error('Create user error:', error);
-        res.status(500).json({ error: 'Failed to create user' });
+        console.error('Signup error:', error);
+        res.status(500).json({ error: 'Failed to create account' });
     }
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaSave, FaArrowLeft, FaUpload, FaImages, FaTimes, FaFolder, FaCloud } from 'react-icons/fa';
 import { fetchGalleryData, getAlbumConfig, saveAlbumConfig, getAlbumSettings, saveAlbumSettings } from '../../services/galleryService';
+import { useAdminAuth } from '../../contexts/AdminAuthContext';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -51,6 +52,7 @@ const SortablePhoto = ({ id, photo, idx, removePhoto }) => {
 const AlbumEditor = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { adminFetch } = useAdminAuth();
     const isEditing = !!id;
 
     // Data State
@@ -240,12 +242,12 @@ const AlbumEditor = () => {
     // 2. Cloudinary Upload (Unsigned Mode)
     const uploadCloudinary = async (file, category, album) => {
         const folder = `solidweddings/${category}/${albumName}`;
-        const uploadPreset = 'solidwedding'; // Unsigned Preset
+        const uploadPreset = 'solidweddings'; // Unsigned Preset (matches the Cloudinary console preset name)
 
         // 1. Get Cloud Name (Fetch from backend config)
         let cloudName = '';
         try {
-            const confRes = await fetch('/api/sign-upload');
+            const confRes = await adminFetch('/api/sign-upload');
             if (confRes.ok) {
                 const conf = await confRes.json();
                 cloudName = conf.cloudName;
@@ -362,7 +364,7 @@ const AlbumEditor = () => {
                             publicId = decodeURIComponent(publicId);
 
                             console.log(`[Save] Deleting from Cloudinary: ${publicId}`);
-                            await fetch('/api/delete-image', {
+                            await adminFetch('/api/delete-image', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ public_id: publicId })

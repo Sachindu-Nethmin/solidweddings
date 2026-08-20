@@ -5,42 +5,83 @@ const AdminAuthContext = createContext(null);
 
 export const useAdminAuth = () => useContext(AdminAuthContext);
 
-const ADMIN_USER_HASH = import.meta.env.VITE_ADMIN_USER_HASH || '';
-const ADMIN_PASS_HASH = import.meta.env.VITE_ADMIN_PASS_HASH || '';
+const STORAGE_KEY = 'adminAuthSession';
 
-const computeHash = async (str) => {
-    const msgBuffer = new TextEncoder().encode(str);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+// Credentials are verified server-side by /api/admin/login, which returns a
+// signed, expiring session token. Nothing secret ever ships in the client bundle.
+const readStoredSession = () => {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed?.token || !parsed?.expiresAt || parsed.expiresAt <= Date.now()) {
+            localStorage.removeItem(STORAGE_KEY);
+            return null;
+        }
+        return parsed;
+    } catch {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+    }
 };
 
 export const AdminAuthProvider = ({ children }) => {
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [session, setSession] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const authenticated = localStorage.getItem('isAdminAuthenticated') === 'true';
-        setIsAdmin(authenticated);
+        setSession(readStoredSession());
         setLoading(false);
     }, []);
 
     const signIn = useCallback(async (username, password) => {
-        const inputUserHash = await computeHash(username);
-        const inputPassHash = await computeHash(password);
+        const response = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
 
-        if (inputUserHash === ADMIN_USER_HASH && inputPassHash === ADMIN_PASS_HASH) {
-            localStorage.setItem('isAdminAuthenticated', 'true');
-            setIsAdmin(true);
-            return true;
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Invalid username or password');
         }
 
-        throw new Error('Invalid username or password');
+        const newSession = { token: data.token, expiresAt: data.expiresAt };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newSession));
+        setSession(newSession);
+        return true;
     }, []);
 
     const signOut = useCallback(() => {
-        localStorage.removeItem('isAdminAuthenticated');
-        setIsAdmin(false);
+        localStorage.removeItem(STORAGE_KEY);
+        setSession(null);
+    }, []);
+
+    // Authenticated fetch wrapper for every admin-only API route
+    // (/api/admin/*, /api/sign-upload, /api/delete-image). Attaches the
+    // session token and clears it if the server reports it's no longer valid.
+    const adminFetch = useCallback(async (url, options = {}) => {
+        const current = readStoredSession();
+        if (!current) {
+            setSession(null);
+            throw new Error('Your admin session has expired. Please sign in again.');
+        }
+
+        const response = await fetch(url, {
+            ...options,
+            headers: {
+                ...(options.headers || {}),
+                Authorization: `Bearer ${current.token}`
+            }
+        });
+
+        if (response.status === 401) {
+            localStorage.removeItem(STORAGE_KEY);
+            setSession(null);
+        }
+
+        return response;
     }, []);
 
     if (loading) {
@@ -58,7 +99,7 @@ export const AdminAuthProvider = ({ children }) => {
     }
 
     return (
-        <AdminAuthContext.Provider value={{ isAdmin, signIn, signOut }}>
+        <AdminAuthContext.Provider value={{ isAdmin: !!session, signIn, signOut, adminFetch }}>
             {children}
         </AdminAuthContext.Provider>
     );

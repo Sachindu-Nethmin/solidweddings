@@ -20,7 +20,12 @@ const ClientDashboard = () => {
     const loadGalleries = React.useCallback(async () => {
         try {
             const assignedIds = await getAssignedGalleries();
+            console.log('[Dashboard] Assigned gallery IDs:', assignedIds);
+
             const galleryData = await fetchGalleryData();
+            console.log('[Dashboard] All albums:', Object.keys(galleryData.raw).flatMap(catId =>
+                Object.keys(galleryData.raw[catId].albums || {}).map(a => `fs-${catId}-${a}`)
+            ));
 
             const matchedGalleries = [];
             for (const cat of galleryData.display) {
@@ -40,6 +45,7 @@ const ClientDashboard = () => {
                 }
             }
 
+            console.log('[Dashboard] Matched galleries:', matchedGalleries.length);
             setGalleries(matchedGalleries);
         } catch (err) {
             console.error('Failed to load galleries:', err);

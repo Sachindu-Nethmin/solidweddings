@@ -62,13 +62,27 @@ export const ClientAuthProvider = ({ children }) => {
     const getAssignedGalleries = async () => {
         if (!user) return [];
 
-        const { data, error } = await supabase
+        // Try by email first
+        let { data, error } = await supabase
+            .from('client_galleries')
+            .select('gallery_id')
+            .eq('client_email', user.email);
+
+        if (!error && data && data.length > 0) {
+            return data.map(row => row.gallery_id);
+        }
+
+        // Fallback: try by client_id
+        const result2 = await supabase
             .from('client_galleries')
             .select('gallery_id')
             .eq('client_id', user.id);
 
-        if (error) throw error;
-        return data.map(row => row.gallery_id);
+        if (!result2.error && result2.data) {
+            return result2.data.map(row => row.gallery_id);
+        }
+
+        return [];
     };
 
     return (

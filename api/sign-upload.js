@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { requireAdmin } from './_lib/adminAuth.js';
 
 export default async function handler(req, res) {
     // Enable CORS
@@ -7,7 +8,7 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
     res.setHeader(
         'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
     );
 
     if (req.method === 'OPTIONS') {
@@ -18,6 +19,8 @@ export default async function handler(req, res) {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
+
+    if (!requireAdmin(req, res)) return;
 
     try {
         // Modern URL parsing to avoid DeprecationWarning
