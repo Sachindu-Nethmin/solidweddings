@@ -47,8 +47,8 @@ const Login = () => {
                         marginBottom: '20px',
                         boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                     }}>
-                        <img
-                            src="/images/logos/logo.png"
+                    <img
+                            src="/assets/logo-ink.png"
                             alt="Solid Weddings Logo"
                             className="admin-logo"
                             style={{
@@ -58,7 +58,6 @@ const Login = () => {
                                 objectFit: 'contain'
                             }}
                             onError={(e) => {
-                                console.error("Logo load failed", e);
                                 e.target.style.display = 'none';
                                 e.target.parentElement.innerHTML = '<span style="color:white; font-family:serif; font-size: 1.2rem; white-space:nowrap;">SOLID WEDDINGS</span>';
                             }}
@@ -71,8 +70,8 @@ const Login = () => {
                 <form onSubmit={handleLogin}>
                     {error && (
                         <div className="error-message" style={{
-                            background: '#ffeceb',
-                            color: '#ff6b6b',
+                    background: '#fdf6ee',
+                        color: '#b89d5c',
                             padding: '12px',
                             borderRadius: '8px',
                             marginBottom: '1rem',

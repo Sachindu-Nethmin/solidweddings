@@ -48,7 +48,7 @@ const ClientLogin = () => {
                         boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
                     }}>
                         <img
-                            src="/images/logos/logo.png"
+                            src="/assets/logo-ink.png"
                             alt="Solid Weddings Logo"
                             style={{
                                 display: 'block',
@@ -69,8 +69,8 @@ const ClientLogin = () => {
                 <form onSubmit={handleLogin}>
                     {error && (
                         <div style={{
-                            background: '#ffeceb',
-                            color: '#ff6b6b',
+                    background: '#fdf6ee',
+                        color: '#b89d5c',
                             padding: '12px',
                             borderRadius: '8px',
                             marginBottom: '1rem',
