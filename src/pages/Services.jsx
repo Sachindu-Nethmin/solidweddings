@@ -121,7 +121,7 @@ export default function Services() {
                     <li key={f} style={{ fontSize: 14, color: 'var(--ink-3)', padding: '10px 0', borderBottom: '1px solid var(--cream-3)', textAlign: 'center' }}>{f}</li>
                   ))}
                 </ul>
-                <Link to="/contact" className={p.featured ? 'btn-primary' : 'btn-gold-outline'} style={{ marginTop: 'auto' }}>Get Quote</Link>
+                <Link to={`/booking?package=${encodeURIComponent(p.name)}`} className={p.featured ? 'btn-primary' : 'btn-gold-outline'} style={{ marginTop: 'auto' }}>Get Quote</Link>
               </div>
             ))}
           </div>
@@ -134,7 +134,7 @@ export default function Services() {
             <h2 style={{ color: '#fff', marginBottom: 24 }}>Ready to Book Your <em>Photography?</em></h2>
             <p style={{ maxWidth: 600, margin: '0 auto 40px', opacity: .8 }}>Let's discuss your needs and create a custom package that perfectly captures your special day.</p>
             <div style={{ display: 'flex', gap: 18, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/contact" className="btn-primary">Get in Touch</Link>
+              <Link to="/booking" className="btn-primary">Get in Touch</Link>
             </div>
           </div>
         </div>

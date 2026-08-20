@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
-    FaHome, FaImages, FaUtensils, FaEnvelope, FaSignOutAlt, FaBars, FaBell, FaUserCircle, FaFolder, FaUsers
+    FaHome, FaImages, FaUtensils, FaEnvelope, FaSignOutAlt, FaBars, FaBell, FaUserCircle, FaFolder, FaUsers, FaCalendarAlt
 } from 'react-icons/fa';
 import { useAdminAuth } from '../contexts/AdminAuthContext';
 import '../styles/AdminDashboard.css';
@@ -25,6 +25,7 @@ const AdminLayout = () => {
             case '/admin/categories': return 'Category Manager';
             case '/admin/photos': return 'Photo Library';
             case '/admin/clients': return 'Client Manager';
+            case '/admin/bookings': return 'Bookings Manager';
             default: return 'Admin Panel';
         }
     };
@@ -53,10 +54,9 @@ const AdminLayout = () => {
                     <NavLink to="/admin/clients" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                         <FaUsers /> Clients
                     </NavLink>
-                    {/* Placeholder links */}
-                    <div className="sidebar-link" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
-                        <FaEnvelope /> Inquiries
-                    </div>
+                    <NavLink to="/admin/bookings" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+                        <FaCalendarAlt /> Bookings
+                    </NavLink>
                 </nav>
 
                 <div className="sidebar-footer">

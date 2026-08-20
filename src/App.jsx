@@ -19,6 +19,8 @@ import ClientLogin from './pages/client/ClientLogin';
 import ClientSignup from './pages/client/ClientSignup';
 import ClientDashboard from './pages/client/ClientDashboard';
 import GalleryDetail from './pages/client/GalleryDetail';
+import Booking from './pages/Booking';
+import BookingsManager from './admin/pages/BookingsManager';
 import './App.css';
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
               <Route path="/services" element={<><Navbar /><main className="main-content"><Services /></main></>} />
               <Route path="/gallery" element={<><Navbar /><main className="main-content"><Gallery /></main></>} />
               <Route path="/contact" element={<><Navbar /><main className="main-content"><Contact /></main></>} />
+              <Route path="/booking" element={<><Navbar /><main className="main-content"><Booking /></main></>} />
 
               {/* Admin Routes */}
               <Route path="/admin/login" element={<Login />} />
@@ -48,6 +51,7 @@ function App() {
                 <Route path="albums/create" element={<AlbumEditor />} />
                 <Route path="albums/edit/:id" element={<AlbumEditor />} />
                 <Route path="clients" element={<ClientManager />} />
+                <Route path="bookings" element={<BookingsManager />} />
                 {/* Unknown admin sub-route: land back on the dashboard instead of a blank page */}
                 <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
               </Route>
