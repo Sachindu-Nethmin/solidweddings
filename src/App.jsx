@@ -1,7 +1,6 @@
 import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -29,11 +28,11 @@ function App() {
           <div className="App">
             <Routes>
               {/* Public Routes */}
-              <Route path="/" element={<><Header /><main className="main-content"><Home /></main><Footer /></>} />
-              <Route path="/about-me" element={<><Header /><main className="main-content"><About /></main><Footer /></>} />
-              <Route path="/services" element={<><Header /><main className="main-content"><Services /></main><Footer /></>} />
-              <Route path="/gallery" element={<><Header /><main className="main-content"><Gallery /></main><Footer /></>} />
-              <Route path="/contact" element={<><Header /><main className="main-content"><Contact /></main><Footer /></>} />
+              <Route path="/" element={<><Navbar /><main className="main-content"><Home /></main></>} />
+              <Route path="/about-me" element={<><Navbar /><main className="main-content"><About /></main></>} />
+              <Route path="/services" element={<><Navbar /><main className="main-content"><Services /></main></>} />
+              <Route path="/gallery" element={<><Navbar /><main className="main-content"><Gallery /></main></>} />
+              <Route path="/contact" element={<><Navbar /><main className="main-content"><Contact /></main></>} />
 
               {/* Admin Routes */}
               <Route path="/admin/login" element={<Login />} />

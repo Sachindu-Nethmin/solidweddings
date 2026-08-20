@@ -125,10 +125,12 @@ export const fetchGalleryData = async () => {
     const virtualAlbums = getAlbumConfig();
     const albumSettings = getAlbumSettings();
     // Use fallback for migration
+    const hiddenAlbums = albumSettings.hidden || [];
     const hiddenPhotos = albumSettings.hiddenPhotos || [];
     const addedPhotosMap = albumSettings.addedPhotos || {};
     const categoryOverrides = albumSettings.categoryOverrides || {};
     const photoOrders = albumSettings.photoOrder || {};
+    const renames = albumSettings.renames || {};
 
     const finalData = { ...data };
 
@@ -227,7 +229,7 @@ export const fetchGalleryData = async () => {
             // It is FS (or mixed? Assuming FS primarily)
 
             // 1. Check Hidden
-            if (albumSettings.hidden.includes(fsId)) {
+            if (hiddenAlbums.includes(fsId)) {
                 return; // Skip
             }
 
@@ -248,7 +250,7 @@ export const fetchGalleryData = async () => {
             }
 
             // 3. Check Rename
-            const newName = albumSettings.renames[fsId] || origName;
+            const newName = renames[fsId] || origName;
 
             // 4. Process Photos
             let images = originalAlbums[origName];
