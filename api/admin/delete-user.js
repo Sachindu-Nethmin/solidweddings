@@ -35,10 +35,26 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Client ID is required' });
         }
 
+        // Look up the client's email first so we can also clean up any
+        // gallery assignments made by email before this account existed
+        // (client_galleries.client_id is null on those rows).
+        const { data: clientRow } = await supabase
+            .from('clients')
+            .select('email')
+            .eq('id', clientId)
+            .single();
+
         await supabase
             .from('client_galleries')
             .delete()
             .eq('client_id', clientId);
+
+        if (clientRow?.email) {
+            await supabase
+                .from('client_galleries')
+                .delete()
+                .eq('client_email', clientRow.email);
+        }
 
         const { error: profileError } = await supabase
             .from('clients')
