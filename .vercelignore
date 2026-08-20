@@ -1,10 +1,6 @@
 node_modules
 .git
 .vercel
-public/images/**
-!public/images/photos/
-!public/images/weddings/
-!public/images/logos/
 *.md
 netlify.toml
 dist
