@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FaPlus, FaTrash, FaUser, FaImages, FaSave, FaTimes, FaEnvelope } from 'react-icons/fa';
-import { supabase } from '../../lib/supabase';
 import { fetchGalleryData } from '../../services/galleryService';
 import { useAdminAuth } from '../../contexts/AdminAuthContext';
 
@@ -16,24 +15,24 @@ const ClientManager = () => {
     const [saving, setSaving] = useState(false);
     const [emailInput, setEmailInput] = useState('');
 
-    useEffect(() => {
-        loadClients();
-        loadGalleries();
-    }, []);
-
-    const loadClients = async () => {
-        const { data, error } = await supabase
-            .from('clients')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (!error) {
+    // `clients` and `client_galleries` are read through /api/admin/* rather
+    // than directly: they're under RLS whose SELECT policy only matches a
+    // signed-in Supabase user, and the admin dashboard holds its own session
+    // token instead - so a direct query here returns zero rows, not an error.
+    const loadClients = useCallback(async () => {
+        try {
+            const response = await adminFetch('/api/admin/clients');
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Failed to load clients');
             setClients(data || []);
+        } catch (err) {
+            console.error('Failed to load clients:', err);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
-    };
+    }, [adminFetch]);
 
-    const loadGalleries = async () => {
+    const loadGalleries = useCallback(async () => {
         const galleryData = await fetchGalleryData();
 
         const galleries = [];
@@ -49,7 +48,12 @@ const ClientManager = () => {
             }
         }
         setAvailableGalleries(galleries);
-    };
+    }, []);
+
+    useEffect(() => {
+        loadClients();
+        loadGalleries();
+    }, [loadClients, loadGalleries]);
 
     const handleCreateClient = async (e) => {
         e.preventDefault();
@@ -109,12 +113,21 @@ const ClientManager = () => {
     const handleSelectClient = async (client) => {
         setSelectedClient(client);
         setEmailInput(client.email);
-        const { data } = await supabase
-            .from('client_galleries')
-            .select('gallery_id')
-            .eq('client_email', client.email);
+        setAssignedGalleries(await loadAssignedGalleries(client.email));
+    };
 
-        setAssignedGalleries(data?.map(d => d.gallery_id) || []);
+    const loadAssignedGalleries = async (email) => {
+        try {
+            const response = await adminFetch(
+                `/api/admin/assign-gallery?client_email=${encodeURIComponent(email)}`
+            );
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Failed to load assignments');
+            return data;
+        } catch (err) {
+            console.error('Failed to load gallery assignments:', err);
+            return [];
+        }
     };
 
     const handleAssignByEmail = async (galleryId) => {
@@ -349,18 +362,7 @@ const ClientManager = () => {
                                 return (
                                     <div
                                         key={client.id}
-                                        onClick={() => {
-                                            setEmailInput(client.email);
-                                            setSelectedClient(client);
-                                            // Load assigned galleries for this email
-                                            supabase
-                                                .from('client_galleries')
-                                                .select('gallery_id')
-                                                .eq('client_email', client.email)
-                                                .then(({ data }) => {
-                                                    setAssignedGalleries(data?.map(d => d.gallery_id) || []);
-                                                });
-                                        }}
+                                        onClick={() => handleSelectClient(client)}
                                         style={{
                                             padding: '1rem 1.5rem',
                                             borderBottom: '1px solid #f5f5f5',
