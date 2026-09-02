@@ -24,6 +24,27 @@ export default async function handler(req, res) {
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
     try {
+        if (req.method === 'GET') {
+            const { client_email, client_id } = req.query;
+
+            if (!client_email && !client_id) {
+                return res.status(400).json({ error: 'client_email or client_id is required' });
+            }
+
+            let query = supabase.from('client_galleries').select('gallery_id');
+            query = client_email
+                ? query.eq('client_email', client_email)
+                : query.eq('client_id', client_id);
+
+            const { data, error } = await query;
+
+            if (error) {
+                return res.status(400).json({ error: error.message });
+            }
+
+            return res.status(200).json(data.map(row => row.gallery_id));
+        }
+
         if (req.method === 'POST') {
             const { client_email, client_id, gallery_id } = req.body;
 
